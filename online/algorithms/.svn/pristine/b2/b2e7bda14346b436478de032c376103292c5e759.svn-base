@@ -1,0 +1,57 @@
+package com.inf2b.algorithms.controller;
+
+import com.inf2b.algorithms.model.Task;
+import com.inf2b.algorithms.model.TaskMaster;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController()
+@RequestMapping("/sort")
+public class SortController {
+
+    Map<String, String> sb = new HashMap<String, String>();
+
+    @RequestMapping("/hello")
+    String home(Task task, String data) {
+        //task = new Task();
+        long tmp = System.currentTimeMillis() % 1000;
+        String id;
+        if (tmp < 100) id = "0" + tmp;
+        else id = "" + tmp;
+        task.setTaskID("Task_" + id);
+        //task.setAlgorithm("QUICKSORT");
+        task.setRunTitle(task.getTaskID() + " (" + task.getAlgorithm() + ")");
+        task.setAlgorithmGroup("SORT");
+
+        //task.setPivotPosition("Left");
+
+        task.setInputMinValue("0");
+        task.setInputMaxValue("100000000");
+        //task.setInputStartSize(10000L);
+        //task.setInputFinalSize(500000L);
+        //task.setInputStepSize(10000L);
+        //task.setInputDistribution("Random");
+        task.setNumRuns();
+        //task.setNumRepeats(1);
+
+        TaskMaster taskMaster = new TaskMaster(sb, task);
+        Thread taskMasterTh = new Thread(taskMaster);
+        taskMasterTh.start();
+
+        return "Hello World!";
+    }
+
+    @RequestMapping("/get")
+    String sbGet(String index) {
+        String line = sb.remove(index);
+        return line;
+    }
+
+
+
+
+
+}

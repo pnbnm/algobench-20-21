@@ -1,0 +1,53 @@
+package com.inf2b.algorithms.controller;
+
+import com.alibaba.fastjson.JSON;
+import com.inf2b.algorithms.AlgoBench;
+import com.inf2b.algorithms.model.Task;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+@RestController()
+@RequestMapping("/common")
+public class CommonController {
+
+    @RequestMapping("/save")
+    String save() throws IOException {
+        Task task = new Task();
+        File f = new File(AlgoBench.JarDirectory + File.separator + "saved" + File.separator);
+        if (!f.exists()) {
+            f.mkdir();
+        }
+        f = new File(f, File.separator + new Random().nextInt() + "a.ser");
+        OutputStream file = new FileOutputStream(f);
+        BufferedOutputStream buffer = new BufferedOutputStream(file);
+        ObjectOutput output = new ObjectOutputStream(buffer);
+
+            output.writeObject(task);
+            output.close();
+
+            return "save task success!";
+
+    }
+
+    @RequestMapping("/gett")
+    String gett() throws IOException {
+
+        File f = new File(AlgoBench.JarDirectory + File.separator + "saved" + File.separator);
+
+        List<String> list = new ArrayList<String>();
+        if (f.isDirectory()) {
+            for (File ff : f.listFiles()) {
+                list.add(ff.getName());
+            }
+        }
+
+        return JSON.toJSONString(list);
+
+    }
+
+}

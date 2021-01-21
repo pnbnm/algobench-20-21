@@ -1,0 +1,168 @@
+ //JavaScript代码区域
+
+
+
+ 
+ var $$;
+ var index = 0;
+ 
+ 
+ layui.use(['form', 'layer', 'element'], function () {
+
+    var globalPar = {
+        alertSortStep: 0
+    };
+
+    var
+        form = layui.form,
+        $ = layui.$,
+        layer = layui.layer,
+        element = layui.element;
+
+        var index = 0;
+       $$ = $;
+
+// 页面加载后的初始化任务
+$.post("/common/gett", {}, function(data) {
+    alert(data);
+    for (var i=0; i<data.length; i++) {
+        var s = '<dd><a href="javascript:;">' + data[i] + '</a></dd>';
+        $('.archivedTasks').append(s);
+    }
+}, 'json');
+
+
+    $("#createTask").on("click", function () {
+        layer.open({
+            type: 1,
+            area: ['800px', '560px'],
+            shadeClose: true, //点击遮罩关闭
+            content: $("#alertDiv")
+        });
+    });
+
+    $("#deleteTask").on("click", function () {
+        var willR = $('.activeTasks dd a.onC').parent();
+        if (!willR.size()) {
+            alert("请选定一个活动任务");
+            return;
+        }
+        willR.remove();
+
+    });
+
+    $("#saveTask").on("click", function () {
+        var willR = $('.activeTasks dd a.onC').parent();
+        if (!willR.size()) {
+            alert("请选定一个活动任务");
+            return;
+        }
+        $.post("/common/save", {}, function(data) {
+            alert(data);
+            var s = '<dd><a href="javascript:;">列表三</a></dd>';
+            $('.archivedTasks').append(s);
+        });
+    });
+
+    $(".nextBtn").on("click", function () {
+        if (globalPar.alertSortStep == 2) {
+            return;
+        }
+        var r = $(".alert-sort.show").removeClass("show");
+        var nextPos = globalPar.alertSortStep + 1;
+        $(".alert-sort:eq(" + nextPos + ")").addClass("show");
+        globalPar.alertSortStep = nextPos;
+    });
+
+    $(".backBtn").on("click", function () {
+        if (globalPar.alertSortStep == 0) {
+            return;
+        }
+        var r = $(".alert-sort.show").removeClass("show");
+        var nextPos = globalPar.alertSortStep - 1;
+        $(".alert-sort:eq(" + nextPos + ")").addClass("show");
+        globalPar.alertSortStep = nextPos;
+    });
+
+    $('#startTask').on("click", function () {
+       
+        $.ajax({
+            type: "POST",
+            url: "/sort/hello",
+            data: {},
+            async: false,
+            success: function(data){
+                updateCtx();
+            }
+         });
+  
+    });
+
+    // 创建活动任务
+    $('.ctBtn').on("click", function () {
+        var s = '<dd><a href="javascript:;">列表三</a></dd>';
+        $('.activeTasks').append(s);
+   
+     });
+
+     $('.activeTasks').on("click", "dd a", function () {
+        $('.activeTasks dd a.onC').removeClass("onC");
+        $(this).addClass("onC");
+   
+     });
+
+    
+
+    
+
+});
+function updateCtx() {
+    
+     $$.ajax({
+         type: "POST",
+         url: "/sort/get",
+         data: {index: index},
+         async: false,
+         success: function(data){
+             console.log(data);
+             result = data;
+             var parts = result.split("\t");
+             var pF = parts[0].toUpperCase();
+             var pS = parts[1];
+             /* switch (pF) {
+                 case "[NUMCOMPLETEDRUNS]":
+                    $$("#numComp span").text(pS);
+                    setTimeout('updateCtx()', 0);
+                    break;
+                case "[MAXRECURSION]":
+                    $$("#maxRe span").text(pS);
+                    setTimeout('updateCtx()', 0);
+                    break;
+                case "[CURRENTMEMUSAGE]":
+                    $$("#memFo span").text(pS);
+                    setTimeout('updateCtx()', 0);
+                    break;
+                case "[CURRENTINPUTSIZE]":
+                        $$("#curIn span").text(pS);
+                        setTimeout('updateCtx()', 0);
+                        break;
+                
+             } */
+             
+             
+             
+             var thisText = $$('#updateContent textarea');
+             var str = thisText.val(); //先获取原有的值
+             document.getElementById('yang').value = str + result + "\r\n"; //拼接新值
+            
+             thisText.get(0).scrollTop = thisText.get(0).scrollHeight;   
+             index ++;
+             if (result.toUpperCase().indexOf("EXITING") != -1) {
+                 index = 0;
+                 return;
+             } else {
+                 var t = setTimeout('updateCtx()', 0);
+             }
+         }
+      });
+ }

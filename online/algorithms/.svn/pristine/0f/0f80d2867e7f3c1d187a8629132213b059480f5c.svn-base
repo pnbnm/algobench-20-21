@@ -1,0 +1,1150 @@
+ //JavaScript代码区域
+
+
+
+ 
+ var $$;
+ var index = 0;
+ 
+ 
+ layui.use(['form', 'layer', 'element', 'upload'], function () {
+
+    globalPar = {
+        alertSortStep: 0,
+        willPushData:'',
+    };
+
+    var
+        form = layui.form,
+        $ = layui.$,
+        layer = layui.layer,
+        element = layui.element,
+        upload = layui.upload;
+
+        var index = 0;
+       $$ = $;
+
+       var uploadInst = upload.render({
+        elem: '#test1' //绑定元素
+        ,url: '/common/upload', //上传接口
+        accept:'file',
+        done: function(res){
+          var task = res;
+          var imgName = getImgName(task.algorithm);
+          var s = '<div id="' + task.taskID + '" class="oneTask"><span class="image">' + imgName + '</span><span class="taskName">' + task.taskID + '[queued]</span></div>';
+            $('.left-side.active').append(s);
+            $("#" + task.taskID).data("task", task);
+            $("#" + task.taskID).data("taskSerialize", trans(task, true));
+            $("#" + task.taskID).click();
+        },
+        error: function(){
+          //请求异常回调
+        }
+      });
+
+       $("input[name='ram']").parent().parent().hide();
+
+
+        // **类别显示
+       $('#alertNorthWest li').on('click', function() {
+           var t = $(this);
+           t.parent().children('li').removeClass('selected');
+           t.addClass('selected');
+
+           var sort = t.text();
+
+           
+           $("#alertNorthEast").empty();
+           if ('Sort' == sort) {
+                $("#alertNorthEast").append(globalPar.formSort);
+           } 
+           if ("Graph" == sort) {
+                $("#alertNorthEast").append(globalPar.formGraph);
+            }
+            if ("Hash" == sort) {
+                $("#alertNorthEast").append(globalPar.formHash);
+            }
+            if ("Search" == sort) {
+                $("#alertNorthEast").append(globalPar.formSearch);
+            }
+
+           form.render();
+           
+           if ("Graph" == sort) {
+               // 更改algorithm的选项
+              /*  $("select[name='algorithm']").empty();
+               var str = '<option value="BREADTH-FIRST_SEARCH">Breadth-First Search</option>'
+                         + '<option value="DEPTH-FIRST_SEARCH">Depth-First Search</option>';
+               $("select[name='algorithm']").append(str);
+               form.render(); */
+           }
+
+       });
+
+
+       form.on('select(aihao)', function(data){
+        var option = data.value;
+        if ("QUICKSORT" != option) {
+            $("select[name='pivotPosition']").parent().parent().hide();
+            
+        } else {
+            
+            $("select[name='pivotPosition']").parent().parent().show();
+        }
+        if ("EXTERNAL_MERGESORT" == option) {
+            $("input[name='ram']").parent().parent().show();
+        } else {
+            $("input[name='ram']").parent().parent().hide();
+        }
+        return false;
+      });
+// 页面加载后的初始化任务
+/* $.post("/common/gett", {}, function(data) {
+    console.log(data);
+    for (var i=0; i<data.length; i++) {
+        var task = data[i];
+        var s = '<div id="' + task.taskID + '" class="oneTask"><span class="taskName">' + task.taskID + '</span></div>';
+        $('.left-side.archive').append(s);
+        $('.left-side.archive #' + task.taskID).data('task', task);
+    }
+}, 'json'); */
+$('li.layui-nav-item').unbind();
+$('li.layui-nav-item button').on("mouseover", function() {
+    $(this).css("height", "40px");
+});
+$('li.layui-nav-item button').on("mouseout", function() {
+    $(this).css("height", "30px");
+});
+
+
+    // 创建任务的弹窗
+    $("#createTask").on("click", function () {
+        // 默认选中sort类别
+        $('#alertNorthWest li').removeClass('selected');
+        $('#alertNorthWest li').first().click();
+        layer.open({
+            type: 1,
+            area: ['800px', '560px'],
+            shadeClose: true, //点击遮罩关闭
+            content: $("#alertDiv")
+        });
+    });
+
+    // delete artive task
+    $("#deleteTask").on("click", function () {
+        var willR = $('.left-side.active .onC');
+        if (!willR.size()) {
+            layer.alert('select a active task', {icon: 5})
+            return;
+        }
+        willR.remove();
+        $("#mainDis").hide();
+        $("#paintTable").hide();
+        $("#compareChart").hide();
+        $("#paintChart").hide();
+        $('.layui-body').css('background', "url(awb_splash_screen_no_border.jpg) no-repeat center");
+    });
+
+    $("#reStartTask").on("click", function () {
+        $('#startTask').click();
+    });
+
+    $("#stopTask").on("click", function () {
+        var willR = $('.left-side.active .onC');
+        if (!willR.size()) {
+            layer.alert('select a active task', {icon: 5})
+            return;
+        }
+        websocket.close();
+    });
+
+    $("#saveTask").on("click", function () {
+        
+        var willR = $('.left-side.active .onC');
+        var task = willR.data('task');
+        var taskSerialize = willR.data('taskSerialize');
+        if (!willR.size()) {
+            layer.alert('select a active task', {icon: 5})
+            return;
+        }
+        $.post("/common/save", task, function(data) {
+            
+            var s = '<div id="' + task.taskID + '" class="oneTask"><span class="taskName">' + task.taskID + '</span></div>';
+            $('.left-side.archive').append(s);
+            $('.left-side.archive #' + task.taskID).data('task', task);
+            $(willR).data('saved', '1');
+            var form = $('<form method="POST" action="' + "/common/save" + '">');
+                $.each(task, function(k, v) {
+                    form.append($('<input type="hidden" name="' + k +
+                            '" value="' + v + '">'));
+                });
+                $('body').append(form);
+                form.submit(); //自动提交
+        });
+        /* var href = "/common/save?" + taskSerialize;
+        console.log(href);
+        $("#downTask").attr("href", href);
+        $("#downTask p").click(); */
+    });
+
+    $(".nextBtn").on("click", function () {
+        if (globalPar.alertSortStep == 2) {
+            return;
+        }
+        var r = $(".alert-sort.show").removeClass("show");
+        var nextPos = globalPar.alertSortStep + 1;
+        $(".alert-sort:eq(" + nextPos + ")").addClass("show");
+        globalPar.alertSortStep = nextPos;
+    });
+
+    $(".backBtn").on("click", function () {
+        if (globalPar.alertSortStep == 0) {
+            return;
+        }
+        var r = $(".alert-sort.show").removeClass("show");
+        var nextPos = globalPar.alertSortStep - 1;
+        $(".alert-sort:eq(" + nextPos + ")").addClass("show");
+        globalPar.alertSortStep = nextPos;
+    });
+
+    // 开始执行任务
+    $('#startTask').on("click", function () {
+
+        var willLoad = $('.left-side.active .onC');
+        if (!willLoad.size()) {
+            layer.alert('select a active task', {icon: 5})
+            return;
+        }
+
+        var thisText = $$('#updateContent textarea');
+        thisText.val("");
+    
+        $('.mainStatus span').text('running');
+        var nowTime = 0;
+        $('#runTime').text(nowTime++ + 's');
+        thisT = setInterval(function() {$('#runTime').text(nowTime++ + 's');}, 1000);
+        //var task = $('.activeTasks dd a.onC').parent().data('task');
+        var task = $('.oneTask.onC').data('taskSerialize');
+      
+        var thisUrl = "ws://" + location.host + "/algoWs";
+        websocket = new WebSocket(thisUrl);
+        //连接发生错误的回调方法
+        websocket.onerror = function(){
+            alert("websocket connect error");
+        };
+        //连接成功建立的回调方法
+        websocket.onopen = function(event){
+            websocket.send(task);
+        }
+        //接收到消息的回调方法
+        websocket.onmessage = function(event){
+            //console.log(event.data);
+            updateCtx(event.data);
+        }
+        //连接关闭的回调方法
+        websocket.onclose = function(){
+            $('.mainStatus span').text('COMPLETED');
+            $(willLoad).data('completed', 1);
+            $(willLoad).data('runTime', $('#runTime').text());
+            $(willLoad).data('textarea',$$('#updateContent textarea').val());
+            var spanText = $(willLoad).find('span').eq(1).text();
+            spanText = spanText.replace(/queued/, "completed");
+            $(willLoad).find('span').eq(1).text(spanText);
+            clearInterval(thisT);
+        }
+
+        
+
+
+
+  
+    });
+
+// paint chart
+$('#seeChartTask').on("click", function () {
+
+    var willLoad = $('.left-side.active .onC');
+        if (!willLoad.size()) {
+            layer.alert('select a active task', {icon: 5})
+            return;
+        }
+    var completed = $(willLoad).data('completed');
+    if (1!=completed) {
+        layer.alert('You have to run a task first.', {icon: 5})
+        return;
+    }
+
+    var chartData = willLoad.data('chartData');
+    var task = willLoad.data('task');
+
+//console.log(chartData);
+
+
+    $("#mainDis").hide();
+    $("#paintTable").hide();
+    $("#compareChart").hide();
+    $("#paintChart").show();
+    
+    myChart = echarts.init(document.getElementById('paintChartfirst'));
+    
+    var xAxisData = chartData['x'];
+    var yAxisData = chartData['y'];
+    xAxisData = xAxisData.map(num2e); 
+    
+    legendData = [task.taskID + '(' + task.algorithm + ')']
+    
+    // 指定图表的配置项和数据
+        option = {
+            legend: {
+                data:legendData
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: {readOnly: false},
+                    magicType: {type: ['line', 'bar']},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                name : 'Input Size',
+                nameLocation: 'center',
+                nameGap: 35,
+                data: xAxisData
+            },
+            yAxis: {
+                name : 'Time(ms)',
+                nameLocation: 'center',
+                nameGap: 35,
+                type: 'value'
+            },
+            series: [{
+                data: yAxisData,
+                name: legendData[0],
+                type: 'line'
+            }]
+        };
+        
+        globalPar.option = cloneObj(option);
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+});
+// paint table
+$('#seeTable').on("click", function () {
+    
+    var willLoad = $('.left-side.active .onC');
+    if (!willLoad.size()) {
+        layer.alert('select a active task', {icon: 5})
+        return;
+    }
+
+    var completed = $(willLoad).data('completed');
+    if (1!=completed) {
+        layer.alert('You have to run a task first.', {icon: 5})
+        return;
+    }
+
+    $("#mainDis").hide();
+    $("#paintChart").hide();
+    $("#compareChart").hide();
+    $("#paintTable").show();
+
+    var chartData = willLoad.data('chartData');
+    
+
+    //console.log(chartData);
+
+
+    var xAxisData = chartData['x'];
+    var yAxisData = chartData['y'];
+
+    var tableInner = '';
+    var th1 = "Number of Elements";
+    if (chartData['title1']) {
+        th1 = chartData['title1']
+    }
+    var th2 = "Run 1 (ms)";
+    tableInner += '<tr><th>' + th1 + '</th><th>' + th2 + '</th></tr>';
+    for (var i=0; i<xAxisData.length;i++) {
+        if (i % 2 == 1) {
+            tableInner += '<tr class="alt"><td>' + xAxisData[i] + '</td><td>' + yAxisData[i] + '</td></tr>'
+        } else {
+            tableInner += '<tr><td>' + xAxisData[i] + '</td><td>' + yAxisData[i] + '</td></tr>'
+        }
+        
+    }
+    $("#paintTable table").append(tableInner);
+
+});
+
+// task overview
+$('#taskOverview').on("click", function () {
+    
+    var willLoad = $('.left-side.active .onC');
+    if (!willLoad.size()) {
+        layer.alert('select a active task', {icon: 5})
+        return;
+    }
+
+    $("#mainDis").hide();
+    $("#paintChart").hide();
+    $("#paintTable").hide();
+    $("#compareChart").hide();
+    willLoad.click();
+
+});
+
+// task compare
+$('#compareChartTask').on("click", function () {
+    
+    var willLoad = $('.left-side.active .onC');
+    if (!willLoad.size()) {
+        layer.alert('select a active task', {icon: 5})
+        return;
+    }
+
+    var completed = $(willLoad).data('completed');
+    if (1!=completed) {
+        layer.alert('You have to run a task first.', {icon: 5})
+        return;
+    }
+
+    $("#mainDis").hide();
+    $("#paintChart").hide();
+    $("#paintTable").hide();
+    $("#compareChart").show();
+    
+    var chartData = willLoad.data('chartData');
+    var task = willLoad.data('task');
+    var algorithmGroup = task.algorithmGroup
+
+
+    var myChart = echarts.init(document.getElementById('compareChartfirst'));
+    
+    var xAxisData = chartData['x'];
+    var yAxisData = chartData['y'];
+    xAxisData = xAxisData.map(num2e); 
+    
+    //legendData = [task.taskID + '(' + task.algorithm + ')']
+    var legendData = [];
+    var seriesData = [];
+   /*  seriesData.push({
+        data: yAxisData,
+        name: legendData[0],
+        type: 'line'
+    }); */
+
+    var muti = $('.left-side.active div');
+    muti.map(function(one) {
+        one = muti[one];
+        var thisTask = $(one).data('task');
+        var thisChartData = $(one).data('chartData');
+        if (thisTask.algorithmGroup == algorithmGroup) {
+            legendData.push(thisTask.taskID + '(' + thisTask.algorithm + ')');
+            seriesData.push({
+                data: thisChartData['y'],
+                name: thisTask.taskID + '(' + thisTask.algorithm + ')',
+                type: 'line'
+            }); 
+        }
+    });
+    
+
+    // 指定图表的配置项和数据
+        option = {
+            legend: {
+                data:legendData
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    dataZoom: {
+                        yAxisIndex: 'none'
+                    },
+                    dataView: {readOnly: false},
+                    magicType: {type: ['line', 'bar']},
+                    restore: {},
+                    saveAsImage: {}
+                }
+            },
+            xAxis: {
+                type: 'category',
+                name : 'Input Size',
+                nameLocation: 'center',
+                nameGap: 35,
+                data: xAxisData
+            },
+            yAxis: {
+                name : 'Time(ms)',
+                nameLocation: 'center',
+                nameGap: 35,
+                type: 'value'
+            },
+            series: seriesData
+        };
+        
+    
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+        
+});
+
+$('.layui-body').on('click', '#savePng', function() {
+    if ($('#compareChartTask').parent().hasClass('layui-this')) {
+        downloadCanvasIamge('#compareChart canvas', 'compare')
+    } else if ($('#seeChartTask').parent().hasClass('layui-this')) {
+        downloadCanvasIamge('#paintChart canvas', 'chart')
+    }
+
+    
+});
+
+    // 弹窗中创建活动任务
+    $('.ctBtn').on("click", function () {
+
+        var task = {};
+
+        var now = new Date();
+        task.taskID = now.getMilliseconds();
+        if(task.taskID<100) {
+            task.taskID = "0"+task.taskID;
+        }
+        task.taskID = 'Task_' + task.taskID;
+        task.algorithm = $('select[name="algorithm"]  option:selected').val();
+        task.runTitle = task.taskID + "(" + task.algorithm + ")";
+        task.algorithmGroup = $('#alertNorthWest li.selected').text().toUpperCase();
+        
+        if ("SORT" == task.algorithmGroup) {
+            task.pivotPosition = $('select[name="pivotPosition"]  option:selected').val();
+            if (task.algorithm == "EXTERNAL_MERGESORT") {
+                task.sortRam = $('input[name="ram"]').val();
+            }
+            task.inputMinValue = 0;
+            task.inputMaxValue = 100000000;
+            task.inputStartSize = $('select[name="inputStartSize"]  option:selected').val();
+            task.inputFinalSize = $('select[name="inputFinalSize"]  option:selected').val();
+            task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
+            task.inputDistribution = $('select[name="inputDistribution"]  option:selected').val();
+            var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
+            numRuns = parseInt(numRuns);
+            numRuns++;
+            task.numRuns = numRuns;
+            task.numRepeats = $('select[name="numRepeats"]  option:selected').val();
+        }
+        if ("GRAPH" == task.algorithmGroup) {
+            task.dataStructure = $('select[name="dataStructure"]  option:selected').val();
+            task.isDirectedGraph = $('input[name="isDirectedGraph"]').prop('checked')?true:false;
+            task.allowSelfLoops = $('input[name="allowSelfLoops"]').prop('checked')?true:false;
+            task.graphIsDelayed = $('input[name="graphIsDelayed"]').prop('checked')?true:false;
+            task.fixedGraphParam = $('input[name="fixedGraphParam"]:checked').val();
+            task.fixedGraphSize = $('select[name="fixedGraphSize"]  option:selected').val();
+            task.inputStartSize = $('select[name="inputStartSize"]  option:selected').val();
+            task.inputFinalSize = $('select[name="inputFinalSize"]  option:selected').val();
+            task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
+            task.numRepeats = $('select[name="numRepeats"]  option:selected').val();
+            var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
+            numRuns = parseInt(numRuns);
+            numRuns++;
+            task.numRuns = numRuns;
+        }
+        if ("HASH" == task.algorithmGroup) {
+            task.inputStartSize = $('select[name="inputStartSize"]  option:selected').val();
+            task.hashBucketSize = $('input[name="hashBucketSize"]').val();
+            task.hashFunction_a = $('input[name="hashFunction_a"]').val();
+            task.hashFunction_b = $('input[name="hashFunction_b"]').val();
+            task.hashKeyType = "Numbers";
+            task.numRuns = 1;
+        }
+
+        if ("SEARCH" == task.algorithmGroup) {
+            task.inputMinValue = 0;
+            task.inputMaxValue = 100000000;
+            task.inputDistribution = $('select[name="inputDistribution"]  option:selected').val();
+            task.searchKeyType = $('select[name="searchKeyType"]  option:selected').val();
+            task.inputStartSize = $('select[name="inputStartSize"]  option:selected').val();
+            task.inputFinalSize = $('select[name="inputFinalSize"]  option:selected').val();
+            task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
+            task.numRepeats = $('select[name="numRepeats"]  option:selected').val();
+            var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
+            numRuns = parseInt(numRuns);
+            numRuns++;
+            task.numRuns = numRuns;
+        }
+        var imgName = getImgName(task.algorithm);
+        
+        var s = '<div id="' + task.taskID + '" class="oneTask"><span class="image">' + imgName + '</span><span class="taskName">' 
+            + task.taskID + '[queued]</span></div>';
+        $('.left-side.active').append(s);
+
+        globalPar.willPushData = $("form").serialize();
+        $("#" + task.taskID).data("task", task);
+        $("#" + task.taskID).data("taskSerialize", trans(task, true));
+        
+        layer.closeAll();
+        $("#" + task.taskID).click();
+        //$("#mainDis").show();
+     });
+
+     // 弹窗中关闭任务
+    $('.clBtn').on("click", function () {
+        layer.closeAll();
+    });
+      // 弹窗中help任务
+      $('.hpBtn').on("click", function () {
+        layer.open({
+            type: 2,
+            title: 'help',
+            shadeClose: true,
+            shade: 0.8,
+            area: ['780px', '90%'],
+            content: 'newtask_help.html' //iframe的url
+          }); 
+    });
+
+     // 点击任务列表事件
+     $('.left-side.active').on("click", ".oneTask" ,function () {
+        $('.left-side.active .oneTask.onC').removeClass("onC");
+        
+        $(this).addClass("onC");
+        /* if ($(this).data('saved') == '1') {
+            $('#saveTask').addClass('layui-btn-disabled')
+        } else {
+            $('#saveTask').removeClass('layui-btn-disabled')
+        }
+        $('#deleteTask').removeClass('layui-btn-disabled') */
+        var task = $(this).data('task');
+
+        $('.mainSettings P').hide();
+        var group = task.algorithmGroup;
+        var algorithm = task.algorithm;
+
+        $('#settings #inputStartSize').parent().show();
+        $('#settings #inputFinalSize').parent().show();
+        $('#settings #inputStepSize').parent().show();
+        $('#settings #inputMinValue').parent().show();
+        $('#settings #inputMaxValue').parent().show();
+        $('#settings #inputDistribution').parent().show();
+        
+        $('#settings #currentInputSize').parent().show();
+        $('#settings #memUsage').parent().show();
+        $('#settings #scheduledTasks').parent().show();
+        $('#settings #completedNum').parent().show();
+        $('#settings #percentage').parent().show();
+        
+        $('#currentInputSize').text(task.inputStartSize);
+        $('#scheduledTasks').text(task.numRuns);
+        $('#inputStartSize').text(task.inputStartSize);
+        $('#inputFinalSize').text(task.inputFinalSize);
+        $('#inputStepSize').text(task.inputStepSize);
+        $('#inputMinValue').text(task.inputMinValue);
+        $('#inputMaxValue').text(task.inputMaxValue);
+        $('#inputDistribution').text(task.inputDistribution);
+
+        switch (group) {
+            case "GRAPH":
+
+                $('#settings #inputStartSize').parent().hide();
+                $('#settings #inputMinValue').parent().hide();
+                $('#settings #inputMaxValue').parent().hide();
+                $('#settings #inputDistribution').parent().hide();
+
+                $('#settings #startSize').parent().show();
+                $('#settings #directedEdges').parent().show();
+                $('#settings #selfLoop').parent().show();
+                $('#settings #fixedParameter').parent().show();
+                $('#settings #size').parent().show();
+                $('#settings #graphRepresentation').parent().show();
+                $('#settings #selfLoop').parent().show();
+                $('#settings #variedParameter').parent().show();
+
+                $('#settings #startSize').text(task.inputStartSize);
+                $('#settings #directedEdges').text(task.isDirectedGraph);
+                $('#settings #selfLoop').text(task.allowSelfLoops);
+                $('#settings #fixedParameter').text(task.fixedGraphParam);
+                $('#settings #size').text(task.fixedGraphSize);
+                $('#settings #graphRepresentation').text("Adjacency List");
+                $('#settings #selfLoop').text(task.allowSelfLoops);
+                $('#settings #variedParameter').text("EDGES");
+                break;
+            case "HASH":
+                $('#settings #bucketArraySize').parent().show();
+                $('#settings #hashFunction').parent().show();
+                $('#settings #hashKeyType').parent().show();
+
+                $('#settings #bucketArraySize').text(task.hashBucketSize);
+                $('#settings #hashFunction').text(
+                    "|"+task.hashFunction_a+"K+"+task.hashFunction_b+"| mod "+task.hashBucketSize
+                );
+                $('#settings #hashKeyType').text(task.hashKeyType);
+
+                break;
+            case "SORT":
+                $('#settings hr').hide();
+                if (algorithm == 'QUICKSORT') {
+                    $('#settings #recursion').parent().show();
+                    $('#settings #pivotPosition').parent().show();
+                    $('#settings #pivotPosition').text(task.pivotPosition);
+                } else if (algorithm == 'EXTERNAL_MERGESORT') {
+                    $('#settings #customRam').parent().show();
+                    $('#settings #treeHeight').parent().show();
+                    $('#settings #customRam').text(task.sortRam + "KB");
+                } else if (algorithm == 'INTERNAL_MERGESORT') {
+                    $('#settings #treeHeight').parent().show();
+                } else if (algorithm == 'HEAPSORT') {
+                    $('#settings #treeHeight').parent().show();
+                } else if (algorithm == 'INSERTSORT') {
+                    $('#settings #treeHeight').parent().show();
+                }
+               
+                break;
+            case "SEARCH":
+                if (algorithm == 'LINEAR_SEARCH') {
+                    $('#settings #recursion').parent().show();
+                } else {
+                    $('#settings #treeHeight').parent().show();
+                }
+                break;
+        }
+
+        
+
+        $("#settings .mainTask .mainTaskName").text(task.algorithm);
+        willLoad = $('.left-side.active .onC');
+        var completed = $(willLoad).data('completed');
+        if (1 == completed) {
+            $("#settings .mainStatus span").text("COMPLETED");
+            $('#runTime').text($(willLoad).data('runTime'));
+            $$('#updateContent textarea').val($(willLoad).data('textarea'));
+            var spanText = $(this).find('span').eq(1).text();
+            if (spanText.indexOf('que')) {
+                spanText = spanText.replace(/queued/, "completed");
+                $(this).find('span').eq(1).text(spanText);
+            }
+            
+        } else {
+            $("#settings .mainStatus span").text("QUEUED");
+            $('#runTime').text('--s');
+            $$('#updateContent textarea').val("");
+            var spanText = $(this).find('span').eq(1).text();
+            if (spanText.indexOf('comp')) {
+                spanText = spanText.replace(/completed/, "queued");
+                $(this).find('span').eq(1).text(spanText);
+            }
+        }
+        
+        $("#mainDis").show();
+        $('.layui-body').css('background', "");
+     });
+
+    // 点击archive任务列表事件
+    $('.left-side.archive').on("click", ".oneTask" ,function () {
+        $('#delArchiveTask').removeAttr('disabled');
+        $('.left-side.archive .oneTask.onC').removeClass("onC");
+        $(this).addClass("onC");
+        var hadLoad = $(this).data('hadLoad');
+        if (hadLoad == '1') {
+            
+        } else {
+            $('#loadArchiveTask').removeAttr('disabled');
+        }
+    });
+
+     // 加载归档任务
+     $("#loadArchiveTask").on("click", function () {
+        
+        var willLoad = $('.left-side.archive .onC');
+        if (!willLoad.size()) {
+            alert("请选定一个活动的归档任务");
+            return;
+        }
+        willLoad.data('hadLoad', '1');
+        $('#loadArchiveTask').prop('disabled',"true");
+        var task = willLoad.data('task');
+        var s = '<div id="' + task.taskID + '" class="oneTask"><span class="image">QS</span><span class="taskName">' + task.taskID + '</span></div>';
+        $('.left-side.active').append(s);
+        $('.left-side.active #' + task.taskID).data('task', task);
+
+    });
+    // 删除归档任务
+    $("#delArchiveTask").on("click", function () {
+
+        var willDel = $('.left-side.archive .onC');
+        if (!willDel.size()) {
+            alert("请选定一个活动的归档任务");
+            return;
+        }
+        var task = $(willDel).data('task');
+        willDel.remove();
+        $.post('/common/del', {taskID: task.taskID}, function(data) {
+            console.log(data);
+        });
+        $('#loadArchiveTask').prop('disabled',"true");
+        $('#delArchiveTask').prop('disabled',"true");
+    });
+
+    $("#selectVal, #constantVal,#selectVal2, #constantVal2").on("change", function () {
+       
+        var selectVal = $('#selectVal').val();
+        var constantVal = $('#constantVal').val();
+
+        var willLoad = $('.left-side.active .onC');
+        var chartData = willLoad.data('chartData');
+        var xAxisData = chartData['x'];
+        var yAxisData;
+        var cons = constantVal * 0.00001;
+        var isNone1=false;
+
+        if ("N" == selectVal) {
+            
+            yAxisData = xAxisData.map(function(x) {
+                return x * cons;
+            })
+        } else if ("NONE" == selectVal) {
+            myChart.setOption(globalPar.option);
+            isNone1 = true;
+        } else if ("1" == selectVal) {
+            yAxisData = xAxisData.map(function(x) {
+                return 1 * cons;
+            })
+        } else if ("logN" == selectVal) {
+            yAxisData = xAxisData.map(function(x) {
+                return math.log(x, 10) * cons;
+            })
+        } else if ("NlogN" == selectVal) {
+            yAxisData = xAxisData.map(function(x) {
+                return x * math.log(x, 10) * cons;
+            })
+        } else {
+            yAxisData = xAxisData.map(function(x) {
+                return x * x * cons;
+            })
+        }
+        //var option = myChart.getOption();
+        var option;
+        if (!isNone1) {
+            option = cloneObj(globalPar.option);
+            option.legend.data.push("standard1");
+            option.series.push({
+                data: yAxisData,
+                name: "standard1",
+                type: 'line'
+            });
+        }
+
+
+        var anotherInput = $('#anotherInput').prop("checked");
+        if (!anotherInput) {
+            myChart.setOption(option);
+            return;
+        }
+        var selectVal2 = $('#selectVal2').val();
+        var constantVal2 = $('#constantVal2').val();
+        var yAxisData2;
+        var cons2 = constantVal2 * 0.00001;
+        if ("N" == selectVal2) {
+            
+            yAxisData2 = xAxisData.map(function(x) {
+                return x * cons2;
+            })
+        } else if ("NONE" == selectVal2) {
+            myChart.setOption(option);
+            return;
+        } else if ("1" == selectVal2) {
+            yAxisData2 = xAxisData.map(function(x) {
+                return 1 * cons2;
+            })
+        } else if ("logN" == selectVal2) {
+            yAxisData2 = xAxisData.map(function(x) {
+                return math.log(x, 10) * cons2;
+            })
+        } else if ("NlogN" == selectVal2) {
+            yAxisData2 = xAxisData.map(function(x) {
+                return x * math.log(x, 10) * cons2;
+            })
+        } else {
+            yAxisData2 = xAxisData.map(function(x) {
+                return x * x * cons2;
+            })
+        }
+        option.legend.data.push("standard2");
+        option.series.push({
+            data: yAxisData2,
+            name: "standard2",
+            type: 'line'
+        });
+        myChart.setOption(option);
+       
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    });
+
+    $("#anotherInput").change(function() { 
+        var anotherInput = $('#anotherInput').prop("checked");
+       if (anotherInput) {
+        $('#selectVal2').show();
+        $('#constantVal2').show();
+       } else {
+        $('#selectVal2').hide();
+        $('#constantVal2').hide();
+       }
+    });
+
+    
+ $(function(){
+    
+    globalPar.formSort = $("#formSort");
+    globalPar.formGraph = $("#formGraph");
+    globalPar.formHash = $("#formHash");
+    globalPar.formSearch = $("#formSearch");
+    $("#alertNorthEast").empty();
+  });
+
+});
+function updateCtx(data, obj) {
+
+    result = data;
+    if (result.indexOf('Number') != -1 
+        &&
+        result.indexOf('ms') != -1 ) {
+        //console.log(result);
+
+        var lines = result.split("\n");
+        lines.pop();
+        var firstLine = lines.shift();
+        var coordinateX = []; 
+        var coordinateY = []; 
+        lines.map(function(one) {
+            var xy = one.split("\t");
+            coordinateX.push(parseInt(xy[0]));
+            coordinateY.push(parseInt(xy[1]));
+        });
+        // console.log(coordinateX);
+        // console.log(coordinateY);
+        var title1 = firstLine.split("\t")[0];
+        $$('.left-side.active .onC').data("chartData", {x: coordinateX, y:coordinateY,title1:title1});
+        return;
+    }
+
+    var parts = result.split("\t");
+    var pF = parts[0].toUpperCase();
+    switch (pF) {
+        case "[NUMCOMPLETEDRUNS]":
+           result = 's';
+           var pS = parts[1];
+           pS = new Number(pS);
+           $$('#completedNum').text(pS);
+           pS = pS * 100 / 50
+           $$('#percentage').text(pS + "%");
+           break;
+       case "[MAXRECURSION]":
+           result = 's';
+           var pS = parts[1];
+           $$('#recursion').text(pS).
+           break;
+       case "[TREEHEIGHT]":
+           result = 's';
+           var pS = parts[1];
+           $$('#settings #treeHeight').text(pS).
+           break;
+       case "[STATUS]":
+           result = 's';
+           var pS = parts[1];
+           $$('#live span').text(pS);
+           break;
+       case "[TERMINATE]":
+           result = 's';
+           var pS = parts[1];
+           $$('.mainStatus span').text(pS);
+           break;
+       case "[CURRENTMEMUSAGE]":
+           result = 's';
+           var pS = parts[1];
+           pS = new Number(pS);
+           pS /=  1024;
+           pS = pS.toFixed(2);
+           if (pS > 1024) {
+               pS /= 1024;
+               pS = pS.toFixed(2);
+               pS = pS + "MB";
+           } else {
+               pS = pS + "KB";
+           }
+           $$('#memUsage').text(pS);
+           break;
+       case "[CURRENTINPUTSIZE]":
+           result = 's';
+           var pS = parts[1];
+           $$('#settings #currentInputSize').text(pS);    
+           break;
+       case "[NUMRUNS]":
+           result = 's';  
+           var pS = parts[1];
+           $$('#settings #scheduledTasks').text(pS);   
+           break;
+       case "[MINBUCKETSIZE]":
+           result = 's';   
+           var pS = parts[1];
+           $$('#settings #minBucketSize').text(pS);  
+           break;
+       case "[MAXBUCKETSIZE]":
+           result = 's';  
+           var pS = parts[1];
+           $$('#settings #maxBucketSize').text(pS);  
+           break;
+       case "[AVERAGE]":
+           result = 's'; 
+           var pS = parts[1];
+           $$('#settings #averageBucketSize').text(pS);   
+           break;
+       case "[STDDEVIATION]":
+           result = 's';
+           var pS = parts[1];
+           $$('#settings #standardDeviation').text(pS);    
+           break;
+       case "[ERROR]":
+           result = 's';  
+           break;
+       case "[UPDATE]":
+           var pS = parts[1].toUpperCase();
+           result = pS;
+           break;
+       default:
+           
+           break;
+    }
+
+    var thisText = $$('#updateContent textarea');
+    var str = thisText.val(); //先获取原有的值
+    if (result == 's') {
+       
+    } else {
+       document.getElementById('yang').value = str + result + "\r\n"; //拼接新值
+       thisText.get(0).scrollTop = thisText.get(0).scrollHeight;   
+       if (result.indexOf('TaskRunner exiting') != -1) {
+            setTimeout("websocket.close()", 500);
+       }
+    }
+   
+ }
+ 
+
+ function trans(strr, type) {
+
+    if (true) {
+        var result = "";
+        for (var key in strr) {
+            result = result + key + "=" + strr[key] + "&";
+        }
+        result = result.substring(0, result.length - 1);
+        return result;
+    }
+
+    var result = {};
+    var keyValue = strr.split("&");
+    for (var i=0; i<keyValue.length; i++) {
+        var o = keyValue[i];
+        var oo = o.split("=");
+        result[oo[0]] = oo[1];
+    }
+    result['runTitle'] = 'ybq';
+    return result;
+ }
+
+ function num2e(num){
+    var p = Math.floor(Math.log(num)/Math.LN10);
+    var n = num * Math.pow(10, -p);
+  n = n.toFixed(1);
+    return n + 'E' + p;
+}
+
+// 下载Canvas元素的图片
+function downloadCanvasIamge(selector, name) {
+    // 通过选择器获取canvas元素
+    var canvas = document.querySelector(selector)
+    // 使用toDataURL方法将图像转换被base64编码的URL字符串
+    var url = canvas.toDataURL('image/png')
+    // 生成一个a元素
+    var a = document.createElement('a')
+    // 创建一个单击事件
+    var event = new MouseEvent('click')
+    
+    // 将a的download属性设置为我们想要下载的图片名称，若name不存在则使用‘下载图片名称’作为默认名称
+    a.download = name || '下载图片名称'
+    // 将生成的URL设置为a.href属性
+    a.href = url
+    
+    // 触发a的单击事件
+    a.dispatchEvent(event)
+}
+
+function getImgName(code) {
+    var imgName = '';
+    switch (code) {
+        case "QUICKSORT":
+            imgName = "QS";
+            break;
+        case "HEAPSORT":
+            imgName = "HS";
+            break;
+        case "INSERTSORT":
+            imgName = "IS";
+            break;
+        case "EXTERNAL_MERGESORT":
+            imgName = "EMS";
+            break;
+        case "INTERNAL_MERGESORT":
+            imgName = "IMS";
+            break;
+        case "BREADTH-FIRST_SEARCH":
+            imgName = "BFS";
+            break;
+        case "DEPTH-FIRST_SEARCH":
+            imgName = "DFS";
+            break;
+        case "HASHING":
+            imgName = "Ha";
+            break;
+        case "LINEAR_SEARCH":
+            imgName = "BS";
+            break;
+        case "BINARY_SEARCH":
+            imgName = "LS";
+            break;
+    }
+    return imgName;
+}
+
+function cloneObj(obj){
+    var str, newobj = obj.constructor === Array ? [] : {};
+    if(typeof obj !== 'object'){
+        return;
+    } else if(window.JSON){
+        str = JSON.stringify(obj), //系列化对象
+        newobj = JSON.parse(str); //还原
+    } else {
+        for(var i in obj){
+            newobj[i] = typeof obj[i] === 'object' ? 
+            cloneObj(obj[i]) : obj[i]; 
+        }
+    }
+    return newobj;
+};

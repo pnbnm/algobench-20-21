@@ -1,0 +1,61 @@
+* {
+    font-size: 12px;
+}
+
+#alertDiv {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: #1E9FFF;
+}
+
+#alertNorth {
+    width: 100%;
+    height: 90%;
+    background-color: #00F7DE;
+    /*float: left;*/
+}
+
+#alertSouth {
+    width: 100%;
+    height: 10%;
+    background-color: #DBE5F4;
+    text-align: center;
+}
+
+#alertNorthWest {
+    width: 20%;
+    height: 100%;
+    background-color: #FFFFFF;
+    float: left;
+}
+
+#alertNorthEast {
+    width: 80%;
+    height: 100%;
+    background-color: #F0F0F0;
+    float: left;
+}
+
+.alert-ul-title {
+    background-color: #346c9c;
+    padding: 5px;
+    font-size: 15px;
+}
+
+#alertNorthWest ul li {
+    margin: 0px;
+    padding: 15px;
+    font-size: 20px;
+}
+
+#alertNorthWest ul li:hover {
+    cursor:hand;
+    background:#9c5915;
+}
+
+#alertSouth button {
+    font-size: 20px;
+    margin: 10px 20px;
+}
+

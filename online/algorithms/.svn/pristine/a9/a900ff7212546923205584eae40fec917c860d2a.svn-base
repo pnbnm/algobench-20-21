@@ -1,0 +1,193 @@
+/*
+ * The MIT License
+ *
+ * Copyright 2015 Eziama Ubachukwu (eziama.ubachukwu@gmail.com).
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+/*
+ * Modified by Yufen Wang.
+ * 2016
+ */
+
+
+package com.inf2b.algorithms.model;
+
+import com.inf2b.algorithms.AlgoBench;
+import com.inf2b.algorithms.controller.WebSocketController;
+
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class TaskMaster implements Runnable, Serializable {
+
+    protected final String CLIENT_MODE = "1";
+    protected int serverPort;
+    protected Task task;
+    protected Map<String, String> sb;
+    transient protected ProcessBuilder processBuilder;
+    private WebSocketController websocket;
+
+    public WebSocketController getWebsocket() {
+        return websocket;
+    }
+
+    public void setWebsocket(WebSocketController websocket) {
+        this.websocket = websocket;
+    }
+
+    public TaskMaster(Map sb, Task task) {
+        this.sb = sb;
+        this.task = task;
+    }
+
+    public TaskMaster(Task task, WebSocketController websocket) {
+        this.websocket = websocket;
+        this.task = task;
+    }
+
+    public TaskMaster(Task task) {
+        this.task = task;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    @Override
+    public void run() {
+        Thread serverThread = new Thread(new Server());
+        serverThread.start();
+        try {
+            launchTaskRunner();
+            serverThread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void launchTaskRunner() throws IOException, InterruptedException {
+
+        processBuilder = new ProcessBuilder(AlgoBench.PathToTaskRunner,
+                CLIENT_MODE, Integer.toString(serverPort));
+        processBuilder.redirectErrorStream(true);
+        final Process taskRunner = processBuilder.start();
+
+        String line;
+        InputStream is = taskRunner.getInputStream();
+        InputStreamReader isReader = new InputStreamReader(is);
+        BufferedReader bfReader = new BufferedReader(isReader);
+
+        //int index = 0;
+        while ((line = bfReader.readLine()) != null) {
+
+            System.out.println(line);
+            //sb.put(index + "" , line);
+            websocket.sendMessage(line);
+            //index++;
+
+        }
+        // wait for the process to end
+        taskRunner.waitFor();
+    }
+
+
+    private class Server implements Runnable {
+
+        protected ServerSocket serverSocket;
+        protected Socket connectionSocket;
+
+        public Server() {
+
+            for (int trials = 0; trials < 3; ++trials) {
+                try {
+                    serverSocket = new ServerSocket(0);
+                    serverPort = serverSocket.getLocalPort();
+                    break;
+                } catch (IOException ex) {
+                    serverPort = 0;
+                    Logger.getLogger(TaskMaster.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (serverSocket.isClosed()) {
+                System.out.println("Error: SERVER daemon failed to initiate.");
+            }
+        }
+
+        private void startCommunication() {
+            try {
+                System.out.println("Server listening on port " + serverPort);
+                serverSocket.setSoTimeout(200 * 1000);
+                connectionSocket = serverSocket.accept();
+                PrintWriter pOut = new PrintWriter(connectionSocket.getOutputStream(), true);
+                BufferedReader buffIn = new BufferedReader(
+                        new InputStreamReader(connectionSocket.getInputStream(), "UTF-8"));
+                String instruction = task.getCommand();
+                pOut.write(instruction);
+                pOut.flush();
+                connectionSocket.shutdownOutput();
+                connectionSocket.setSoTimeout(10 * 60 * 1000);   // 10 mins
+
+
+                String responseLine;
+                StringBuilder response = new StringBuilder();
+                int responseLineCount = 0;
+                while ((responseLine = buffIn.readLine()) != null) {
+                    if (responseLine.length() == 1) {
+                        // it's a heartbeat message
+//                        System.out.println("-- heartbeat --");
+                        continue;
+                    }
+                    switch (responseLine) {
+                        case "BEGIN": // markers sent by client
+                            break;
+                        case "END":
+                            break;
+                        default:
+                            response.append(responseLine);
+                            response.append("\n");
+                            ++responseLineCount;
+                            break;
+                    }
+                }
+                System.out.println("response:" + response.toString());
+                //sb.put("response", response.toString());
+                websocket.sendMessage(response.toString());
+            } catch (IOException ex) {
+                Logger.getLogger(TaskMaster.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+
+            }
+        }
+
+        @Override
+        public void run() {
+            startCommunication();
+        }
+    }
+}

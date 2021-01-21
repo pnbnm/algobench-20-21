@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>INF2B</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <link rel="stylesheet" href="custom.css">
+</head>
+
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header">
+            <div class="layui-logo">inf2b workbench</div>
+            <!-- 头部区域（可配合layui已有的水平导航）  -->
+            <ul class="layui-nav layui-layout-left">
+                <li class="layui-nav-item">
+                    <button id="createTask" class="layui-btn">create task</button>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">load saved task</a>
+                </li>
+                <li class="layui-nav-item">
+                    <button id="saveTask" class="layui-btn">save task</button>
+                </li>
+                <li class="layui-nav-item">
+                    <button id="deleteTask" class="layui-btn">delete task</button>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">compare task</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;" id="startTask">start</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">stop</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">restart</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">task overview</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">其它系统</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="">管理</a>
+                        </dd>
+                        <dd>
+                            <a href="">消息管理</a>
+                        </dd>
+                        <dd>
+                            <a href="">授权管理</a>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> 贤心
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="">基本资料</a>
+                        </dd>
+                        <dd>
+                            <a href="">安全设置</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">退了</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="layui-side layui-bg-black">
+            <div class="layui-side-scroll">
+                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="javascript:;">active tasks</a>
+                        <dl class="layui-nav-child activeTasks">
+                            
+                            <dd>
+                                <a href="javascript:;">列表三</a>
+                            </dd>
+                            
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">archive tasks</a>
+                        <dl class="layui-nav-child archivedTasks">
+                           <button id="loadArchiveTask">load task</button>
+                           <button id="delArchiveTask"> delete task</button>
+                        </dl>
+                        
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="layui-body">
+            <!-- 内容主体区域 -->
+            <div id="mainDis">
+                <div id="settings">
+                    <div class="mainTask">
+                        <span class="mainTaskName"></span>
+                    </div>
+                    <hr />
+                    <div class="mainStatus">
+                        Status: <span>COMPLETED</span>
+                    </div>
+                    <hr />
+                    <div>
+                        <div class="settings left">
+                            <p id="curIn">Current input size: <span id="currentInputSize"></span></p>
+                            <p id="memFo">Memory footprint: <span></span></p>
+                            <p>No. of scheduled tasks: <span id="scheduledTasks"></span></p>
+                            <p id="numComp">No. of completed tasks: <span></span></p>
+                            <p>Percentage completion:</p>
+                            <p id="maxRe">Max. recursion depth: <span></span></p>
+                        </div>
+                        <div class="settings right">
+                            <p>Initial size: <span id="inputStartSize"></span></p>
+                            <p>Final size: <span id="inputFinalSize"></span></p>
+                            <p>Increment size: <span id="inputStepSize"></span></p>
+                            <p >Min. value: <span id="inputMinValue"></span></p>
+                            <p>Max. value: <span id="inputMaxValue"></span></p>
+                            <p>Input distribution:Random: <span id="inputDistribution"></span></p>
+                            <p>Pivot position: <span id="pivotPosition"></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div id="updateContent">
+                    <textarea id="yang"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            <span id="statusInfo"></span>
+        </div>
+    </div>
+    <script src="layui/layui.js"></script>
+    
+
+    <div id="alertDiv">
+        <div id="alertNorth">
+            <div id="alertNorthWest">
+                <p class="alert-ul-title">select algorithm type</p>
+                <ul>
+                    <li>Sort</li>
+                    <li>Graph</li>
+                    <li>Hash</li>
+                    <li>Search</li>
+                </ul>
+            </div>
+            <div id="alertNorthEast">
+                <form class="layui-form" action="" enctype="application/x-www-form-urlencoded">
+                    <div class="alert-sort one show">
+                        <span>Step 1: Choose algorithm</span>
+                        <hr />
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">algotithm:</label>
+                            <div class="layui-input-inline">
+                                <select name="algorithm"  lay-filter="aihao">
+                                    <option value="QUICKSORT">Quicksort</option>
+                                    <option value="HEAPSORT">Heapsort</option>
+                                    <option value="INSERTSORT">Insertsort</option>
+                                    <option value="EXTERNAL_MERGESORT">External Mergesort</option>
+                                    <option value="INTERNAL_MERGESORT">Internal Mergesort</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Pivot position:</label>
+                            <div class="layui-input-inline">
+                                <select name="pivotPosition">
+                                    <option value="Left">Left</option>
+                                    <option value="Centre">Centre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                                <label class="layui-form-label">RAM:</label>
+                                <div class="layui-input-inline">
+                                        <input type="text" name="ram" autocomplete="off" class="layui-input">KB
+                                </div>
+                            </div>
+
+                        <br />
+                        <br />
+                        <span class="alert-next-alt">
+                            Click "Next" button below to step 2.
+                        </span>
+                    </div>
+
+                    <div class="alert-sort two">
+                        <span>Step 2: Input settings</span>
+                        <hr /> input Source:
+                        <br />
+                        <input type="radio" name="inputSource" value="nan" title="Use Algobench-generated input" checked>
+                        <br />
+                        <input type="radio" name="inputSource" value="nv" title="Use custom input file">
+                        <hr /> input Settings:
+                        <br />
+                        <label class="layui-form-label">Distribution:</label>
+                        <div class="layui-input-inline">
+                            <select name="inputDistribution">
+                                <option value="Random">Random</option>
+                                <option value="Sorted">Sorted</option>
+                                <option value="Reserse-sorted">Reserse-sorted</option>
+                                <option value="Worst-case">Worst-case</option>
+                            </select>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <span class="alert-next-alt">
+                            Click "Next" button below to step 3.
+                        </span>
+                    </div>
+
+                    <div class="alert-sort three">
+                        <span>Step 3: Run configuration</span>
+                        <hr />
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">initial input size:</label>
+                            <div class="layui-input-inline">
+                                <select name="inputStartSize">
+                                    <option value="10000">10000</option>
+                                    <option value="20000">20000</option>
+                                    <option value="50000">50000</option>
+                                    <option value="100000">100000</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Final input size:</label>
+                            <div class="layui-input-inline">
+                                <select name="inputFinalSize">
+                                    <option value="500000">500000</option>
+                                    <option value="1000000">1000000</option>
+                                    <option value="2000000">2000000</option>
+                                    <option value="5000000">5000000</option>
+                                    <option value="10000000">10000000</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Step size:</label>
+                            <div class="layui-input-inline">
+                                <select name="inputStepSize">
+                                    <option value="10000">10000</option>
+                                    <option value="20000">20000</option>
+                                    <option value="50000">50000</option>
+                                    <option value="100000">100000</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">Number of experiments per input size:</label>
+                            <div class="layui-input-inline">
+                                <select name="numRepeats">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <br />
+                            if > 1, Algobench will calculate average runtime
+                        </div>
+                        
+                        <br /> Total no.of executions: 100
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <span class="alert-next-alt">
+                            Click "Create Task" button below to finish.
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="alertSouth">
+            <button>help</button>
+            <button class="backBtn">back</button>
+            <button class="nextBtn">next</button>
+            <button class="ctBtn layui-btn" lay-submit lay-filter="*">create task</button>
+            <button>cancel</button>
+        </div>
+    </div>
+    <script src="custom.js"></script>
+</body>
+
+</html>

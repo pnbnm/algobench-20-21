@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="acf5eb80-47c5-4088-9216-946ba6b7ad5d" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/custom2.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/custom2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>getInputDistribution</find>
+      <find>response</find>
+      <find>layui-nav-item</find>
+      <find>test1</find>
+      <find>uri</find>
+      <find>rui</find>
+      <find />
+      <find>alert-sort</find>
+      <find />
+      <find>.alert-sort</find>
+      <find>.js</find>
+      <find>信息</find>
+      <find>custom2.js</find>
+      <find>toolbox</find>
+      <find />
+      <find>alert-ul-title</find>
+      <find>layui-this</find>
+      <find>seeChartTask</find>
+      <find>savePng</find>
+      <find>paintChart</find>
+      <find>layer</find>
+      <find>next</find>
+      <find />
+      <find />
+      <find />
+      <find />
+      <find>title:'info'</find>
+      <find>Load</find>
+      <find>active</find>
+      <find>异常</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>title:'info',btn:'OK'</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven3" />
+        <option name="userSettingsFile" value="D:\apache-maven-3.5.2\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="downloadDocsAutomatically" value="true" />
+        <option name="downloadSourcesAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="697" />
+    <option name="height" value="745" />
+  </component>
+  <component name="ProjectId" id="1nLer5N6e6y6fToVMVR7NxVGInL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="306" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="306" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="306" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="305" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="306" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="305" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="306" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="306" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="306" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="305" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="306" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="305" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="project.structure.last.edited" value="Problems" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.updates" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.inf2b.algorithms.config" />
+      <recent name="com.inf2b.algorithms.controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\work\wksp\idea\algorithms\src\main\resources\static" />
+      <recent name="D:\work\wksp\idea\algorithms\src\main\resources" />
+      <recent name="D:\work\wksp\idea\algorithms\src\main\resources\static\layui\lay\modules" />
+      <recent name="D:\work\wksp\idea\algorithms\src\main\java\com\inf2b\algorithms\controller" />
+      <recent name="D:\work\wksp\idea\algorithms\src\main\java\com\inf2b\algorithms\model" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.AlgoBench">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="boot" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="spring-boot:run" />
+              </list>
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="AlgoBench" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="algorithms" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.inf2b.algorithms.AlgoBench" />
+      <option name="PROGRAM_PARAMETERS" value="$USER_HOME$/Desktop/ybq/ybq/algobench_b.exe" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateResources" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateResources" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="TestNG">
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Maven.boot" />
+      <item itemvalue="Spring Boot.AlgoBench" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>$USER_HOME$/.subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="acf5eb80-47c5-4088-9216-946ba6b7ad5d" name="Default" comment="" />
+      <created>1521073973612</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1521073973612</updated>
+      <workItem from="1521073975241" duration="2019000" />
+      <workItem from="1521127350934" duration="20000" />
+      <workItem from="1521127448285" duration="4806000" />
+      <workItem from="1521266265973" duration="1679000" />
+      <workItem from="1521282841219" duration="1098000" />
+      <workItem from="1521350707496" duration="7094000" />
+      <workItem from="1521360579272" duration="10553000" />
+      <workItem from="1521460711520" duration="7747000" />
+      <workItem from="1521555561563" duration="4939000" />
+      <workItem from="1521639695063" duration="2590000" />
+      <workItem from="1522068898187" duration="10071000" />
+      <workItem from="1522157806564" duration="2047000" />
+      <workItem from="1522237701396" duration="11380000" />
+      <workItem from="1522336575535" duration="1716000" />
+      <workItem from="1522497074225" duration="9559000" />
+      <workItem from="1522587756966" duration="13300000" />
+      <workItem from="1522669428888" duration="7675000" />
+      <workItem from="1522767264372" duration="594000" />
+      <workItem from="1522849218120" duration="1911000" />
+      <workItem from="1522995230722" duration="10959000" />
+      <workItem from="1523024125469" duration="14580000" />
+      <workItem from="1523085546140" duration="8980000" />
+      <workItem from="1523452130358" duration="764000" />
+      <workItem from="1523629905714" duration="586000" />
+      <workItem from="1523777799068" duration="1198000" />
+      <workItem from="1523789710644" duration="10599000" />
+      <workItem from="1523837149998" duration="1174000" />
+      <workItem from="1523884936036" duration="4305000" />
+      <workItem from="1523971898496" duration="1599000" />
+      <workItem from="1524009461129" duration="705000" />
+      <workItem from="1524053712825" duration="5000000" />
+      <workItem from="1524147421564" duration="315000" />
+      <workItem from="1524376429741" duration="12961000" />
+      <workItem from="1524440698728" duration="1791000" />
+      <workItem from="1524485967627" duration="8802000" />
+      <workItem from="1524578052906" duration="5797000" />
+      <workItem from="1524614407595" duration="597000" />
+      <workItem from="1524659004126" duration="8845000" />
+      <workItem from="1524701520089" duration="1288000" />
+      <workItem from="1524835812643" duration="4368000" />
+      <workItem from="1524924370054" duration="6923000" />
+      <workItem from="1528295750342" duration="7483000" />
+      <workItem from="1531233420444" duration="5058000" />
+      <workItem from="1531240532947" duration="24000" />
+      <workItem from="1531317800292" duration="6063000" />
+      <workItem from="1531407246891" duration="725000" />
+      <workItem from="1534175074008" duration="2364000" />
+      <workItem from="1534294448329" duration="5492000" />
+      <workItem from="1611173995325" duration="788000" />
+    </task>
+    <task id="LOCAL-00001">
+      <created>1521132075095</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1521132075095</updated>
+    </task>
+    <task id="LOCAL-00002" summary="卓有成效">
+      <created>1521555935863</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1521555935863</updated>
+    </task>
+    <task id="LOCAL-00003" summary="功能按钮">
+      <created>1522069034473</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1522069034473</updated>
+    </task>
+    <task id="LOCAL-00004">
+      <created>1522251327988</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1522251327988</updated>
+    </task>
+    <task id="LOCAL-00005" summary="终于可以 data:task了">
+      <created>1522254188071</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1522254188071</updated>
+    </task>
+    <task id="LOCAL-00006" summary="终于可以 data:task了">
+      <created>1522592109427</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1522592109427</updated>
+    </task>
+    <task id="LOCAL-00007" summary="tinghaode">
+      <created>1522602176308</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1522602176308</updated>
+    </task>
+    <task id="LOCAL-00008" summary="tinghaode">
+      <created>1522683341439</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1522683341439</updated>
+    </task>
+    <task id="LOCAL-00009" summary="加入 websoket">
+      <created>1522998435596</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1522998435596</updated>
+    </task>
+    <task id="LOCAL-00010" summary="mainsettings">
+      <created>1524009545804</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1524009545804</updated>
+    </task>
+    <task id="LOCAL-00011" summary="milestone">
+      <created>1524442655021</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1524442655021</updated>
+    </task>
+    <task id="LOCAL-00012" summary="milestone">
+      <created>1524584842991</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1524584842991</updated>
+    </task>
+    <task id="LOCAL-00013" summary="export to txt">
+      <created>1524667644941</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1524667644941</updated>
+    </task>
+    <task id="LOCAL-00014" summary="export to txt">
+      <created>1524670121283</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1524670121283</updated>
+    </task>
+    <task id="LOCAL-00015" summary="export to txt">
+      <created>1524842571871</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1524842571871</updated>
+    </task>
+    <task id="LOCAL-00016" summary="完整版">
+      <created>1528295980236</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1528295980237</updated>
+    </task>
+    <task id="LOCAL-00017" summary="移除了很多功能">
+      <created>1528298261969</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1528298261969</updated>
+    </task>
+    <task id="LOCAL-00018" summary="1.&#9;整个左边缩进一些，左菜单对齐“+create”这个按钮&#10;2.&#9;左菜单里的文字全都居中&#10;3.&#9;左上角的logo换一个对比度高一些的颜色，比如白色&#10;4.&#9;“save”按钮也加一个矢量图，和周围的按钮一样大&#10;5.&#9;主界面logo的作者名字，在Yufen Wang后面依次加上Shalom Rachapudi David，Nevena Blagoeva和Yuecheng Hu&#10;6.&#9;最顶上的菜单栏里的按钮在网页不全屏的时候会折下来，能让他不折下来吗">
+      <created>1531239472811</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1531239472811</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="卓有成效" />
+    <MESSAGE value="功能按钮" />
+    <MESSAGE value="终于可以 data:task了" />
+    <MESSAGE value="tinghaode" />
+    <MESSAGE value="加入 websoket" />
+    <MESSAGE value="mainsettings" />
+    <MESSAGE value="milestone" />
+    <MESSAGE value="export to txt" />
+    <MESSAGE value="完整版" />
+    <MESSAGE value="移除了很多功能" />
+    <MESSAGE value="1.&#9;整个左边缩进一些，左菜单对齐“+create”这个按钮&#10;2.&#9;左菜单里的文字全都居中&#10;3.&#9;左上角的logo换一个对比度高一些的颜色，比如白色&#10;4.&#9;“save”按钮也加一个矢量图，和周围的按钮一样大&#10;5.&#9;主界面logo的作者名字，在Yufen Wang后面依次加上Shalom Rachapudi David，Nevena Blagoeva和Yuecheng Hu&#10;6.&#9;最顶上的菜单栏里的按钮在网页不全屏的时候会折下来，能让他不折下来吗" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.&#9;整个左边缩进一些，左菜单对齐“+create”这个按钮&#10;2.&#9;左菜单里的文字全都居中&#10;3.&#9;左上角的logo换一个对比度高一些的颜色，比如白色&#10;4.&#9;“save”按钮也加一个矢量图，和周围的按钮一样大&#10;5.&#9;主界面logo的作者名字，在Yufen Wang后面依次加上Shalom Rachapudi David，Nevena Blagoeva和Yuecheng Hu&#10;6.&#9;最顶上的菜单栏里的按钮在网页不全屏的时候会折下来，能让他不折下来吗" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611189355723">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1611189355723" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>AlgoBench.properties.getProperty(&quot;INPUT_&quot; + inputDistribution.toUpperCase())</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>JSON.toJSONString(task)</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>algorithms</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: ch.qos.logback:logback-classic:1.2.3</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

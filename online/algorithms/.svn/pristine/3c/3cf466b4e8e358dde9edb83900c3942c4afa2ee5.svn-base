@@ -1,0 +1,322 @@
+ //JavaScript代码区域
+
+
+
+ 
+ var $$;
+ var index = 0;
+ 
+ 
+ layui.use(['form', 'layer', 'element'], function () {
+
+    var globalPar = {
+        alertSortStep: 0,
+        willPushData:'',
+    };
+
+    var
+        form = layui.form,
+        $ = layui.$,
+        layer = layui.layer,
+        element = layui.element;
+
+        var index = 0;
+       $$ = $;
+
+       $("input[name='ram']").parent().parent().hide();
+
+        // 类别显示
+       $('#alertNorthWest li').on('click', function() {
+           var t = $(this);
+           t.parent().children('li').removeClass('selected');
+           t.addClass('selected');
+
+           var sort = t.text();
+           if ("Graph" == sort) {
+               
+           }
+
+
+
+       });
+
+
+       form.on('select(aihao)', function(data){
+        var option = data.value;
+        if ("QUICKSORT" != option) {
+            $("select[name='pivotPosition']").parent().parent().hide();
+            
+        } else {
+            
+            $("select[name='pivotPosition']").parent().parent().show();
+        }
+        if ("EXTERNAL_MERGESORT" == option) {
+            $("input[name='ram']").parent().parent().show();
+        } else {
+            $("input[name='ram']").parent().parent().hide();
+        }
+        return false;
+      });
+
+// 页面加载后的初始化任务
+$.post("/common/gett", {}, function(data) {
+    alert(data);
+    for (var i=0; i<data.length; i++) {
+        var s = '<dd><a href="javascript:;">' + data[i] + '</a></dd>';
+        $('.archivedTasks').append(s);
+    }
+}, 'json');
+
+
+    $("#createTask").on("click", function () {
+        layer.open({
+            type: 1,
+            area: ['800px', '560px'],
+            shadeClose: true, //点击遮罩关闭
+            content: $("#alertDiv")
+        });
+    });
+
+    $("#deleteTask").on("click", function () {
+        var willR = $('.activeTasks dd a.onC').parent();
+        if (!willR.size()) {
+            alert("请选定一个活动任务");
+            return;
+        }
+        willR.remove();
+
+    });
+
+    $("#saveTask").on("click", function () {
+        var willR = $('.activeTasks dd a.onC').parent();
+        if (!willR.size()) {
+            alert("请选定一个活动任务");
+            return;
+        }
+        $.post("/common/save", {}, function(data) {
+            alert(data);
+            var s = '<dd><a href="javascript:;">列表三</a></dd>';
+            $('.archivedTasks').append(s);
+        });
+    });
+
+    $(".nextBtn").on("click", function () {
+        if (globalPar.alertSortStep == 2) {
+            return;
+        }
+        var r = $(".alert-sort.show").removeClass("show");
+        var nextPos = globalPar.alertSortStep + 1;
+        $(".alert-sort:eq(" + nextPos + ")").addClass("show");
+        globalPar.alertSortStep = nextPos;
+    });
+
+    $(".backBtn").on("click", function () {
+        if (globalPar.alertSortStep == 0) {
+            return;
+        }
+        var r = $(".alert-sort.show").removeClass("show");
+        var nextPos = globalPar.alertSortStep - 1;
+        $(".alert-sort:eq(" + nextPos + ")").addClass("show");
+        globalPar.alertSortStep = nextPos;
+    });
+
+    // 开始执行任务
+    $('#startTask').on("click", function () {
+
+        var task = $('.activeTasks dd a.onC').parent().data('task');
+      
+       var s = "";
+        $.ajax({
+            type: "POST",
+            url: "/sort/hello",
+            //data: globalPar.willPushData,
+            //data: trans(task, true),
+            data: task,
+            async: false,
+            success: function(data){
+                updateCtx();
+            }
+         });
+  
+    });
+
+    // 弹窗中创建活动任务
+    $('.ctBtn').on("click", function () {
+        var task = {};
+
+        var now = new Date();
+        task.taskID = now.getMilliseconds();
+        if(task.taskID<100) {
+            task.taskID = "0"+task.taskID;
+        }
+        task.taskID = 'Task_' + task.taskID;
+        task.algorithm = $('select[name="algorithm"]  option:selected').val();
+        task.runTitle = task.taskID + "(" + task.algorithm + ")";
+        task.algorithmGroup = $('#alertNorthWest li.selected').text().toUpperCase();
+        if ("SORT" == task.algorithmGroup) {
+            task.pivotPosition = $('select[name="pivotPosition"]  option:selected').val();
+            if (task.algorithm == "EXTERNAL_MERGESORT") {
+                task.sortRam = $('input[name="ram"]').val();
+            }
+            task.inputMinValue = 0;
+            task.inputMaxValue = 100000000;
+            task.inputStartSize = $('select[name="inputStartSize"]  option:selected').val();
+            task.inputFinalSize = $('select[name="inputFinalSize"]  option:selected').val();
+            task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
+            task.inputDistribution = $('select[name="inputDistribution"]  option:selected').val();
+            task.numRuns;
+            task.numRepeats = $('select[name="numRepeats"]  option:selected').val();
+        }
+        var s = '<dd id="' + task.taskID + '"><a href="javascript:;">' + task.taskID + '</a></dd>';
+        $('.activeTasks').append(s);
+        
+        globalPar.willPushData = $("form").serialize();
+        $("#" + task.taskID).data("task", task);
+     });
+
+     // 点击任务列表事件
+     $('.activeTasks, .archivedTasks').on("click", "dd a", function () {
+        $('.activeTasks dd a.onC').removeClass("onC");
+        $(this).addClass("onC");
+        var task = $(this).parent().data('task');
+        $("#settings .mainTask .mainTaskName").text(task.algorithm);
+        $("#settings .mainStatus span").text("QUEUED");
+        
+        $('#currentInputSize').text(task.inputStartSize);
+        $('#scheduledTasks').text(50);
+        $('#inputStartSize').text(task.inputStartSize);
+        $('#inputFinalSize').text(task.inputFinalSize);
+        $('#inputStepSize').text(task.inputStepSize);
+        $('#inputMinValue').text(task.inputMinValue);
+        $('#inputMaxValue').text(task.inputMaxValue);
+        $('#inputDistribution').text(task.inputDistribution);
+        $('#pivotPosition').text(task.pivotPosition);
+
+     });
+
+     // 加载归档任务
+     $("#loadArchiveTask").on("click", function () {
+        alert("load archive task");
+    });
+    // 删除归档任务
+    $("#delArchiveTask").on("click", function () {
+
+        var willR = $('.archivedTasks dd a.onC').parent();
+        if (!willR.size()) {
+            alert("请选定一个活动的归档任务");
+            return;
+        }
+        willR.remove();
+    });
+
+    
+
+});
+function updateCtx() {
+    
+     $$.ajax({
+         type: "POST",
+         url: "/sort/get",
+         data: {index: index},
+         async: false,
+         success: function(data){
+             result = data;
+             /* if (result.indexOf('exiting') != -1) {
+                 return;
+             } */
+             var parts = result.split("\t");
+             var pF = parts[0].toUpperCase();
+             switch (pF) {
+                 case "[NUMCOMPLETEDRUNS]":
+                    result = 's';
+                    break;
+                case "[MAXRECURSION]":
+                result = 's';
+                    break;
+                case "[TREEHEIGHT]":
+                result = 's';
+                    break;
+                case "[STATUS]":
+                    result = 's';
+                    break;
+                case "[TERMINATE]":
+                    result = 's';
+                    break;
+                case "[CURRENTMEMUSAGE]":
+                    result = 's';
+                    break;
+                case "[CURRENTINPUTSIZE]":
+                    result = 's';    
+                    break;
+                case "[NUMRUNS]":
+                    result = 's';  
+                    break;
+                case "[MINBUCKETSIZE]":
+                    result = 's';   
+                    break;
+                case "[MAXBUCKETSIZE]":
+                    result = 's';  
+                    break;
+                case "[AVERAGE]":
+                    result = 's';  
+                    break;
+                case "[STDDEVIATION]":
+                    result = 's';  
+                    break;
+                case "[ERROR]":
+                    result = 's';  
+                    break;
+                case "[UPDATE]":
+                    var pS = parts[1].toUpperCase();
+                    result = pS;
+                    break;
+                default:
+                    
+                    break;
+             }
+             
+             
+             
+             var thisText = $$('#updateContent textarea');
+             var str = thisText.val(); //先获取原有的值
+             if (result == 's') {
+                
+             } else {
+                document.getElementById('yang').value = str + result + "\r\n"; //拼接新值
+                thisText.get(0).scrollTop = thisText.get(0).scrollHeight;   
+             }
+             
+            
+             
+             index ++;
+             if (result.toUpperCase().indexOf("EXITING") != -1) {
+                 index = 0;
+                 return;
+             } else {
+                 var t = setTimeout('updateCtx()', 0);
+             }
+         }
+      });
+ }
+
+ function trans(strr, type) {
+
+    if (true) {
+        var result = "";
+        for (var key in strr) {
+            result = result + key + "=" + strr[key] + "&";
+        }
+        result = result.substring(0, result.length - 1);
+        return result;
+    }
+
+    var result = {};
+    var keyValue = strr.split("&");
+    for (var i=0; i<keyValue.length; i++) {
+        var o = keyValue[i];
+        var oo = o.split("=");
+        result[oo[0]] = oo[1];
+    }
+    result['runTitle'] = 'ybq';
+    return result;
+ }
