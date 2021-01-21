@@ -35,43 +35,6 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>getInputDistribution</find>
-      <find>response</find>
-      <find>layui-nav-item</find>
-      <find>test1</find>
-      <find>uri</find>
-      <find>rui</find>
-      <find />
-      <find>alert-sort</find>
-      <find />
-      <find>.alert-sort</find>
-      <find>.js</find>
-      <find>信息</find>
-      <find>custom2.js</find>
-      <find>toolbox</find>
-      <find />
-      <find>alert-ul-title</find>
-      <find>layui-this</find>
-      <find>seeChartTask</find>
-      <find>savePng</find>
-      <find>paintChart</find>
-      <find>layer</find>
-      <find>next</find>
-      <find />
-      <find />
-      <find />
-      <find />
-      <find>title:'info'</find>
-      <find>Load</find>
-      <find>active</find>
-      <find>异常</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>title:'info',btn:'OK'</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
@@ -164,6 +127,17 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -286,7 +260,8 @@
       <workItem from="1534175074008" duration="2364000" />
       <workItem from="1534294448329" duration="5492000" />
       <workItem from="1611173995325" duration="788000" />
-      <workItem from="1611190872376" duration="121000" />
+      <workItem from="1611190872376" duration="633000" />
+      <workItem from="1611268168024" duration="1832000" />
     </task>
     <task id="LOCAL-00001">
       <created>1521132075095</created>
@@ -448,6 +423,50 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1611190992396" />
+    <state width="867" height="323" key="GridCell.Tab.0.bottom" timestamp="1611269936162">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="867" height="323" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1611269936162" />
+    <state width="867" height="323" key="GridCell.Tab.0.bottom/0.23.1792.1020@0.23.1792.1020" timestamp="1611246148349" />
+    <state width="867" height="323" key="GridCell.Tab.0.center" timestamp="1611269936161">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="867" height="323" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1611269936161" />
+    <state width="867" height="323" key="GridCell.Tab.0.center/0.23.1792.1020@0.23.1792.1020" timestamp="1611246148348" />
+    <state width="867" height="323" key="GridCell.Tab.0.left" timestamp="1611269936160">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="867" height="323" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1611269936160" />
+    <state width="867" height="323" key="GridCell.Tab.0.left/0.23.1792.1020@0.23.1792.1020" timestamp="1611246148348" />
+    <state width="867" height="323" key="GridCell.Tab.0.right" timestamp="1611269936162">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="867" height="323" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1611269936162" />
+    <state width="867" height="323" key="GridCell.Tab.0.right/0.23.1792.1020@0.23.1792.1020" timestamp="1611246148348" />
+    <state width="867" height="323" key="GridCell.Tab.1.bottom" timestamp="1611269936164">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="867" height="323" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1611269936164" />
+    <state width="867" height="323" key="GridCell.Tab.1.bottom/0.23.1792.1020@0.23.1792.1020" timestamp="1611246148350" />
+    <state width="867" height="323" key="GridCell.Tab.1.center" timestamp="1611269936163">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="867" height="323" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1611269936163" />
+    <state width="867" height="323" key="GridCell.Tab.1.center/0.23.1792.1020@0.23.1792.1020" timestamp="1611246148350" />
+    <state width="867" height="323" key="GridCell.Tab.1.left" timestamp="1611269936163">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="867" height="323" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1611269936163" />
+    <state width="867" height="323" key="GridCell.Tab.1.left/0.23.1792.1020@0.23.1792.1020" timestamp="1611246148349" />
+    <state width="867" height="323" key="GridCell.Tab.1.right" timestamp="1611269936164">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="867" height="323" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1611269936164" />
+    <state width="867" height="323" key="GridCell.Tab.1.right/0.23.1792.1020@0.23.1792.1020" timestamp="1611246148350" />
+    <state x="676" y="173" width="943" height="648" key="find.popup" timestamp="1611270046876">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="676" y="173" width="943" height="648" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1611270046876" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">

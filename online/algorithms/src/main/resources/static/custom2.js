@@ -629,6 +629,7 @@ $('.layui-body').on('click', '.savePng', function() {
             task.inputFinalSize = $('select[name="inputFinalSize"]  option:selected').val();
             task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
             task.inputDistribution = $('select[name="inputDistribution"]  option:selected').val();
+            task.rngSeed = $('#rngSeed').val();
             var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
             numRuns = parseInt(numRuns);
             numRuns++;
