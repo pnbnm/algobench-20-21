@@ -73,7 +73,7 @@
     </replaceStrings>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -88,11 +88,6 @@
         <option name="downloadSourcesAutomatically" value="true" />
       </MavenImportingSettings>
     </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="697" />
-    <option name="height" value="745" />
   </component>
   <component name="ProjectId" id="1nLer5N6e6y6fToVMVR7NxVGInL" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -134,6 +129,7 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -207,7 +203,7 @@
     <configuration name="AlgoBench" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="algorithms" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.inf2b.algorithms.AlgoBench" />
-      <option name="PROGRAM_PARAMETERS" value="$USER_HOME$/Desktop/ybq/ybq/algobench_b.exe" />
+      <option name="PROGRAM_PARAMETERS" value="$PROJECT_DIR$/src/main/resources/Algobench_Backend" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="UPDATE_ACTION_UPDATE_POLICY" value="UpdateResources" />
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateResources" />
@@ -290,6 +286,7 @@
       <workItem from="1534175074008" duration="2364000" />
       <workItem from="1534294448329" duration="5492000" />
       <workItem from="1611173995325" duration="788000" />
+      <workItem from="1611190872376" duration="121000" />
     </task>
     <task id="LOCAL-00001">
       <created>1521132075095</created>
@@ -447,10 +444,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="1.&#9;整个左边缩进一些，左菜单对齐“+create”这个按钮&#10;2.&#9;左菜单里的文字全都居中&#10;3.&#9;左上角的logo换一个对比度高一些的颜色，比如白色&#10;4.&#9;“save”按钮也加一个矢量图，和周围的按钮一样大&#10;5.&#9;主界面logo的作者名字，在Yufen Wang后面依次加上Shalom Rachapudi David，Nevena Blagoeva和Yuecheng Hu&#10;6.&#9;最顶上的菜单栏里的按钮在网页不全屏的时候会折下来，能让他不折下来吗" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611189355723">
+    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611190992396">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1611189355723" />
+    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1611190992396" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
