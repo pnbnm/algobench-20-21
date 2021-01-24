@@ -629,7 +629,8 @@ $('.layui-body').on('click', '.savePng', function() {
             task.inputFinalSize = $('select[name="inputFinalSize"]  option:selected').val();
             task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
             task.inputDistribution = $('select[name="inputDistribution"]  option:selected').val();
-            task.rngSeed = $('#rngSeed').val();
+            task.rngSeed = $('input[name="rngSeed"]').val();
+            console.log(task.rngSeed);
             var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
             numRuns = parseInt(numRuns);
             numRuns++;
@@ -733,6 +734,7 @@ $('.layui-body').on('click', '.savePng', function() {
         $('#settings #inputMinValue').parent().show();
         $('#settings #inputMaxValue').parent().show();
         $('#settings #inputDistribution').parent().show();
+        $('#settings #rngSeed').parent().show();
         
         $('#settings #currentInputSize').parent().show();
         $('#settings #memUsage').parent().show();
@@ -748,6 +750,7 @@ $('.layui-body').on('click', '.savePng', function() {
         $('#inputMinValue').text(task.inputMinValue);
         $('#inputMaxValue').text(task.inputMaxValue);
         $('#inputDistribution').text(task.inputDistribution);
+        $('#rngSeed').text(task.rngSeed);
 
         switch (group) {
             case "GRAPH":
