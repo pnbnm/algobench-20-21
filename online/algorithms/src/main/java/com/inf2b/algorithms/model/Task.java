@@ -470,6 +470,7 @@ public class Task implements Serializable {
             r += "\nINPUT-MINVALUE:" + getInputMinValue();
             r += "\nINPUT-MAXVALUE:" + getInputMaxValue();
             r += "\nINPUT-DISTRIBUTION:" + getInputDistribution(false);
+            r += "\nRNGSEED:" + getRngSeed();
 
             if (getAlgorithmCode().equals(AlgoBench.properties.getProperty("QUICKSORT"))) {
                 r += "\nQUICKSORT-PIVOT-POSITION:" + getPivotPosition(false);
