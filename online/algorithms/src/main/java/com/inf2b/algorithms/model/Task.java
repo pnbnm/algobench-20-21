@@ -39,6 +39,7 @@ public class Task implements Serializable {
     private boolean graphIsDelayed;
     private String searchKeyType;//custom,always-in,not-in,random
     private int ram;
+    private String rngSeed;
 
     protected Integer status;
 
@@ -408,6 +409,10 @@ public class Task implements Serializable {
     public void setSearchKeyType(String searchKeyType) {
         this.searchKeyType = searchKeyType.replaceAll("\\s+", "_").toUpperCase();;
     }
+
+    public String getRngSeed() { return rngSeed; }
+
+    public void  setRngSeed(String seed) { rngSeed = seed; }
 
     public int getSortRam(){
         return this.ram;
