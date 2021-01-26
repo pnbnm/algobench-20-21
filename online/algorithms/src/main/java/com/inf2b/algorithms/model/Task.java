@@ -449,6 +449,7 @@ public class Task implements Serializable {
         r += "\nINPUT-STARTSIZE:" + getInputStartSize();
         r += "\nINPUT-STEPSIZE:" + getInputStepSize();
         r += "\nINPUT-FILENAME:" + getInputFileName();
+        r += "\nRNGSEED:" + getRngSeed();
         r += "\nNUMRUNS:" + getNumRuns();
         r += "\nNUMREPEATS:" + getNumRepeats();
         if (getAlgorithmGroup(true).equals("GRAPH")) {
@@ -470,7 +471,6 @@ public class Task implements Serializable {
             r += "\nINPUT-MINVALUE:" + getInputMinValue();
             r += "\nINPUT-MAXVALUE:" + getInputMaxValue();
             r += "\nINPUT-DISTRIBUTION:" + getInputDistribution(false);
-            r += "\nRNGSEED:" + getRngSeed();
 
             if (getAlgorithmCode().equals(AlgoBench.properties.getProperty("QUICKSORT"))) {
                 r += "\nQUICKSORT-PIVOT-POSITION:" + getPivotPosition(false);

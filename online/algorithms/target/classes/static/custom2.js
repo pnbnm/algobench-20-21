@@ -630,7 +630,6 @@ $('.layui-body').on('click', '.savePng', function() {
             task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
             task.inputDistribution = $('select[name="inputDistribution"]  option:selected').val();
             task.rngSeed = $('input[name="rngSeed"]').val();
-            console.log(task.rngSeed);
             var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
             numRuns = parseInt(numRuns);
             numRuns++;
@@ -647,6 +646,7 @@ $('.layui-body').on('click', '.savePng', function() {
             task.inputStartSize = $('select[name="inputStartSize"]  option:selected').val();
             task.inputFinalSize = $('select[name="inputFinalSize"]  option:selected').val();
             task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
+            task.rngSeed = $('input[name="rngSeed"]').val();
             task.numRepeats = $('select[name="numRepeats"]  option:selected').val();
             var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
             numRuns = parseInt(numRuns);
@@ -659,6 +659,7 @@ $('.layui-body').on('click', '.savePng', function() {
             task.hashFunction_a = $('input[name="hashFunction_a"]').val();
             task.hashFunction_b = $('input[name="hashFunction_b"]').val();
             task.hashKeyType = "Numbers";
+            task.rngSeed = $('input[name="rngSeed"]').val();
             task.numRuns = 1;
         }
 
@@ -670,6 +671,7 @@ $('.layui-body').on('click', '.savePng', function() {
             task.inputStartSize = $('select[name="inputStartSize"]  option:selected').val();
             task.inputFinalSize = $('select[name="inputFinalSize"]  option:selected').val();
             task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
+            task.rngSeed = $('input[name="rngSeed"]').val();
             task.numRepeats = $('select[name="numRepeats"]  option:selected').val();
             var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
             numRuns = parseInt(numRuns);
