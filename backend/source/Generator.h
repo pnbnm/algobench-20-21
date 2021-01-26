@@ -39,7 +39,8 @@ namespace inf2b
         static void generateRandom( InputVectorType& input,
                                     const size_t& size,
                                     InputIntType min,
-                                    InputIntType max
+                                    InputIntType max,
+                                    RngSeedType seed
                                   );
         
         /**
@@ -51,11 +52,13 @@ namespace inf2b
         static void generateUniqueRandom( InputVectorType& input,
                                           const size_t& size,
                                           InputIntType min,
-                                          InputIntType max
+                                          InputIntType max,
+                                          RngSeedType seed
                                   );
 
         static void generateRepeated( InputVectorType& input, 
                                       const size_t& size, 
+                                      RngSeedType seed,
                                       int thId = 0
                                   );
         
@@ -92,12 +95,14 @@ namespace inf2b
         
         static void generateRandomLong( long& target, 
                                         long min, 
-                                        long max 
+                                        long max,
+                                        RngSeedType seed
                                 );
         
         static void generateRandomKey( InputIntType& target, 
                                        InputIntType min,
-                                       InputIntType max
+                                       InputIntType max,
+                                       RngSeedType seed
                                 );
 
     public:
@@ -106,7 +111,8 @@ namespace inf2b
                                    const int inputDistribution,
                                    const int runNumber,
                                    InputIntType minValue,
-                                   InputIntType maxValue
+                                   InputIntType maxValue,
+                                   RngSeedType seed
                                  );
         
         static void generateGraph( Graph& graph,
@@ -114,7 +120,8 @@ namespace inf2b
                                    size_t fixedParamSize,
                                    bool directed,
                                    bool allowSelfLoop,
-                                   bool fixedEdges
+                                   bool fixedEdges,
+                                   RngSeedType seed
                                  );
 
         static void generateHashList( PairList& list,
@@ -134,13 +141,15 @@ namespace inf2b
                                        const int searchKeyType,
                                        const int runNumber,
                                        InputIntType minValue,
-                                       InputIntType maxValue
+                                       InputIntType maxValue,
+                                       RngSeedType seed
                                      );
         static void generateTreeInput( InputVectorType& input,
                                        const size_t size,
                                        const InputIntType min,
                                        const InputIntType max,
-                                       const int treeType
+                                       const int treeType,
+                                       RngSeedType seed
                                      );
     };
 }

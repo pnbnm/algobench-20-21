@@ -114,7 +114,7 @@ namespace inf2b
             InputVectorType input;
             std::cout << "[STATUS]\tGenerating input" << std::endl;
             currentInputSize = Command[ "TREE-SIZE" ];
-            Generator::generateTreeInput( input, currentInputSize, Command[ "TREE-RANGE-LOWER-LIMIT" ], Command[ "TREE-RANGE-UPPER-LIMIT" ], Command[ "TREE-TYPE" ] );
+            Generator::generateTreeInput( input, currentInputSize, Command[ "TREE-RANGE-LOWER-LIMIT" ], Command[ "TREE-RANGE-UPPER-LIMIT" ], Command[ "TREE-TYPE" ], Command[ "RNGSEED" ]);
             std::cout << "[CURRENTINPUTSIZE]\t" << currentInputSize << std::endl;
 
             // get memory usage
@@ -283,7 +283,7 @@ namespace inf2b
                     else {
                         std::cout << "[STATUS]\tGenerating input" << std::endl;
                         Generator::generateArray( input, currentInputSize+1, 4, j,
-                            Command[ "RANGE-FROM" ], Command[ "RANGE-TO" ] );
+                            Command[ "RANGE-FROM" ], Command[ "RANGE-TO" ], Command[ "RNGSEED" ]);
                     }
                     std::cout << "[CURRENTINPUTSIZE]\t" << currentInputSize << std::endl;
 
@@ -315,7 +315,7 @@ namespace inf2b
                         else {
                             std::cout << "[STATUS]\tGenerating input" << std::endl;
                             Generator::generateArray( input, currentInputSize, Command[ "INPUT-DISTRIBUTION" ], j,
-                                Command[ "INPUT-MINVALUE" ], Command[ "INPUT-MAXVALUE" ] );
+                                Command[ "INPUT-MINVALUE" ], Command[ "INPUT-MAXVALUE" ], Command[ "RNGSEED" ]);
                         }
                         std::cout << "[CURRENTINPUTSIZE]\t" << currentInputSize << std::endl;
 
@@ -355,7 +355,7 @@ namespace inf2b
                         }
                         else {
                             std::cout << "[STATUS]\tGenerating input" << std::endl;
-                            Generator::generateGraph( graph, currentInputSize, Command[ "GRAPH-FIXED-SIZE" ], Command[ "GRAPH-IS-DIRECTED" ], Command[ "GRAPH-ALLOW-SELF-LOOP" ], Command[ "GRAPH-FIXED-EDGES" ] );
+                            Generator::generateGraph( graph, currentInputSize, Command[ "GRAPH-FIXED-SIZE" ], Command[ "GRAPH-IS-DIRECTED" ], Command[ "GRAPH-ALLOW-SELF-LOOP" ], Command[ "GRAPH-FIXED-EDGES" ], Command[ "RNGSEED" ]);
                         }
 
                         //graph.printGraph();
@@ -397,14 +397,16 @@ namespace inf2b
                                                       Command[ "INPUT-DISTRIBUTION" ],
                                                       j,
                                                       Command[ "INPUT-MINVALUE" ],
-                                                      Command[ "INPUT-MAXVALUE" ]
+                                                      Command[ "INPUT-MAXVALUE" ], 
+                                                      Command[ "RNGSEED" ]
                                                     );
                             Generator::generateSearchKey( input,
                                                           key,
                                                           Command[ "SEARCH-KEY-TYPE" ],
                                                           j,
                                                           Command[ "INPUT-MINVALUE" ],
-                                                          Command[ "INPUT-MAXVALUE" ]
+                                                          Command[ "INPUT-MAXVALUE" ], 
+                                                          Command[ "RNGSEED" ]
                                                         );
                         }
 

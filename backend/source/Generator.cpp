@@ -4,11 +4,11 @@
 namespace inf2b
 {
 
-void Generator::generateRandom( InputVectorType& input, const size_t& size, InputIntType min, InputIntType max )
+void Generator::generateRandom( InputVectorType& input, const size_t& size, InputIntType min, InputIntType max, RngSeedType seed )
 {
     std::uniform_int_distribution< InputIntType > range( min, max );
     // Mersenne Twister generator engine
-    std::mt19937 randEngine(0);
+    std::mt19937 randEngine(seed);
 
     for ( size_t i = 0; i < size; ++i ) {
         input.push_back( ( InputIntType ) ( min + range( randEngine ) * ( max - min ) ) );
@@ -16,9 +16,9 @@ void Generator::generateRandom( InputVectorType& input, const size_t& size, Inpu
     }
 }
 
-void Generator::generateUniqueRandom( InputVectorType& input, const size_t& size, InputIntType min, InputIntType max )
+void Generator::generateUniqueRandom( InputVectorType& input, const size_t& size, InputIntType min, InputIntType max, RngSeedType seed )
 {
-    srand( time( NULL ) );
+    srand( seed );
     for ( int k = 0, i = min, j = max; k < size; k++ ) {
         int flip = (rand() % 2);
         input.push_back( flip == 0 ? i++ : j-- );
@@ -27,17 +27,17 @@ void Generator::generateUniqueRandom( InputVectorType& input, const size_t& size
     std::random_shuffle( input.begin(), input.end() ); // shuffle input to randomize input so that it doesn't result in a skewed tree
 }
 
-void Generator::generateRepeated( InputVectorType& input, const size_t& size, int thId )
+void Generator::generateRepeated( InputVectorType& input, const size_t& size, RngSeedType seed, int thId)
 {
     std::cout << "Generating REPEATED input. Size: " << size << std::endl;
-
+    srand ( seed );
     InputIntType number = rand();
     for ( size_t i = 0; i < size; ++i ) {
         input.push_back( number );
     }
 }
 
-void Generator::generateSorted( InputVectorType& input, const size_t& size, InputIntType min, int thId )
+void Generator::generateSorted( InputVectorType& input, const size_t& size, InputIntType min, int thId)
 {
     std::cout << "Generating SORTED input. Size: " << size << std::endl;
     for ( auto i = min; i < (min + size); ++i ) {
@@ -45,7 +45,7 @@ void Generator::generateSorted( InputVectorType& input, const size_t& size, Inpu
     }
 }
 
-void Generator::generateRSorted( InputVectorType& input, const size_t& size, InputIntType max, int thId )
+void Generator::generateRSorted( InputVectorType& input, const size_t& size, InputIntType max, int thId)
 {
     std::cout << "Generating REVERSE-SORTED input. Size: " << size << std::endl;
     if ( max < size ) {
@@ -57,7 +57,7 @@ void Generator::generateRSorted( InputVectorType& input, const size_t& size, Inp
     }
 }
 
-void Generator::generateWorstRecursive( InputVectorType& input, long low, long high, long leastValue )
+void Generator::generateWorstRecursive( InputVectorType& input, long low, long high, long leastValue)
 {
     if ( low < high ) {
         generateWorstRecursive( input, low + 1, high, leastValue + 1 );
@@ -67,7 +67,7 @@ void Generator::generateWorstRecursive( InputVectorType& input, long low, long h
     input[ pivotIndex ] = leastValue;
 }
 
-void Generator::generateWorst( InputVectorType& input, long low, long high, long leastValue )
+void Generator::generateWorst( InputVectorType& input, long low, long high, long leastValue)
 {
     std::cout << "Generating WORST-CASE input (centred pivot). Size: " << input.size() << std::endl;
     low = high;
@@ -82,7 +82,7 @@ void Generator::generateWorst( InputVectorType& input, long low, long high, long
     }
 }
 
-void Generator::generateTreeInput( InputVectorType& input, const size_t size, const InputIntType min, const InputIntType max, const int treeType )
+void Generator::generateTreeInput( InputVectorType& input, const size_t size, const InputIntType min, const InputIntType max, const int treeType, RngSeedType seed )
 {
     /* Generate input based on tree tyoe
      *
@@ -95,7 +95,7 @@ void Generator::generateTreeInput( InputVectorType& input, const size_t size, co
 
     if ( treeType == ROOTED_TREE ) {
         std::cout << "[UPDATE]\tGenerating ROOTED_TREE input: Number of Nodes = " << size << std::endl;
-        generateUniqueRandom( input, size, min, max );
+        generateUniqueRandom( input, size, min, max, seed);
     }
     else if ( treeType == LEFT_SKEWED_TREE ) {
         std::cout << "[UPDATE]\tGenerating LEFT_SKEWED_TREE input: Number of Nodes = " << size << std::endl;
@@ -107,7 +107,7 @@ void Generator::generateTreeInput( InputVectorType& input, const size_t size, co
     }
 }
 void Generator::generateArray( InputVectorType& input, const size_t inputSize, const int inputDistribution, const int runNumber,
-            InputIntType minValue, InputIntType maxValue )
+            InputIntType minValue, InputIntType maxValue, RngSeedType seed )
 {
 
     if ( inputSize <= 0 ) {
@@ -119,11 +119,11 @@ void Generator::generateArray( InputVectorType& input, const size_t inputSize, c
     switch ( inputDistribution ) {
         case 1: // random
             std::cout << "[UPDATE]\tRun " << (runNumber + 1) << ": Generating RANDOM input: Size=" << inputSize << std::endl;
-            generateRandom( input, inputSize, minValue, maxValue );
+            generateRandom( input, inputSize, minValue, maxValue, seed);
             break;
         case 2: // repeated
             std::cout << "[UPDATE]\tRun " << (runNumber + 1) << ": Generating REPEATED input: Size=" << inputSize << std::endl;
-            generateRepeated( input, inputSize );
+            generateRepeated( input, inputSize, seed );
             break;
         case 3: // sorted
             std::cout << "[UPDATE]\tRun " << (runNumber + 1) << ": Generating SORTED input: Size=" << inputSize << std::endl;
@@ -143,13 +143,13 @@ void Generator::generateArray( InputVectorType& input, const size_t inputSize, c
                 generateSorted( input, inputSize, 0 );
             }
             else { // no more necessary cos only Quicksort in frontend can request for worst-case
-                generateRandom( input, inputSize, minValue, maxValue );
+                generateRandom( input, inputSize, minValue, maxValue, seed);
             }
             break;
         default:
             std::cout << "[UPDATE]\tRun " << (runNumber + 1) << ": Generating UNKNOWN input: Size=" << inputSize << std::endl;
             std::cout << "SIZE_MAX: " << SIZE_MAX << std::endl;
-            generateRandom( input, inputSize, 0, SIZE_MAX );
+            generateRandom( input, inputSize, 0, SIZE_MAX, seed);
             break;
     }
 }
@@ -158,7 +158,7 @@ void Generator::generateArray( InputVectorType& input, const size_t inputSize, c
 // in order to make the graph algos run slower, so that we can get more significant runtimes.
 // Without it, graph generation time is several times execution time, needing really large graphs
 // to get any sensible runtimes.
-void Generator::generateGraph( Graph& graph, const size_t& size, size_t fixedParamSize, bool directed, bool allowSelfLoop, bool fixedEdges )
+void Generator::generateGraph( Graph& graph, const size_t& size, size_t fixedParamSize, bool directed, bool allowSelfLoop, bool fixedEdges, RngSeedType seed )
 {
     size_t prevSize;
     size_t numEdges;
@@ -206,7 +206,7 @@ void Generator::generateGraph( Graph& graph, const size_t& size, size_t fixedPar
     // get the random number generator
     std::uniform_int_distribution< InputIntType > range( 0, static_cast< InputIntType > ( graph.getNumVertices() - 1 ) );
     std::mt19937 randEngine;
-    randEngine.seed( clock() );
+    randEngine.seed( seed );
 
     // calculate memory usage
     MemoryUsage += sizeof( Vertex* ) * numEdges;
@@ -393,27 +393,27 @@ void Generator::generateWorstCaseInput(InputVectorType& input, InputIntType min,
     }
 } */
 
-void Generator::generateRandomLong( long& target, long min, long max )
+void Generator::generateRandomLong( long& target, long min, long max, RngSeedType seed )
 {
     std::uniform_int_distribution< long > range( min, max );
-    std::mt19937 randEngine;
+    std::mt19937 randEngine(seed);
     target = range( randEngine );
 }
 
-void Generator::generateRandomKey( InputIntType& target, InputIntType min, InputIntType max )
+void Generator::generateRandomKey( InputIntType& target, InputIntType min, InputIntType max, RngSeedType seed )
 {
     std::uniform_int_distribution< InputIntType > range( min, max );
-    std::mt19937 randEngine;
+    std::mt19937 randEngine(seed);
     target = range( randEngine );
 }
 
-void Generator::generateSearchKey( InputVectorType input, InputIntType& key, const int searchKeyType, const int runNumber, InputIntType minValue, InputIntType maxValue )
+void Generator::generateSearchKey( InputVectorType input, InputIntType& key, const int searchKeyType, const int runNumber, InputIntType minValue, InputIntType maxValue, RngSeedType seed )
 {
     long index;
     switch ( searchKeyType ) {
         case 1://always in
             std::cout << "[UPDATE]\tRun " << ( runNumber + 1 ) << ": Generating ALWAYS-IN search key" << std::endl;
-            generateRandomLong( index, 0, input.size() - 1 );
+            generateRandomLong( index, 0, input.size() - 1, seed);
             key = input.at( index );
             break;
         case 2://not in
@@ -422,7 +422,7 @@ void Generator::generateSearchKey( InputVectorType input, InputIntType& key, con
             break;
         case 3://random
             std::cout << "[UPDATE]\tRun " << ( runNumber + 1 ) << ": Generating RANDOM search target" << std::endl;
-            generateRandomKey( key, minValue, maxValue );
+            generateRandomKey( key, minValue, maxValue, seed);
             break;
         default:
             std::cout << "[UPDATE]\tRun " << ( runNumber + 1 ) << ": generateSearchKey default" << std::endl;
@@ -430,7 +430,7 @@ void Generator::generateSearchKey( InputVectorType input, InputIntType& key, con
     }
 }
 
-void Generator::generateHashInput( InputVectorType& input, const size_t numEntries, const int hashKeyType, const std::string& filename )
+void Generator::generateHashInput( InputVectorType& input, const size_t numEntries, const int hashKeyType, const std::string& filename)
 {
     if ( filename.length() > 0 ) {
         std::cout << "Parsing HASH input file... " << std::endl;

@@ -39,6 +39,7 @@ namespace inf2b
     typedef std::vector< StringPair > PairList;
     typedef std::unordered_map< std::string, std::string > HashDictionaryType;
     typedef std::function< size_t( const std::string ) > HashFunctionType;
+    typedef InputIntType RngSeedType;
 
     const int DEFAULT_BUFFERSIZE = 1024;
     const char INSTRUCTION_DELIM = ':';

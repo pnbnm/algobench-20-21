@@ -190,10 +190,6 @@ global.h
 Algorithm.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Algorithm.h
 
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Quicksort.cpp
-stdafx.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
-
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Quicksort.h
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
@@ -277,10 +273,6 @@ BinarySearchTree.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/predef.h
 unistd.h
 -
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.cpp
-stdafx.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 iostream
