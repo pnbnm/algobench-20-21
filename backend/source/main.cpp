@@ -94,6 +94,7 @@ namespace inf2b
         //std::string ch_output;
         std::string checkpoints;
         output.reserve( 100 );
+        
         if ( Command[ "ALGORITHM-GROUP" ] == HASH ) {
             PairList pairList;
             Generator::generateHashList( pairList, Command[ "INPUT-STARTSIZE" ], Command[ "HASH-KEY-TYPE" ], inputFilename );

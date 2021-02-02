@@ -6,7 +6,6 @@
  var $$;
  var index = 0;
  
- 
  layui.use(['form', 'layer', 'element', 'upload'], function () {
 
     globalPar = {
@@ -217,6 +216,8 @@ $("#toTabExp").on('click', function() {
                 globalPar.alertSortStep = 0;
               }    
         });
+
+
     });
 
     // delete artive task
@@ -284,6 +285,9 @@ $("#toTabExp").on('click', function() {
         var nextPos = globalPar.alertSortStep + 1;
         $(".alert-sort:eq(" + nextPos + ")").addClass("show");
         globalPar.alertSortStep = nextPos;
+
+        fillSeedList();
+
     });
 
     $(".backBtn").on("click", function () {
@@ -294,6 +298,8 @@ $("#toTabExp").on('click', function() {
         var nextPos = globalPar.alertSortStep - 1;
         $(".alert-sort:eq(" + nextPos + ")").addClass("show");
         globalPar.alertSortStep = nextPos;
+
+        fillSeedList();
     });
 
     // Start the task
@@ -617,7 +623,12 @@ $('.layui-body').on('click', '.savePng', function() {
         task.algorithm = $('select[name="algorithm"]  option:selected').val();
         task.runTitle = task.taskID + "(" + task.algorithm + ")";
         task.algorithmGroup = $('#alertNorthWest li.selected').text().toUpperCase();
-        
+        if($('input[name="seedInputType"]').val()=="newSeed"){
+            task.rngSeed = $('input[name="rngSeed"]').val();
+        }
+        else{
+            task.rngSeed = $('select[name="rngSeed"] option:selected').val();
+        }
         if ("SORT" == task.algorithmGroup) {
             task.pivotPosition = $('select[name="pivotPosition"]  option:selected').val();
             if (task.algorithm == "EXTERNAL_MERGESORT") {
@@ -629,7 +640,7 @@ $('.layui-body').on('click', '.savePng', function() {
             task.inputFinalSize = $('select[name="inputFinalSize"]  option:selected').val();
             task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
             task.inputDistribution = $('select[name="inputDistribution"]  option:selected').val();
-            task.rngSeed = $('input[name="rngSeed"]').val();
+
             var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
             numRuns = parseInt(numRuns);
             numRuns++;
@@ -646,7 +657,6 @@ $('.layui-body').on('click', '.savePng', function() {
             task.inputStartSize = $('select[name="inputStartSize"]  option:selected').val();
             task.inputFinalSize = $('select[name="inputFinalSize"]  option:selected').val();
             task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
-            task.rngSeed = $('input[name="rngSeed"]').val();
             task.numRepeats = $('select[name="numRepeats"]  option:selected').val();
             var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
             numRuns = parseInt(numRuns);
@@ -659,7 +669,6 @@ $('.layui-body').on('click', '.savePng', function() {
             task.hashFunction_a = $('input[name="hashFunction_a"]').val();
             task.hashFunction_b = $('input[name="hashFunction_b"]').val();
             task.hashKeyType = "Numbers";
-            task.rngSeed = $('input[name="rngSeed"]').val();
             task.numRuns = 1;
         }
 
@@ -671,7 +680,6 @@ $('.layui-body').on('click', '.savePng', function() {
             task.inputStartSize = $('select[name="inputStartSize"]  option:selected').val();
             task.inputFinalSize = $('select[name="inputFinalSize"]  option:selected').val();
             task.inputStepSize = $('select[name="inputStepSize"]  option:selected').val();
-            task.rngSeed = $('input[name="rngSeed"]').val();
             task.numRepeats = $('select[name="numRepeats"]  option:selected').val();
             var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
             numRuns = parseInt(numRuns);
@@ -679,7 +687,9 @@ $('.layui-body').on('click', '.savePng', function() {
             task.numRuns = numRuns;
         }
         var imgName = getImgName(task.algorithm);
-        
+
+        seeds.add(task.rngSeed, task.taskID);
+
         var s = '<div id="' + task.taskID + '" class="oneTask"><span class="image">' + imgName + '</span><span class="taskName">' 
             + task.taskID + '[queued]</span></div>';
         $('.left-side.active').append(s);
@@ -1344,3 +1354,41 @@ function yyyy() {
 
     }
   };
+
+  var seeds = {
+      //list of seeds being used by tasks
+      //each member is an obj {value, tasks: [taskid1, taskid2...]}
+      seeds: [{value: "example", tasks: ["example"]}],
+
+      //add a new seed entry or add a new taskid to the list of users
+      add: function (seed, taskId) {
+          console.log("Adding seed " + seed + " with task ID " + taskId);
+          for (let i=0; i<this.seeds.length; i++){
+              if (this.seeds[i].value === seed) {
+                  this.seeds[i].tasks.push(taskId);
+                  return;
+              }
+          }
+          this.seeds.push({value: seed, tasks: [taskId]});
+      },
+
+      //get the list of seeds with an example user task for each
+      get: function () {
+          return this.seeds.map( x => {return {value: x.value, taskId: x.tasks[0]}});
+      }
+
+  };
+
+  function fillSeedList(){
+      let seedList = document.getElementById('seedList');
+      //clear seed list
+      for (let i = seedList.options.length; i>0; i--){
+          seedList.options.remove(i);
+      }
+      //fill seed list
+      seeds.get().forEach(x => {
+          let o = new Option(x.value + " - used in " + x.taskId, x.value);
+          console.log(o);
+          seedList.options.add(o);
+      });
+  }

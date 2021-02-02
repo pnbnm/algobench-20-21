@@ -449,7 +449,7 @@ public class Task implements Serializable {
         r += "\nINPUT-STARTSIZE:" + getInputStartSize();
         r += "\nINPUT-STEPSIZE:" + getInputStepSize();
         r += "\nINPUT-FILENAME:" + getInputFileName();
-        r += "\nRNGSEED:" + getRngSeed();
+        r += "\nRNGSEED:" + getRngSeed().hashCode();
         r += "\nNUMRUNS:" + getNumRuns();
         r += "\nNUMREPEATS:" + getNumRepeats();
         if (getAlgorithmGroup(true).equals("GRAPH")) {

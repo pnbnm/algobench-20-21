@@ -10,23 +10,11 @@
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Algorithm.cpp
-stdafx.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
-Algorithm.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Algorithm.h
-type_traits
--
-
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Algorithm.h
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 global.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/BinarySearch.cpp
-BinarySearch.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/BinarySearch.h
 
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/BinarySearch.h
 stdafx.h
@@ -34,21 +22,11 @@ stdafx.h
 global.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
 
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/BinarySearchTree.cpp
-BinarySearchTree.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/BinarySearchTree.h
-
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/BinarySearchTree.h
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 global.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Client.cpp
-stdafx.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
-Client.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Client.h
 
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Client.h
 stdafx.h
@@ -58,39 +36,17 @@ global.h
 Server.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Server.h
 
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/ClientPipe.cpp
-stdafx.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
-ClientPipe.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/ClientPipe.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/ClientPipe.h
-global.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/ExternalMergeSort.cpp
-ExternalMergeSort.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/ExternalMergeSort.h
-
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/ExternalMergeSort.h
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 global.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
 
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Generator.cpp
-Generator.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Generator.h
-
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Generator.h
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 global.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
-GraphAlgo.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/GraphAlgo.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/GraphAlgo.cpp
 GraphAlgo.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/GraphAlgo.h
 
@@ -102,29 +58,17 @@ global.h
 GraphStructure.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/GraphStructure.h
 
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/GraphStructure.cpp
-GraphStructure.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/GraphStructure.h
-
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/GraphStructure.h
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 global.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
 
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/HashBucketStructure.cpp
-HashBucketStructure.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/HashBucketStructure.h
-
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/HashBucketStructure.h
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 global.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Hashing.cpp
-Hashing.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Hashing.h
 
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Hashing.h
 stdafx.h
@@ -133,10 +77,6 @@ global.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
 HashBucketStructure.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/HashBucketStructure.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Heapsort.cpp
-Heapsort.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Heapsort.h
 
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Heapsort.h
 stdafx.h
@@ -146,19 +86,11 @@ global.h
 Algorithm.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Algorithm.h
 
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/InsertionSort.cpp
-InsertionSort.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/InsertionSort.h
-
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/InsertionSort.h
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 global.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/InternalMergeSort.cpp
-InternalMergeSort.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/InternalMergeSort.h
 
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/InternalMergeSort.h
 stdafx.h
@@ -166,21 +98,11 @@ stdafx.h
 global.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
 
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/LinearSearch.cpp
-LinearSearch.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/LinearSearch.h
-
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/LinearSearch.h
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 global.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/PriorityQueue.cpp
-PriorityQueue.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/PriorityQueue.h
-Heapsort.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Heapsort.h
 
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/PriorityQueue.h
 stdafx.h
@@ -200,29 +122,7 @@ global.h
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Server.cpp
-stdafx.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
-Server.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Server.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/Server.h
-stdafx.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
-global.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/ServerPipe.cpp
-stdafx.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
-ServerPipe.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/ServerPipe.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/ServerPipe.h
-global.h
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.h
-
-/Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/global.cpp
 stdafx.h
 /Users/maciek/Documents/Programming/UniversityProjects/HonsProject/dev/backend/source/stdafx.h
 global.h
