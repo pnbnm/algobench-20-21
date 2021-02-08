@@ -39,6 +39,27 @@ public class CommonController {
 
     }
 
+    //TODO
+    @RequestMapping("/print")
+    public void print(Task task, HttpServletResponse res) throws IOException {
+
+        res.setHeader("content-type", "application/octet-stream");
+        res.setContentType("application/octet-stream");
+        res.setHeader("Content-Disposition", "attachment;filename=" + task.getTaskID() + ".pdf");
+        OutputStream out = res.getOutputStream();
+        byte[] buff;
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        //ObjectOutput obo = new ObjectOutputStream(bos);
+        //obo.writeObject(task);
+        //CALL PDF GENERATION FUNCTION
+        //WRITE PDF TO BUFFER OUTPUT STREAM HERE
+        buff = bos.toByteArray();
+
+        out.write(buff, 0, buff.length);
+        out.close();
+
+    }
+
     @RequestMapping("/gett")
     String gett() throws IOException, ClassNotFoundException {
 

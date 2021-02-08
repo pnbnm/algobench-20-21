@@ -277,6 +277,36 @@ $("#toTabExp").on('click', function() {
         $("#downTask p").click(); */
     });
 
+    //TODO
+     $("#printReport").on("click", function () {
+
+         var willR = $('.left-side.active .onC');
+         var task = willR.data('task');
+         var taskSerialize = willR.data('taskSerialize');
+         if (!willR.size()) {
+             layer.alert('select an active task', {icon: 5,title:'info',btn:'OK'})
+             return;
+         }
+         $.post("/common/save", task, function(data) {
+
+             var s = '<div id="' + task.taskID + '" class="oneTask"><span class="taskName">' + task.taskID + '</span></div>';
+             $('.left-side.archive').append(s);
+             $('.left-side.archive #' + task.taskID).data('task', task);
+             $(willR).data('saved', '1');
+             var form = $('<form method="POST" action="' + "/common/save" + '">');
+             $.each(task, function(k, v) {
+                 form.append($('<input type="hidden" name="' + k +
+                     '" value="' + v + '">'));
+             });
+             $('body').append(form);
+             form.submit(); //Automatic submission
+         });
+         /* var href = "/common/save?" + taskSerialize;
+         console.log(href);
+         $("#downTask").attr("href", href);
+         $("#downTask p").click(); */
+     });
+
     $(".nextBtn").on("click", function () {
         if (globalPar.alertSortStep == 2) {
             return;

@@ -103,8 +103,8 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="project.structure.last.edited" value="Problems" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.updates" />
   </component>
@@ -265,7 +265,9 @@
       <workItem from="1611502516168" duration="2532000" />
       <workItem from="1611608813580" duration="4554000" />
       <workItem from="1611776252443" duration="1173000" />
-      <workItem from="1612286101828" duration="8951000" />
+      <workItem from="1612286101828" duration="9068000" />
+      <workItem from="1612349252829" duration="263000" />
+      <workItem from="1612787726398" duration="3587000" />
     </task>
     <task id="LOCAL-00001">
       <created>1521132075095</created>
@@ -423,54 +425,62 @@
     <option name="LAST_COMMIT_MESSAGE" value="1.&#9;整个左边缩进一些，左菜单对齐“+create”这个按钮&#10;2.&#9;左菜单里的文字全都居中&#10;3.&#9;左上角的logo换一个对比度高一些的颜色，比如白色&#10;4.&#9;“save”按钮也加一个矢量图，和周围的按钮一样大&#10;5.&#9;主界面logo的作者名字，在Yufen Wang后面依次加上Shalom Rachapudi David，Nevena Blagoeva和Yuecheng Hu&#10;6.&#9;最顶上的菜单栏里的按钮在网页不全屏的时候会折下来，能让他不折下来吗" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1611782845281">
+    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1612369650598">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1611782845281" />
-    <state width="1750" height="251" key="GridCell.Tab.0.bottom" timestamp="1612289161970">
-      <screen x="0" y="23" width="1792" height="1020" />
+    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1612369650598" />
+    <state width="1750" height="251" key="GridCell.Tab.0.bottom" timestamp="1612795823358">
+      <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="323" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1612288258092" />
+    <state width="1750" height="251" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1612795823358" />
     <state width="1750" height="251" key="GridCell.Tab.0.bottom/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161970" />
-    <state width="1750" height="251" key="GridCell.Tab.0.center" timestamp="1612289161967">
-      <screen x="0" y="23" width="1792" height="1020" />
-    </state>
-    <state width="1750" height="323" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1612288258091" />
-    <state width="1750" height="251" key="GridCell.Tab.0.center/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161967" />
-    <state width="1750" height="251" key="GridCell.Tab.0.left" timestamp="1612289161967">
-      <screen x="0" y="23" width="1792" height="1020" />
-    </state>
-    <state width="1750" height="323" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1612288258090" />
-    <state width="1750" height="251" key="GridCell.Tab.0.left/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161967" />
-    <state width="1750" height="251" key="GridCell.Tab.0.right" timestamp="1612289161969">
-      <screen x="0" y="23" width="1792" height="1020" />
-    </state>
-    <state width="1750" height="323" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1612288258092" />
-    <state width="1750" height="251" key="GridCell.Tab.0.right/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161969" />
-    <state width="1750" height="251" key="GridCell.Tab.1.bottom" timestamp="1612289161971">
-      <screen x="0" y="23" width="1792" height="1020" />
-    </state>
-    <state width="1750" height="323" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1612288258094" />
-    <state width="1750" height="251" key="GridCell.Tab.1.bottom/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161971" />
-    <state width="1750" height="251" key="GridCell.Tab.1.center" timestamp="1612289161971">
-      <screen x="0" y="23" width="1792" height="1020" />
-    </state>
-    <state width="1750" height="323" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1612288258093" />
-    <state width="1750" height="251" key="GridCell.Tab.1.center/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161971" />
-    <state width="1750" height="251" key="GridCell.Tab.1.left" timestamp="1612289161970">
-      <screen x="0" y="23" width="1792" height="1020" />
-    </state>
-    <state width="1750" height="323" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1612288258093" />
-    <state width="1750" height="251" key="GridCell.Tab.1.left/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161970" />
-    <state width="1750" height="251" key="GridCell.Tab.1.right" timestamp="1612289161971">
-      <screen x="0" y="23" width="1792" height="1020" />
-    </state>
-    <state width="1750" height="323" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1612288258094" />
-    <state width="1750" height="251" key="GridCell.Tab.1.right/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161971" />
-    <state x="512" y="255" width="943" height="648" key="find.popup" timestamp="1612303119428">
+    <state width="1750" height="251" key="GridCell.Tab.0.center" timestamp="1612795823356">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="512" y="255" width="943" height="648" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1612303119428" />
+    <state width="1750" height="251" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1612795823356" />
+    <state width="1750" height="251" key="GridCell.Tab.0.center/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161967" />
+    <state width="1750" height="251" key="GridCell.Tab.0.left" timestamp="1612795823355">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="251" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1612795823355" />
+    <state width="1750" height="251" key="GridCell.Tab.0.left/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161967" />
+    <state width="1750" height="251" key="GridCell.Tab.0.right" timestamp="1612795823356">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="251" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1612795823356" />
+    <state width="1750" height="251" key="GridCell.Tab.0.right/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161969" />
+    <state width="1750" height="251" key="GridCell.Tab.1.bottom" timestamp="1612795823360">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="251" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1612795823360" />
+    <state width="1750" height="251" key="GridCell.Tab.1.bottom/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161971" />
+    <state width="1750" height="251" key="GridCell.Tab.1.center" timestamp="1612795823359">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="251" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1612795823359" />
+    <state width="1750" height="251" key="GridCell.Tab.1.center/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161971" />
+    <state width="1750" height="251" key="GridCell.Tab.1.left" timestamp="1612795823359">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="251" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1612795823359" />
+    <state width="1750" height="251" key="GridCell.Tab.1.left/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161970" />
+    <state width="1750" height="251" key="GridCell.Tab.1.right" timestamp="1612795823360">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state width="1750" height="251" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1612795823360" />
+    <state width="1750" height="251" key="GridCell.Tab.1.right/0.23.1792.1020@0.23.1792.1020" timestamp="1612289161971" />
+    <state x="434" y="222" key="Maven.ArtifactSearchDialog" timestamp="1612796282379">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="434" y="222" key="Maven.ArtifactSearchDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1612796282379" />
+    <state x="384" y="141" key="SettingsEditor" timestamp="1612795629886">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="384" y="141" key="SettingsEditor/0.0.1792.1120@0.0.1792.1120" timestamp="1612795629886" />
+    <state x="512" y="255" width="943" height="648" key="find.popup" timestamp="1612790238472">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="512" y="255" width="943" height="648" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1612790238472" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
@@ -485,92 +495,5 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <settings>
-          <artifact-editor />
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="FacetStructureConfigurable.UI">
-        <settings>
-          <last-edited>Spring</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ModuleStructureConfigurable.UI">
-        <settings>
-          <last-edited>algorithms</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <last-edited>Maven: ch.qos.logback:logback-classic:1.2.3</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
   </component>
 </project>
