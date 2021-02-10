@@ -2,7 +2,9 @@ package com.inf2b.algorithms.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.inf2b.algorithms.AlgoBench;
+import com.inf2b.algorithms.model.PDFGeneration;
 import com.inf2b.algorithms.model.Task;
+import org.apache.fop.apps.FOPException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.transform.TransformerException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +55,13 @@ public class CommonController {
         //ObjectOutput obo = new ObjectOutputStream(bos);
         //obo.writeObject(task);
         //CALL PDF GENERATION FUNCTION
+        try {
+            PDFGeneration.generatePDF(task, bos);
+        } catch (FOPException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
         //WRITE PDF TO BUFFER OUTPUT STREAM HERE
         buff = bos.toByteArray();
 

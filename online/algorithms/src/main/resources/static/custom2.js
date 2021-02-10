@@ -287,13 +287,12 @@ $("#toTabExp").on('click', function() {
              layer.alert('select an active task', {icon: 5,title:'info',btn:'OK'})
              return;
          }
-         $.post("/common/save", task, function(data) {
+         $.post("/common/print", task, function(data) {
 
              var s = '<div id="' + task.taskID + '" class="oneTask"><span class="taskName">' + task.taskID + '</span></div>';
              $('.left-side.archive').append(s);
              $('.left-side.archive #' + task.taskID).data('task', task);
-             $(willR).data('saved', '1');
-             var form = $('<form method="POST" action="' + "/common/save" + '">');
+             var form = $('<form method="POST" action="' + "/common/print" + '">');
              $.each(task, function(k, v) {
                  form.append($('<input type="hidden" name="' + k +
                      '" value="' + v + '">'));
@@ -301,10 +300,7 @@ $("#toTabExp").on('click', function() {
              $('body').append(form);
              form.submit(); //Automatic submission
          });
-         /* var href = "/common/save?" + taskSerialize;
-         console.log(href);
-         $("#downTask").attr("href", href);
-         $("#downTask p").click(); */
+
      });
 
     $(".nextBtn").on("click", function () {
