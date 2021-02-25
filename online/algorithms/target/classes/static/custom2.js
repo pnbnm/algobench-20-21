@@ -282,12 +282,19 @@ $("#toTabExp").on('click', function() {
 
          var willR = $('.left-side.active .onC');
          var task = willR.data('task');
+         var chartData = willR.data('chartData');
+         console.log(chartData);
          var taskSerialize = willR.data('taskSerialize');
          if (!willR.size()) {
              layer.alert('select an active task', {icon: 5,title:'info',btn:'OK'})
              return;
          }
-         $.post("/common/print", task, function(data) {
+
+         data = task;
+         data.x = chartData.x;
+         data.y = chartData.y;
+
+         $.post("/common/print", data, function(data) {
 
              var s = '<div id="' + task.taskID + '" class="oneTask"><span class="taskName">' + task.taskID + '</span></div>';
              $('.left-side.archive').append(s);
@@ -459,6 +466,7 @@ $('#seeChartTask').on("click", function () {
         willLoad.data("cloneOp", cloneObj(option));
         // Use just assigned configuration items and data to display charts.
         myChart.setOption(option);
+        console.log(myChart.getDataURL({}));
 
 });
 // paint table

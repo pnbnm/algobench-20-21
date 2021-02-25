@@ -4,7 +4,9 @@ import com.inf2b.algorithms.AlgoBench;
 
 import java.io.*;
 
+
 import org.apache.fop.apps.*;
+import org.knowm.xchart.XYChart;
 
 import javax.xml.transform.*;
 import javax.xml.transform.sax.SAXResult;
@@ -13,12 +15,17 @@ import javax.xml.transform.stream.StreamSource;
 public class PDFGeneration {
 
     //adapted from http://svn.apache.org/viewvc/xmlgraphics/fop/trunk/fop/examples/embedding/java/embedding/ExampleXML2PDF.java?view=markup
-    public static void generatePDF(Task task, OutputStream out) throws FOPException, TransformerException {
+    public static void generatePDF(Task task, double[] chartXData, double[] chartYData, OutputStream out) throws FOPException, TransformerException, IOException {
+
+
         //prepare XSLT file
         File xsltFile = new File("src/main/resources/static/task.xsl");
         //generate XML
         String xml = getXMLSourceCode(task);
         //prepare image
+        System.out.println(chartXData.length);
+        XYChart chart = Plotter.createRunTimeChart(chartXData, chartYData);
+        Plotter.saveChart(chart, "images/image.png");
 
         System.out.println("Generated XML");
         //construct FOPFactory

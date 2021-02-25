@@ -317,7 +317,7 @@
         <fo:block><fo:leader /></fo:block> <!-- empty line -->
         <!-- image -->
         <fo:block border-bottom-width="1.3pt" border-bottom-style="solid" border-bottom-color="#4c4cff">
-        	<fo:external-graphic src="images/image.jpg" content-height="145mm" content-width="180mm" display-align="center" text-align="center" border="solid 0.1pt"/>
+        	<fo:external-graphic src="images/image.png" content-height="145mm" content-width="180mm" display-align="center" text-align="center" border="solid 0.1pt"/>
         </fo:block>
 
         <!-- Notes, if any -->

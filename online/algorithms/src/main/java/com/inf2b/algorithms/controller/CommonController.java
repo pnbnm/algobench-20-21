@@ -5,10 +5,7 @@ import com.inf2b.algorithms.AlgoBench;
 import com.inf2b.algorithms.model.PDFGeneration;
 import com.inf2b.algorithms.model.Task;
 import org.apache.fop.apps.FOPException;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,9 +39,30 @@ public class CommonController {
 
     }
 
-    //TODO
+
     @RequestMapping("/print")
-    public void print(Task task, HttpServletResponse res) throws IOException {
+    public void print(Task task,
+                      @RequestParam(value="x", required = false) double[] x, @RequestParam(value="y", required=false) double[] y, HttpServletResponse res) throws IOException {
+/*
+        System.out.println("Received data:");
+        System.out.println(task);
+        System.out.println(x[0]);
+        System.out.println(x.length);
+        System.out.println(y[0]);
+        System.out.println(y.length);
+
+ */
+
+        //Hack around the request double-sending
+        //For some reason the request always double sends, once with the arrays as x[] and once as x
+        try {
+            System.out.println(x.length);
+        }
+        catch (NullPointerException e){
+            return;
+        }
+
+        System.out.println("received print request!");
 
         res.setHeader("content-type", "application/octet-stream");
         res.setContentType("application/octet-stream");
@@ -56,7 +74,7 @@ public class CommonController {
         //obo.writeObject(task);
         //CALL PDF GENERATION FUNCTION
         try {
-            PDFGeneration.generatePDF(task, bos);
+            PDFGeneration.generatePDF(task, x, y, bos);
         } catch (FOPException e) {
             e.printStackTrace();
         } catch (TransformerException e) {
@@ -67,6 +85,8 @@ public class CommonController {
 
         out.write(buff, 0, buff.length);
         out.close();
+
+        //System.out.println("response complete!");
 
     }
 
