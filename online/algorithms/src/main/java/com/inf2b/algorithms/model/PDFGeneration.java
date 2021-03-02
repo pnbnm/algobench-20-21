@@ -24,7 +24,7 @@ public class PDFGeneration {
         String xml = getXMLSourceCode(task);
         //prepare image
         System.out.println(chartXData.length);
-        XYChart chart = Plotter.createRunTimeChart(chartXData, chartYData);
+        XYChart chart = Plotter.createRunTimeChart(task.getTaskID(), chartXData, chartYData);
         Plotter.saveChart(chart, "images/image.png");
 
         System.out.println("Generated XML");
