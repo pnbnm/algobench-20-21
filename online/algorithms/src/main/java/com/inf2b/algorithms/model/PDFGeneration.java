@@ -25,7 +25,10 @@ public class PDFGeneration {
         //prepare image
         System.out.println(chartXData.length);
         XYChart chart = Plotter.createRunTimeChart(task.getTaskID(), chartXData, chartYData);
-        String imageFilePath = "images/" + task.getTaskID() + ".png";
+
+        //generate random ID for image to prevent contamination between different users' tasks
+        int imageID = (int)(Math.random() * 9999999);
+        String imageFilePath = "images/" + imageID + ".png";
         Plotter.saveChart(chart, imageFilePath);
 
         System.out.println("Generated XML");
@@ -44,7 +47,7 @@ public class PDFGeneration {
         //setup xslt
         TransformerFactory factory = TransformerFactory.newInstance();
         Transformer transformer = factory.newTransformer(new StreamSource(xsltFile));
-        transformer.setParameter("taskID", task.getTaskID());
+        transformer.setParameter("imageID", imageID);
 
         System.out.println("Transformer set up");
         //setup input for XSLT transformation
