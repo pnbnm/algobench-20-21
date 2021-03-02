@@ -25,7 +25,8 @@ public class PDFGeneration {
         //prepare image
         System.out.println(chartXData.length);
         XYChart chart = Plotter.createRunTimeChart(task.getTaskID(), chartXData, chartYData);
-        Plotter.saveChart(chart, "images/image.png");
+        String imageFilePath = "images/" + task.getTaskID() + ".png";
+        Plotter.saveChart(chart, imageFilePath);
 
         System.out.println("Generated XML");
         //construct FOPFactory
@@ -43,6 +44,7 @@ public class PDFGeneration {
         //setup xslt
         TransformerFactory factory = TransformerFactory.newInstance();
         Transformer transformer = factory.newTransformer(new StreamSource(xsltFile));
+        transformer.setParameter("taskID", task.getTaskID());
 
         System.out.println("Transformer set up");
         //setup input for XSLT transformation
@@ -52,6 +54,12 @@ public class PDFGeneration {
         Result res = new SAXResult(fop.getDefaultHandler());
         //start XSLT transformation and FOP processing
         transformer.transform(src, res);
+
+
+        //delete chart image file
+        File imageFile = new File(imageFilePath);
+        if (imageFile.delete()) System.out.println("Successfully cleaned up!");
+        else System.out.println("Warning: Failed to delete chart image file!");
 
         System.out.println("PDF generation complete!");
 
