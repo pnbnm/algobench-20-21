@@ -1392,7 +1392,7 @@ function yyyy() {
   var seeds = {
       //list of seeds being used by tasks
       //each member is an obj {value, tasks: [taskid1, taskid2...]}
-      seeds: [{value: "example", tasks: ["example"]}],
+      seeds: [],//[{value: "example", tasks: ["example"]}],
 
       //add a new seed entry or add a new taskid to the list of users
       add: function (seed, taskId) {
