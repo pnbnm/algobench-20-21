@@ -32,6 +32,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -61,6 +63,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
@@ -127,6 +130,17 @@
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -265,7 +279,8 @@
       <workItem from="1614650358389" duration="3647000" />
       <workItem from="1615043450513" duration="386000" />
       <workItem from="1615146780480" duration="693000" />
-      <workItem from="1615221457042" duration="1547000" />
+      <workItem from="1615221457042" duration="2614000" />
+      <workItem from="1615292494179" duration="11323000" />
     </task>
     <task id="LOCAL-00001">
       <created>1521132075095</created>
@@ -423,53 +438,53 @@
     <option name="LAST_COMMIT_MESSAGE" value="1.&#9;整个左边缩进一些，左菜单对齐“+create”这个按钮&#10;2.&#9;左菜单里的文字全都居中&#10;3.&#9;左上角的logo换一个对比度高一些的颜色，比如白色&#10;4.&#9;“save”按钮也加一个矢量图，和周围的按钮一样大&#10;5.&#9;主界面logo的作者名字，在Yufen Wang后面依次加上Shalom Rachapudi David，Nevena Blagoeva和Yuecheng Hu&#10;6.&#9;最顶上的菜单栏里的按钮在网页不全屏的时候会折下来，能让他不折下来吗" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1612369650598">
+    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615248077213">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1612369650598" />
+    <state x="424" y="29" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1792.1120@0.0.1792.1120" timestamp="1615248077213" />
     <state x="709" y="283" key="#com.intellij.ide.util.MemberChooser" timestamp="1614189232348">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="709" y="283" key="#com.intellij.ide.util.MemberChooser/0.0.1792.1120@0.0.1792.1120" timestamp="1614189232348" />
-    <state width="1750" height="341" key="GridCell.Tab.0.bottom" timestamp="1614692115152">
+    <state width="1750" height="194" key="GridCell.Tab.0.bottom" timestamp="1615297649845">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="341" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1614692115152" />
+    <state width="1750" height="194" key="GridCell.Tab.0.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1615297649845" />
     <state width="1750" height="341" key="GridCell.Tab.0.bottom/0.23.1792.1020@0.23.1792.1020" timestamp="1614691026454" />
-    <state width="1750" height="341" key="GridCell.Tab.0.center" timestamp="1614692115151">
+    <state width="1750" height="194" key="GridCell.Tab.0.center" timestamp="1615297649845">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="341" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1614692115151" />
+    <state width="1750" height="194" key="GridCell.Tab.0.center/0.0.1792.1120@0.0.1792.1120" timestamp="1615297649845" />
     <state width="1750" height="341" key="GridCell.Tab.0.center/0.23.1792.1020@0.23.1792.1020" timestamp="1614691026452" />
-    <state width="1750" height="341" key="GridCell.Tab.0.left" timestamp="1614692115151">
+    <state width="1750" height="194" key="GridCell.Tab.0.left" timestamp="1615297649844">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="341" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1614692115151" />
+    <state width="1750" height="194" key="GridCell.Tab.0.left/0.0.1792.1120@0.0.1792.1120" timestamp="1615297649844" />
     <state width="1750" height="341" key="GridCell.Tab.0.left/0.23.1792.1020@0.23.1792.1020" timestamp="1614691026451" />
-    <state width="1750" height="341" key="GridCell.Tab.0.right" timestamp="1614692115152">
+    <state width="1750" height="194" key="GridCell.Tab.0.right" timestamp="1615297649845">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="341" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1614692115152" />
+    <state width="1750" height="194" key="GridCell.Tab.0.right/0.0.1792.1120@0.0.1792.1120" timestamp="1615297649845" />
     <state width="1750" height="341" key="GridCell.Tab.0.right/0.23.1792.1020@0.23.1792.1020" timestamp="1614691026452" />
-    <state width="1750" height="341" key="GridCell.Tab.1.bottom" timestamp="1614692115154">
+    <state width="1750" height="194" key="GridCell.Tab.1.bottom" timestamp="1615297649847">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="341" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1614692115154" />
+    <state width="1750" height="194" key="GridCell.Tab.1.bottom/0.0.1792.1120@0.0.1792.1120" timestamp="1615297649847" />
     <state width="1750" height="341" key="GridCell.Tab.1.bottom/0.23.1792.1020@0.23.1792.1020" timestamp="1614691026458" />
-    <state width="1750" height="341" key="GridCell.Tab.1.center" timestamp="1614692115153">
+    <state width="1750" height="194" key="GridCell.Tab.1.center" timestamp="1615297649846">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="341" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1614692115153" />
+    <state width="1750" height="194" key="GridCell.Tab.1.center/0.0.1792.1120@0.0.1792.1120" timestamp="1615297649846" />
     <state width="1750" height="341" key="GridCell.Tab.1.center/0.23.1792.1020@0.23.1792.1020" timestamp="1614691026455" />
-    <state width="1750" height="341" key="GridCell.Tab.1.left" timestamp="1614692115153">
+    <state width="1750" height="194" key="GridCell.Tab.1.left" timestamp="1615297649846">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="341" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1614692115153" />
+    <state width="1750" height="194" key="GridCell.Tab.1.left/0.0.1792.1120@0.0.1792.1120" timestamp="1615297649846" />
     <state width="1750" height="341" key="GridCell.Tab.1.left/0.23.1792.1020@0.23.1792.1020" timestamp="1614691026455" />
-    <state width="1750" height="341" key="GridCell.Tab.1.right" timestamp="1614692115154">
+    <state width="1750" height="194" key="GridCell.Tab.1.right" timestamp="1615297649847">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state width="1750" height="341" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1614692115154" />
+    <state width="1750" height="194" key="GridCell.Tab.1.right/0.0.1792.1120@0.0.1792.1120" timestamp="1615297649847" />
     <state width="1750" height="341" key="GridCell.Tab.1.right/0.23.1792.1020@0.23.1792.1020" timestamp="1614691026456" />
     <state x="434" y="222" key="Maven.ArtifactSearchDialog" timestamp="1612796282379">
       <screen x="0" y="0" width="1792" height="1120" />
@@ -483,10 +498,10 @@
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
     <state x="512" y="255" width="943" height="648" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1615226143374" />
-    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup" timestamp="1612957103259">
+    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup" timestamp="1615325805652">
       <screen x="0" y="0" width="1792" height="1120" />
     </state>
-    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1612957103259" />
+    <state x="561" y="251" width="670" height="676" key="search.everywhere.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1615325805652" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">

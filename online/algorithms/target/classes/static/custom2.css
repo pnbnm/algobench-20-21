@@ -1,0 +1,10 @@
+.settings p {
+    font-size: 15px;
+    line-height: 0.8;
+}
+
+#updateContent textarea {
+    margin: 10px;
+    height: 90%;
+    width: 100%;
+}
