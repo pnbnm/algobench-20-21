@@ -269,6 +269,185 @@ $('.ctBtn').on("click", function () {
     doReset();
 });
 
+// Start the task
+$('#startTask').on("click", function () {
+
+    var willLoad = $('.left-side.active .onC');
+    if (!willLoad.length) {
+        alert('Please select an active task')
+        return;
+    }
+
+    var thisText = $$('#updateContent textarea');
+    thisText.val("");
+
+    $('.mainStatus span').text('running');
+    var nowTime = 0;
+    $('#runTime').text(nowTime++ + 's');
+    thisT = setInterval(function() {$('#runTime').text(nowTime++ + 's');}, 1000);
+    //var task = $('.activeTasks dd a.onC').parent().data('task');
+    var task = $('.oneTask.onC').data('taskSerialize');
+
+    var thisUrl = "ws://" + location.host + "/algoWs";
+    websocket = new WebSocket(thisUrl);
+    //Callback method for connection error
+    websocket.onerror = function(){
+        alert("websocket connect error");
+    };
+    //Callback method for successful connection establishment
+    websocket.onopen = function(event){
+        websocket.send(task);
+    }
+    //Callback method for receiving message
+    websocket.onmessage = function(event){
+        //console.log(event.data);
+        updateCtx(event.data);
+    }
+    //Callback method for connection closure
+    websocket.onclose = function(){
+        $('.mainStatus span').text('COMPLETED');
+        $(willLoad).data('completed', 1);
+        $(willLoad).data('runTime', $('#runTime').text());
+        $(willLoad).data('textarea',$$('#updateContent textarea').val());
+        var spanText = $(willLoad).find('span').eq(1).text();
+        spanText = spanText.replace(/queued/, "completed");
+        $(willLoad).find('span').eq(1).text(spanText);
+        clearInterval(thisT);
+        alert('Task completed', {icon: 1,title:'info',btn:'OK'})
+    }
+
+});
+
+function updateCtx(data, obj) {
+
+    result = data;
+    if (result.indexOf('Number') != -1
+        &&
+        result.indexOf('Run') != -1 ) {
+        //console.log(result);
+
+        $('.left-side.active .onC').data('number', result);
+
+        var lines = result.split("\n");
+        lines.pop();
+        var firstLine = lines.shift();
+        var coordinateX = [];
+        var coordinateY = [];
+        lines.map(function(one) {
+            var xy = one.split("\t");
+            coordinateX.push(parseInt(xy[0]));
+            coordinateY.push(parseInt(xy[1]));
+        });
+        // console.log(coordinateX);
+        // console.log(coordinateY);
+        var title1 = firstLine.split("\t")[0];
+        $('.left-side.active .onC').data("chartData", {x: coordinateX, y:coordinateY,title1:title1});
+        return;
+    }
+
+    var parts = result.split("\t");
+    var pF = parts[0].toUpperCase();
+    switch (pF) {
+        case "[NUMCOMPLETEDRUNS]":
+            result = 's';
+            var pS = parts[1];
+            pS = new Number(pS);
+            $('#completedNum').text(pS);
+            pS = pS * 100 / $$('#scheduledTasks').text();
+            $('#percentage').text(pS + "%");
+            break;
+        case "[MAXRECURSION]":
+            result = 's';
+            var pS = parts[1];
+            $('#recursion').text(pS).
+                break;
+        case "[TREEHEIGHT]":
+            result = 's';
+            var pS = parts[1];
+            $('#settings #treeHeight').text(pS).
+                break;
+        case "[STATUS]":
+            result = 's';
+            var pS = parts[1];
+            $('#live span').text(pS);
+            break;
+        case "[TERMINATE]":
+            result = 's';
+            var pS = parts[1];
+            $('.mainStatus span').text(pS);
+            break;
+        case "[CURRENTMEMUSAGE]":
+            result = 's';
+            var pS = parts[1];
+            pS = new Number(pS);
+            pS /=  1024;
+            pS = pS.toFixed(2);
+            if (pS > 1024) {
+                pS /= 1024;
+                pS = pS.toFixed(2);
+                pS = pS + "MB";
+            } else {
+                pS = pS + "KB";
+            }
+            $('#memUsage').text(pS);
+            break;
+        case "[CURRENTINPUTSIZE]":
+            result = 's';
+            var pS = parts[1];
+            $('#settings #currentInputSize').text(pS);
+            $('#settings #currentEdges').text(pS);
+            break;
+        case "[NUMRUNS]":
+            result = 's';
+            var pS = parts[1];
+            $('#settings #scheduledTasks').text(pS);
+            break;
+        case "[MINBUCKETSIZE]":
+            result = 's';
+            var pS = parts[1];
+            $('#settings #minBucketSize').text(pS);
+            break;
+        case "[MAXBUCKETSIZE]":
+            result = 's';
+            var pS = parts[1];
+            $('#settings #maxBucketSize').text(pS);
+            break;
+        case "[AVERAGE]":
+            result = 's';
+            var pS = parts[1];
+            $('#settings #averageBucketSize').text(pS);
+            break;
+        case "[STDDEVIATION]":
+            result = 's';
+            var pS = parts[1];
+            $('#settings #standardDeviation').text(pS);
+            break;
+        case "[ERROR]":
+            result = 's';
+            break;
+        case "[UPDATE]":
+            var pS = parts[1].toUpperCase();
+            result = pS;
+            break;
+        default:
+
+            break;
+    }
+
+    var thisText = $('#updateContent textarea');
+    var str = thisText.val(); //First get the original value.
+    if (result == 's') {
+
+    } else {
+        document.getElementById('yang').value = str + result + "\r\n"; //拼接新值
+        thisText.get(0).scrollTop = thisText.get(0).scrollHeight;
+        if (result.indexOf('TaskRunner exiting') != -1) {
+            setTimeout("websocket.close()", 500);
+        }
+    }
+
+}
+
 $(".nextBtn").on("click", function () {
     if (globalPar.alertSortStep == 0){
         $(".alert-sort.one").removeClass("show");

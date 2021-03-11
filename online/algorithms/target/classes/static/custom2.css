@@ -2,11 +2,35 @@
     font-size: 15px;
     line-height: 0.8;
 }
+.top-nav{
+
+}
+
+.main{
+    height: 95vh
+}
+
+
+
+.mainSettings{
+    height: 70%
+}
+
+#settings {
+    width: 100%;
+    height: 60%;
+}
+
+#updateContent {
+    width: 100%;
+    height: 30%;
+}
 
 #updateContent textarea {
     margin: 10px;
     height: 90%;
     width: 100%;
+    font-size: 10px;
 }
 
 .reveal-if-active {
