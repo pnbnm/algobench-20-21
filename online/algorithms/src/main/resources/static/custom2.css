@@ -8,3 +8,24 @@
     height: 90%;
     width: 100%;
 }
+
+.reveal-if-active {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.alert-sort.show {
+    display: inherit;
+}
+
+.alert-sort {
+    display: none;
+}
+
+
+input[type="radio"]:checked ~ .reveal-if-active {
+    opacity: 1;
+    max-height: 100px;
+    overflow: visible;
+}

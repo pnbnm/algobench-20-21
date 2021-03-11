@@ -315,6 +315,7 @@ $("#toTabExp").on('click', function() {
             return;
         }
         var r = $(".alert-sort.show").removeClass("show");
+
         var nextPos = globalPar.alertSortStep + 1;
         $(".alert-sort:eq(" + nextPos + ")").addClass("show");
         globalPar.alertSortStep = nextPos;
