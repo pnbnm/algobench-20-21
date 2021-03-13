@@ -498,6 +498,261 @@ $("#saveTask").on("click", function () {
     $("#downTask p").click(); */
 });
 
+$('#chart-tab').on("shown.bs.tab", function () {
+
+    var willLoad = $('.left-side.active .onC');
+    if (!willLoad.length) {
+        alert('Please select an active task');
+        $('#overview-tab').tab('show');
+        return;
+    }
+
+    var completed = $(willLoad).data('completed');
+    if (1!=completed) {
+        alert('You have to run the task first');
+        $('#overview-tab').tab('show');
+        return;
+    }
+
+    var chartData = willLoad.data('chartData');
+    var task = willLoad.data('task');
+
+
+    myChart = echarts.init(document.getElementById('singleChart'));
+
+    var xAxisData = chartData['x'];
+    var yAxisData = chartData['y'];
+    xAxisData = xAxisData.map(num2e);
+
+    legendData = [task.taskID + '(' + task.algorithm + ')']
+
+    // Specify the configuration entries and data for the chart.
+    option = {
+        legend: {
+            data:legendData
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                /*dataZoom: {
+                    yAxisIndex: 'none'
+                },*/
+                dataView: {readOnly: false,
+                    title:'data view',lang:['data view', 'close', 'refresh']},
+                magicType: {type: ['line', 'bar'],
+                    title:{line:'switch to line', bar:'switch to bar'}},
+                restore: {title:'restore'},
+                saveAsImage: {title:'save as a image'}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            name : 'Input Size',
+            nameLocation: 'center',
+            nameGap: 35,
+            data: xAxisData
+        },
+        yAxis: {
+            name : 'Time(ms)',
+            nameLocation: 'center',
+            nameGap: 35,
+            type: 'value'
+        },grid:{
+            left:0
+        },
+        series: [{
+            data: yAxisData,
+            name: legendData[0],
+            type: 'line'
+        }]
+    };
+
+    willLoad.data("cloneOp", cloneObj(option));
+    // Use just assigned configuration items and data to display charts.
+    myChart.setOption(option);
+    console.log(myChart.getDataURL({}));
+
+});
+
+$('#compare-tab').on("shown.bs.tab", function () {
+
+    var willLoad = $('.left-side.active .onC');
+    if (!willLoad.length) {
+        alert('Please select an active task');
+        $('#overview-tab').tab('show');
+        return;
+    }
+
+    var completed = $(willLoad).data('completed');
+    if (1!=completed) {
+        alert('You have to run the task first');
+        $('#overview-tab').tab('show');
+        return;
+    }
+
+    var chartData = willLoad.data('chartData');
+    var task = willLoad.data('task');
+    var algorithmGroup = task.algorithmGroup
+
+
+    var myChart = echarts.init(document.getElementById('compareChart'));
+
+    var xAxisData = chartData['x'];
+    var yAxisData = chartData['y'];
+    xAxisData = xAxisData.map(num2e);
+
+    //legendData = [task.taskID + '(' + task.algorithm + ')']
+    var legendData = [];
+    var seriesData = [];
+    /*  seriesData.push({
+         data: yAxisData,
+         name: legendData[0],
+         type: 'line'
+     }); */
+
+    var muti = $('.left-side.active div');
+    muti.map(function(one) {
+        one = muti[one];
+        var thisTask = $(one).data('task');
+        var thisChartData = $(one).data('chartData');
+        if (thisTask.algorithmGroup == algorithmGroup) {
+            legendData.push(thisTask.taskID + '(' + thisTask.algorithm + ')');
+            seriesData.push({
+                data: thisChartData['y'],
+                name: thisTask.taskID + '(' + thisTask.algorithm + ')',
+                type: 'line'
+            });
+        }
+    });
+
+
+    // Specify the configuration entries and data for the chart.
+    option = {
+        legend: {
+            data:legendData
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                /*dataZoom: {
+                    yAxisIndex: 'none'
+                },*/
+                dataView: {readOnly: false,
+                    title:'data view',lang:['data view', 'close', 'refresh']},
+                magicType: {type: ['line', 'bar'],
+                    title:{line:'switch to line', bar:'switch to bar'}},
+                restore: {title:'restore'},
+                saveAsImage: {title:'save as a image'}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            name : 'Input Size',
+            nameLocation: 'center',
+            nameGap: 35,
+            data: xAxisData
+        },grid:{
+            left:0
+        },
+        yAxis: {
+            name : 'Time(ms)',
+            nameLocation: 'center',
+            nameGap: 35,
+            type: 'value'
+        },
+        series: seriesData
+    };
+
+
+    //Use just assigned configuration items and data to display charts.
+    myChart.setOption(option);
+
+});
+
+$('#table-tab').on("show.bs.tab", function () {
+
+
+    var willLoad = $('.left-side.active .onC');
+    if (!willLoad.length) {
+        alert('Please select an active task');
+        $('#overview-tab').tab('show');
+        return;
+    }
+
+    var completed = $(willLoad).data('completed');
+    if (1!=completed) {
+        alert('You have to run the task first');
+        $('#overview-tab').tab('show');
+        return;
+    }
+
+    var chartData = willLoad.data('chartData');
+    //console.log(chartData);
+
+    var xAxisData = chartData['x'];
+    var yAxisData = chartData['y'];
+
+    var tableInner = '';
+    var th1 = "Number of Elements";
+    if (chartData['title1']) {
+        th1 = chartData['title1']
+    }
+    var th2 = "Run 1 (ms)";
+    tableInner += '<thead><tr><th scope="col">' + th1 + '</th><th scope="col">' + th2 + '</th></tr></thead><tbody>';
+    for (var i=0; i<xAxisData.length;i++) {
+        if (i % 2 == 1) {
+            tableInner += '<tr class="alt"><td>' + xAxisData[i] + '</td><td>' + yAxisData[i] + '</td></tr>'
+        } else {
+            tableInner += '<tr><td>' + xAxisData[i] + '</td><td>' + yAxisData[i] + '</td></tr>'
+        }
+
+    }
+    tableInner += "</tbody>";
+    $("#table table").append(tableInner);
+
+});
+
+$("#toclip").on('click', function() {
+    var willSave = $('.left-side.active .onC');
+    var value = willSave.data('number');
+    $('#toclip').attr('data-clipboard-text', value);
+    var clipboard = new ClipboardJS('#toclip');
+    clipboard.on('success', function (e) {
+        layer.alert('copy success', {icon: 6,title:'info',btn:'OK'})
+    });
+    clipboard.on('error', function (e) {
+        layer.alert('unsupport this browser', {icon: 5,title:'info',btn:'OK'})
+    });
+});
+
+$("#toTabExp").on('click', function() {
+    var willSave = $('.left-side.active .onC');
+    var value = willSave.data('number');
+    var isIE = (navigator.userAgent.indexOf('MSIE') >= 0);
+    if (isIE) {
+
+        var winSave = window.open();
+        winSave.document.open("text","utf-8");
+        winSave.document.write(value);
+        winSave.document.execCommand("SaveAs",true,"numbers.txt");
+        winSave.close();
+    } else {
+
+        var mimeType =  'text/plain';
+        $('#createInvote').attr('href', 'data:' + mimeType  +  ';charset=utf-8,' + encodeURIComponent(value));
+        document.getElementById('createInvote').click();
+    }
+
+
+});
+
+$('.savePng').on('click', function() {
+    if ($('#compare').hasClass('active')) {
+        downloadCanvasImage('#compare canvas', 'compare')
+    } else if ($('#chart').hasClass('active')) {
+        downloadCanvasImage('#chart canvas', 'chart')
+    }
+});
 
 $(".nextBtn").on("click", function () {
     if (globalPar.alertSortStep == 0){
@@ -540,6 +795,129 @@ $(".backBtn").on("click", function () {
 $('.clBtn').on("click", function () {
     doReset();
 });
+
+$("#selectVal, #constantVal,#selectVal2, #constantVal2").on("change", function () {
+
+    repaint();
+
+});
+
+function repaint() {
+    var selectVal = $('#selectVal').val();
+    var constantVal = $('#constantVal').val();
+
+    var willLoad = $('.left-side.active .onC');
+    var cloneOp = willLoad.data("cloneOp");
+    cloneOp = cloneObj(cloneOp);
+    var chartData = willLoad.data('chartData');
+    var xAxisData = chartData['x'];
+    var yAxisData;
+    var cons = constantVal * 0.00001;
+    var isNone1=false;
+    var option = cloneOp;
+    if ("N" == selectVal) {
+
+        yAxisData = xAxisData.map(function(x) {
+            return x * cons;
+        })
+    } else if ("NONE" == selectVal) {
+
+        isNone1 = true;
+    } else if ("1" == selectVal) {
+        yAxisData = xAxisData.map(function(x) {
+            return 1 * cons;
+        })
+    } else if ("logN" == selectVal) {
+        yAxisData = xAxisData.map(function(x) {
+            return math.log(x, 10) * cons;
+        })
+    } else if ("NlogN" == selectVal) {
+        yAxisData = xAxisData.map(function(x) {
+            return x * math.log(x, 10) * cons;
+        })
+    } else {
+        yAxisData = xAxisData.map(function(x) {
+            return x * x * cons;
+        })
+    }
+    //var option = myChart.getOption();
+
+    if (!isNone1) {
+        option.legend.data.push("standard1");
+        option.series.push({
+            data: yAxisData,
+            name: "standard1",
+            type: 'line'
+        });
+    }
+
+    myChart.dispose();
+    myChart = echarts.init(document.getElementById('singleChart'));
+    var anotherInput = $('#anotherInput').prop("checked");
+    if (!anotherInput) {
+        myChart.setOption(option);
+        return;
+    }
+    var selectVal2 = $('#selectVal2').val();
+    var constantVal2 = $('#constantVal2').val();
+    var yAxisData2;
+    var cons2 = constantVal2 * 0.00001;
+    var option2;
+    var isNone2=false;
+    if ("N" == selectVal2) {
+
+        yAxisData2 = xAxisData.map(function(x) {
+            return x * cons2;
+        })
+    } else if ("NONE" == selectVal2) {
+        option2 = option;
+        isNone2 = true;
+    } else if ("1" == selectVal2) {
+        yAxisData2 = xAxisData.map(function(x) {
+            return 1 * cons2;
+        })
+    } else if ("logN" == selectVal2) {
+        yAxisData2 = xAxisData.map(function(x) {
+            return math.log(x, 10) * cons2;
+        })
+    } else if ("NlogN" == selectVal2) {
+        yAxisData2 = xAxisData.map(function(x) {
+            return x * math.log(x, 10) * cons2;
+        })
+    } else {
+        yAxisData2 = xAxisData.map(function(x) {
+            return x * x * cons2;
+        })
+    }
+    if (!isNone2) {
+        option.legend.data.push("standard2");
+        option.series.push({
+            data: yAxisData2,
+            name: "standard2",
+            type: 'line'
+        });
+    }
+    myChart.setOption(option);
+}
+
+function downloadCanvasImage(selector, name) {
+    // Get canvas elements through selectors
+    var canvas = document.querySelector(selector)
+    // Using toDataURL method to transform images to Base64 encoded URL strings
+    var url = canvas.toDataURL('image/png')
+    // Generate an A element
+    var a = document.createElement('a')
+    // Create a click event
+    var event = new MouseEvent('click')
+
+    // Set the download property of a to the name of the image we want to download, and use the'download picture name'as the default name if the name does not exist
+    a.download = name || 'Name'
+    // Set the generated URL to the a.href attribute.
+    a.href = url
+
+    // Trigger events for triggering a
+    a.dispatchEvent(event)
+}
 
 function trans(strr, type) {
 

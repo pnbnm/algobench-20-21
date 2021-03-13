@@ -57,7 +57,7 @@
                     ccc
                 </div>
             </div>
-            <div class="col-sm-10 tab-content">
+            <div class="col-sm-11 h-100 tab-content">
                 <div class="tab-pane fade h-100 mx-5 show active" id="overview" role="tabpanel">
                     <div id="settings">
                         <div class="mainTask row">
@@ -134,9 +134,52 @@
                         <textarea id="yang"></textarea>
                     </div>
                 </div>
-                <div class="tab-pane fade h-100 mx-5" id="chart" role="tabpanel">chart</div>
-                <div class="tab-pane fade h-100 mx-5" id="compare" role="tabpanel">compare</div>
-                <div class="tab-pane fade h-100 mx-5" id="table" role="tabpanel">table</div>
+                <div class="tab-pane fade h-100 mx-5" id="chart" role="tabpanel">
+                    <div id="singleChart"></div>
+                    <div id="chartControls">
+                        <button type="button" class="btn btn-secondary savePng">save as a png</button>
+
+                        stand function:
+                        <select class="form-control w-auto d-inline"id="selectVal">
+                            <option value="NONE">NONE</option>
+                            <option value="1">1</option>
+                            <option value="logN">logN</option>
+                            <option value="N">N</option>
+                            <option value="NlogN">NlogN</option>
+                            <option value="N^2">N^2</option>
+                        </select>
+                        constant: 0.00001 * <input type="text" id="constantVal" value="1" />
+
+                        <input type="checkbox" id="anotherInput" value="true" />
+                        <label for="anotherInput">add another one</label>
+                        <select class="form-control w-auto d-inline" id="selectVal2">
+                            stand function:
+                            <option value="NONE">NONE</option>
+                            <option value="1">1</option>
+                            <option value="logN">logN</option>
+                            <option value="N">N</option>
+                            <option value="NlogN">NlogN</option>
+                            <option value="N^2">N^2</option>
+                        </select>
+                        <span id="constant2">constant: 0.00001 *</span> <input type="text" id="constantVal2" value="1" />
+                    </div>
+                </div>
+                <div class="tab-pane fade h-100 mx-5" id="compare" role="tabpanel">
+                    <div id="compareChart"></div>
+                    <div id="compareControls">
+                        <button class="savePng">save as a png</button>
+                    </div>
+                </div>
+                <div class="tab-pane fade h-100 mx-5" id="table" role="tabpanel">
+                    <div class="table-wrapper overflow-auto">
+                        <table class="table table-striped"></table>
+                    </div>
+                    <div class="table-controls" style="text-align: center">
+                        <button id="toclip" type="button" class="btn btn-secondary">Copy to Clipboard</button>
+                        <button id="toTabExp" type="button" class="btn btn-secondary">Export to Tab-Separated Values</button>
+                        <a id="createInvote"  download="numbers.txt" style="display:none" >code</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
