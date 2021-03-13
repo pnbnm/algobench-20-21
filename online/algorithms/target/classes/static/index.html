@@ -156,15 +156,15 @@
                         <div class="row">
                             <div class="col-sm-3">
                                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                    <a class="nav-link active" id="sort-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sort" role="tab" aria-controls="v-pills-sort" aria-selected="true">Sort</a>
-                                    <a class="nav-link" id="graph-tab" data-bs-toggle="pill" data-bs-target="#v-pills-graph" role="tab" aria-controls="v-pills-graph" aria-selected="false">Graph</a>
-                                    <a class="nav-link" id="hash-tab" data-bs-toggle="pill" data-bs-target="#v-pills-hash" role="tab" aria-controls="v-pills-hash" aria-selected="false">Hash</a>
-                                    <a class="nav-link" id="search-tab" data-bs-toggle="pill" data-bs-target="#v-pills-search" role="tab" aria-controls="v-pills-search" aria-selected="false">Search</a>
+                                    <a class="nav-link active createTaskPill" id="sort-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sort" role="tab" aria-controls="v-pills-sort" aria-selected="true">Sort</a>
+                                    <a class="nav-link createTaskPill" id="graph-tab" data-bs-toggle="pill" data-bs-target="#v-pills-graph" role="tab" aria-controls="v-pills-graph" aria-selected="false">Graph</a>
+                                    <a class="nav-link createTaskPill" id="hash-tab" data-bs-toggle="pill" data-bs-target="#v-pills-hash" role="tab" aria-controls="v-pills-hash" aria-selected="false">Hash</a>
+                                    <a class="nav-link createTaskPill" id="search-tab" data-bs-toggle="pill" data-bs-target="#v-pills-search" role="tab" aria-controls="v-pills-search" aria-selected="false">Search</a>
                                 </div>
                             </div>
                             <div class="col-sm-9">
                                 <div class="tab-content" id="v-pills-tabContent">
-                                    <div class="tab-pane fade show active" id="v-pills-sort" role="tabpanel" aria-labelledby="sort-tab">
+                                    <div class="tab-pane fade show active createTaskForm" id="v-pills-sort" role="tabpanel" aria-labelledby="sort-tab">
                                         <form class="form-horizontal"  id="formSort" action="" enctype="application/x-www-form-urlencoded">
                                             <div class="alert-sort one show">
                                                 <span>Step 1: Choose algorithm</span>
@@ -319,7 +319,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="tab-pane fade" id="v-pills-graph" role="tabpanel" aria-labelledby="graph-tab">
+                                    <div class="tab-pane fade createTaskForm" id="v-pills-graph" role="tabpanel" aria-labelledby="graph-tab">
                                         <form class="form-horizontal" id="formGraph" action="" enctype="application/x-www-form-urlencoded">
                                             <div class="alert-sort one show">
                                                 <span>Step 1: Choose algorithm</span>
@@ -486,7 +486,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="tab-pane fade" id="v-pills-hash" role="tabpanel" aria-labelledby="hash-tab">
+                                    <div class="tab-pane fade createTaskForm" id="v-pills-hash" role="tabpanel" aria-labelledby="hash-tab">
                                         <form id="formHash" class="" action="" enctype="application/x-www-form-urlencoded">
                                             <div class="alert-sort one show">
                                                 <span>Step 1: Choose algorithm</span>
@@ -591,7 +591,7 @@
                                             </div>
                                         </form>
                                     </div>
-                                    <div class="tab-pane fade" id="v-pills-search" role="tabpanel" aria-labelledby="search-tab">
+                                    <div class="tab-pane fade createTaskForm" id="v-pills-search" role="tabpanel" aria-labelledby="search-tab">
                                         <form id="formSearch" class="" action="" enctype="application/x-www-form-urlencoded">
                                             <div class="alert-sort one show">
                                                 <span>Step 1: Choose algorithm</span>

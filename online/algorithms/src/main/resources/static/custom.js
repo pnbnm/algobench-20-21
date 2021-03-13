@@ -180,57 +180,57 @@ $('.ctBtn').on("click", function () {
     task.taskID = 'Task_' + task.taskID;
 
 
-    task.algorithm = $('.tab-pane.active').find('select[name="algorithm"]  option:selected').val();
+    task.algorithm = $('.createTaskForm.active').find('select[name="algorithm"]  option:selected').val();
     task.runTitle = task.taskID + "(" + task.algorithm + ")";
 
-    task.algorithmGroup = $('.nav-link.active').text().toUpperCase();
+    task.algorithmGroup = $('.createTaskPill.active').text().toUpperCase();
     console.log(task.algorithmGroup);
 
     if($('input[name="seedInputType"]').val()=="newSeed"){
-        task.rngSeed = $('.tab-pane.active').find('input[name="rngSeed"]').val();
+        task.rngSeed = $('.createTaskForm.active').find('input[name="rngSeed"]').val();
     }
     else{
-        task.rngSeed = $('.tab-pane.active').find('select[name="rngSeed"] option:selected').val();
+        task.rngSeed = $('.createTaskForm.active').find('select[name="rngSeed"] option:selected').val();
     }
     if ("SORT" == task.algorithmGroup) {
-        task.pivotPosition = $('.tab-pane.active').find('select[name="pivotPosition"]  option:selected').val();
+        task.pivotPosition = $('.createTaskForm.active').find('select[name="pivotPosition"]  option:selected').val();
         if (task.algorithm == "EXTERNAL_MERGESORT") {
-            task.sortRam = $('.tab-pane.active').find('input[name="ram"]').val();
+            task.sortRam = $('.createTaskForm.active').find('input[name="ram"]').val();
         }
         task.inputMinValue = 0;
         task.inputMaxValue = 100000000;
-        task.inputStartSize = $('.tab-pane.active').find('select[name="inputStartSize"]  option:selected').val();
-        task.inputFinalSize = $('.tab-pane.active').find('select[name="inputFinalSize"]  option:selected').val();
-        task.inputStepSize = $('.tab-pane.active').find('select[name="inputStepSize"]  option:selected').val();
-        task.inputDistribution = $('.tab-pane.active').find('select[name="inputDistribution"]  option:selected').val();
+        task.inputStartSize = $('.createTaskForm.active').find('select[name="inputStartSize"]  option:selected').val();
+        task.inputFinalSize = $('.createTaskForm.active').find('select[name="inputFinalSize"]  option:selected').val();
+        task.inputStepSize = $('.createTaskForm.active').find('select[name="inputStepSize"]  option:selected').val();
+        task.inputDistribution = $('.createTaskForm.active').find('select[name="inputDistribution"]  option:selected').val();
 
         var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
         numRuns = parseInt(numRuns);
         numRuns++;
         task.numRuns = numRuns;
-        task.numRepeats = $('.tab-pane.active').find('select[name="numRepeats"]  option:selected').val();
+        task.numRepeats = $('.createTaskForm.active').find('select[name="numRepeats"]  option:selected').val();
     }
     if ("GRAPH" == task.algorithmGroup) {
-        task.dataStructure = $('.tab-pane.active').find('select[name="dataStructure"]  option:selected').val();
-        task.isDirectedGraph = $('.tab-pane.active').find('input[name="isDirectedGraph"]').prop('checked')?true:false;
-        task.allowSelfLoops = $('.tab-pane.active').find('input[name="allowSelfLoops"]').prop('checked')?true:false;
-        task.graphIsDelayed = $('.tab-pane.active').find('input[name="graphIsDelayed"]').prop('checked')?true:false;
-        task.fixedGraphParam = $('.tab-pane.active').find('input[name="fixedGraphParam"]:checked').val();
-        task.fixedGraphSize = $('.tab-pane.active').find('select[name="fixedGraphSize"]  option:selected').val();
-        task.inputStartSize = $('.tab-pane.active').find('select[name="inputStartSize"]  option:selected').val();
-        task.inputFinalSize = $('.tab-pane.active').find('select[name="inputFinalSize"]  option:selected').val();
-        task.inputStepSize = $('.tab-pane.active').find('select[name="inputStepSize"]  option:selected').val();
-        task.numRepeats = $('.tab-pane.active').find('select[name="numRepeats"]  option:selected').val();
+        task.dataStructure = $('.createTaskForm.active').find('select[name="dataStructure"]  option:selected').val();
+        task.isDirectedGraph = $('.createTaskForm.active').find('input[name="isDirectedGraph"]').prop('checked')?true:false;
+        task.allowSelfLoops = $('.createTaskForm.active').find('input[name="allowSelfLoops"]').prop('checked')?true:false;
+        task.graphIsDelayed = $('.createTaskForm.active').find('input[name="graphIsDelayed"]').prop('checked')?true:false;
+        task.fixedGraphParam = $('.createTaskForm.active').find('input[name="fixedGraphParam"]:checked').val();
+        task.fixedGraphSize = $('.createTaskForm.active').find('select[name="fixedGraphSize"]  option:selected').val();
+        task.inputStartSize = $('.createTaskForm.active').find('select[name="inputStartSize"]  option:selected').val();
+        task.inputFinalSize = $('.createTaskForm.active').find('select[name="inputFinalSize"]  option:selected').val();
+        task.inputStepSize = $('.createTaskForm.active').find('select[name="inputStepSize"]  option:selected').val();
+        task.numRepeats = $('.createTaskForm.active').find('select[name="numRepeats"]  option:selected').val();
         var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
         numRuns = parseInt(numRuns);
         numRuns++;
         task.numRuns = numRuns;
     }
     if ("HASH" == task.algorithmGroup) {
-        task.inputStartSize = $('.tab-pane.active').find('select[name="inputStartSize"]  option:selected').val();
-        task.hashBucketSize = $('.tab-pane.active').find('input[name="hashBucketSize"]').val();
-        task.hashFunction_a = $('.tab-pane.active').find('input[name="hashFunction_a"]').val();
-        task.hashFunction_b = $('.tab-pane.active').find('input[name="hashFunction_b"]').val();
+        task.inputStartSize = $('.createTaskForm.active').find('select[name="inputStartSize"]  option:selected').val();
+        task.hashBucketSize = $('.createTaskForm.active').find('input[name="hashBucketSize"]').val();
+        task.hashFunction_a = $('.createTaskForm.active').find('input[name="hashFunction_a"]').val();
+        task.hashFunction_b = $('.createTaskForm.active').find('input[name="hashFunction_b"]').val();
         task.hashKeyType = "Numbers";
         task.numRuns = 1;
     }
@@ -238,12 +238,12 @@ $('.ctBtn').on("click", function () {
     if ("SEARCH" == task.algorithmGroup) {
         task.inputMinValue = 0;
         task.inputMaxValue = 100000000;
-        task.inputDistribution = $('.tab-pane.active').find('select[name="inputDistribution"]  option:selected').val();
-        task.searchKeyType = $('.tab-pane.active').find('select[name="searchKeyType"]  option:selected').val();
-        task.inputStartSize = $('.tab-pane.active').find('select[name="inputStartSize"]  option:selected').val();
-        task.inputFinalSize = $('.tab-pane.active').find('select[name="inputFinalSize"]  option:selected').val();
-        task.inputStepSize = $('.tab-pane.active').find('select[name="inputStepSize"]  option:selected').val();
-        task.numRepeats = $('.tab-pane.active').find('select[name="numRepeats"]  option:selected').val();
+        task.inputDistribution = $('.createTaskForm.active').find('select[name="inputDistribution"]  option:selected').val();
+        task.searchKeyType = $('.createTaskForm.active').find('select[name="searchKeyType"]  option:selected').val();
+        task.inputStartSize = $('.createTaskForm.active').find('select[name="inputStartSize"]  option:selected').val();
+        task.inputFinalSize = $('.createTaskForm.active').find('select[name="inputFinalSize"]  option:selected').val();
+        task.inputStepSize = $('.createTaskForm.active').find('select[name="inputStepSize"]  option:selected').val();
+        task.numRepeats = $('.createTaskForm.active').find('select[name="numRepeats"]  option:selected').val();
         var numRuns = (new Number(task.inputFinalSize) - new Number(task.inputStartSize)) / new Number(task.inputStepSize)
         numRuns = parseInt(numRuns);
         numRuns++;
@@ -265,8 +265,11 @@ $('.ctBtn').on("click", function () {
     $("#createTaskDialog").modal('hide');
 
     $("#" + task.taskID).click();
+
+    console.log(task);
     //$("#mainDis").show();
     doReset();
+
 });
 
 // Start the task
