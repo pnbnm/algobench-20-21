@@ -448,6 +448,54 @@ function updateCtx(data, obj) {
 
 }
 
+$("#reStartTask").on("click", function () {
+    $('#startTask').click();
+});
+
+$("#stopTask").on("click", function () {
+    var willR = $('.left-side.active .onC');
+
+    if (!willR.length) {
+        alert('Please select an active task')
+        return;
+    }
+
+    websocket.close();
+});
+
+$("#saveTask").on("click", function () {
+
+    var willR = $('.left-side.active .onC');
+    if (!willR.length) {
+        alert('Please select an active task')
+        return;
+    }
+
+    var task = willR.data('task');
+    var taskSerialize = willR.data('taskSerialize');
+
+
+    $.post("/common/save", task, function(data) {
+
+        var s = '<div id="' + task.taskID + '" class="oneTask"><span class="taskName">' + task.taskID + '</span></div>';
+        $('.left-side.archive').append(s);
+        $('.left-side.archive #' + task.taskID).data('task', task);
+        $(willR).data('saved', '1');
+        var form = $('<form method="POST" action="' + "/common/save" + '">');
+        $.each(task, function(k, v) {
+            form.append($('<input type="hidden" name="' + k +
+                '" value="' + v + '">'));
+        });
+        $('body').append(form);
+        form.submit(); //Automatic submission
+    });
+    /* var href = "/common/save?" + taskSerialize;
+    console.log(href);
+    $("#downTask").attr("href", href);
+    $("#downTask p").click(); */
+});
+
+
 $(".nextBtn").on("click", function () {
     if (globalPar.alertSortStep == 0){
         $(".alert-sort.one").removeClass("show");
