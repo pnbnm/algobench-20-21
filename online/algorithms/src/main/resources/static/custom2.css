@@ -74,6 +74,7 @@
     background-color: #212529;
 }
 
+
 input[type="radio"]:checked ~ .reveal-if-active {
     opacity: 1;
     max-height: 100px;

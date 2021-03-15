@@ -4,10 +4,27 @@ globalPar = {
 };
 $$ = $;
 
-$('.left-side.active').on("click", ".oneTask" ,function () {
-    $('.left-side.active .oneTask.onC').removeClass("onC");
 
-    $(this).addClass("onC");
+
+//INITIALIZE FROM STORAGE
+//for each task, add it to the list and add its data with jquery
+localforage.iterate(function(value, key, iterationNumber){
+    //add it to the list
+    var s = '<li id="' + key + '" class="oneTask"><span class="taskName">'
+        + key + '[queued]</span></li>';
+    $('.left-side.active').append(s);
+
+    //add task data with JQuery
+    $('#'+key).data(value);
+
+    //add seed
+    seeds.add(value.task.rngSeed, key);
+}, ()=>console.log("Loading data complete!"));
+
+$('.left-side.active').on("click", ".oneTask" ,function () {
+    $('.left-side.active .oneTask.active').removeClass("active");
+
+    $(this).addClass("active");
     /* if ($(this).data('saved') == '1') {
         $('#saveTask').addClass('layui-btn-disabled')
     } else {
@@ -140,7 +157,7 @@ $('.left-side.active').on("click", ".oneTask" ,function () {
 
 
     $("#settings .mainTask .mainTaskName").text(task.algorithm);
-    willLoad = $('.left-side.active .onC');
+    willLoad = $('.left-side.active .active');
     var completed = $(willLoad).data('completed');
     if (1 == completed) {
         $("#settings .mainStatus span").text("COMPLETED");
@@ -253,14 +270,16 @@ $('.ctBtn').on("click", function () {
 
     seeds.add(task.rngSeed, task.taskID);
 
-    var s = '<div id="' + task.taskID + '" class="oneTask"><span class="image">' + imgName + '</span><span class="taskName">'
-        + task.taskID + '[queued]</span></div>';
+    var s = '<li id="' + task.taskID + '" class="oneTask"><span class="image">' + imgName + '</span><span class="taskName">'
+        + task.taskID + '[queued]</span></li>';
     $('.left-side.active').append(s);
 
     globalPar.willPushData = $("form").serialize();
     $("#" + task.taskID).data("task", task);
     $("#" + task.taskID).data("taskSerialize", trans(task, true));
 
+    //add task data to storage
+    localforage.setItem(task.taskID, $("#" + task.taskID).data(), ()=>console.log("Stored " + task.taskID + " in local storage"));
 
     $("#createTaskDialog").modal('hide');
 
@@ -275,7 +294,7 @@ $('.ctBtn').on("click", function () {
 // Start the task
 $('#startTask').on("click", function () {
 
-    var willLoad = $('.left-side.active .onC');
+    var willLoad = $('.left-side.active .active');
     if (!willLoad.length) {
         alert('Please select an active task')
         return;
@@ -288,8 +307,8 @@ $('#startTask').on("click", function () {
     var nowTime = 0;
     $('#runTime').text(nowTime++ + 's');
     thisT = setInterval(function() {$('#runTime').text(nowTime++ + 's');}, 1000);
-    //var task = $('.activeTasks dd a.onC').parent().data('task');
-    var task = $('.oneTask.onC').data('taskSerialize');
+    //var task = $('.activeTasks dd a.active').parent().data('task');
+    var task = $('.oneTask.active').data('taskSerialize');
 
     var thisUrl = "ws://" + location.host + "/algoWs";
     websocket = new WebSocket(thisUrl);
@@ -317,6 +336,9 @@ $('#startTask').on("click", function () {
         $(willLoad).find('span').eq(1).text(spanText);
         clearInterval(thisT);
         alert('Task completed', {icon: 1,title:'info',btn:'OK'})
+
+        //update task data in local storage
+        localforage.setItem(task.taskID, $("#" + task.taskID).data(), ()=>console.log("Stored " + task.taskID + " in local storage"));
     }
 
 });
@@ -329,7 +351,7 @@ function updateCtx(data, obj) {
         result.indexOf('Run') != -1 ) {
         //console.log(result);
 
-        $('.left-side.active .onC').data('number', result);
+        $('.left-side.active .active').data('number', result);
 
         var lines = result.split("\n");
         lines.pop();
@@ -344,7 +366,7 @@ function updateCtx(data, obj) {
         // console.log(coordinateX);
         // console.log(coordinateY);
         var title1 = firstLine.split("\t")[0];
-        $('.left-side.active .onC').data("chartData", {x: coordinateX, y:coordinateY,title1:title1});
+        $('.left-side.active .active').data("chartData", {x: coordinateX, y:coordinateY,title1:title1});
         return;
     }
 
@@ -456,7 +478,7 @@ $("#reStartTask").on("click", function () {
 });
 
 $("#stopTask").on("click", function () {
-    var willR = $('.left-side.active .onC');
+    var willR = $('.left-side.active .active');
 
     if (!willR.length) {
         alert('Please select an active task')
@@ -468,7 +490,7 @@ $("#stopTask").on("click", function () {
 
 $("#saveTask").on("click", function () {
 
-    var willR = $('.left-side.active .onC');
+    var willR = $('.left-side.active .active');
     if (!willR.length) {
         alert('Please select an active task')
         return;
@@ -480,7 +502,7 @@ $("#saveTask").on("click", function () {
 
     $.post("/common/save", task, function(data) {
 
-        var s = '<div id="' + task.taskID + '" class="oneTask"><span class="taskName">' + task.taskID + '</span></div>';
+        var s = '<li id="' + task.taskID + '" class="oneTask"><span class="taskName">' + task.taskID + '</span></li>';
         $('.left-side.archive').append(s);
         $('.left-side.archive #' + task.taskID).data('task', task);
         $(willR).data('saved', '1');
@@ -500,7 +522,7 @@ $("#saveTask").on("click", function () {
 
 $('#chart-tab').on("shown.bs.tab", function () {
 
-    var willLoad = $('.left-side.active .onC');
+    var willLoad = $('.left-side.active .active');
     if (!willLoad.length) {
         alert('Please select an active task');
         $('#overview-tab').tab('show');
@@ -576,7 +598,7 @@ $('#chart-tab').on("shown.bs.tab", function () {
 
 $('#compare-tab').on("shown.bs.tab", function () {
 
-    var willLoad = $('.left-side.active .onC');
+    var willLoad = $('.left-side.active .active');
     if (!willLoad.length) {
         alert('Please select an active task');
         $('#overview-tab').tab('show');
@@ -672,7 +694,7 @@ $('#compare-tab').on("shown.bs.tab", function () {
 $('#table-tab').on("show.bs.tab", function () {
 
 
-    var willLoad = $('.left-side.active .onC');
+    var willLoad = $('.left-side.active .active');
     if (!willLoad.length) {
         alert('Please select an active task');
         $('#overview-tab').tab('show');
@@ -713,7 +735,7 @@ $('#table-tab').on("show.bs.tab", function () {
 });
 
 $("#toclip").on('click', function() {
-    var willSave = $('.left-side.active .onC');
+    var willSave = $('.left-side.active .active');
     var value = willSave.data('number');
     $('#toclip').attr('data-clipboard-text', value);
     var clipboard = new ClipboardJS('#toclip');
@@ -726,7 +748,7 @@ $("#toclip").on('click', function() {
 });
 
 $("#toTabExp").on('click', function() {
-    var willSave = $('.left-side.active .onC');
+    var willSave = $('.left-side.active .active');
     var value = willSave.data('number');
     var isIE = (navigator.userAgent.indexOf('MSIE') >= 0);
     if (isIE) {
@@ -806,7 +828,7 @@ function repaint() {
     var selectVal = $('#selectVal').val();
     var constantVal = $('#constantVal').val();
 
-    var willLoad = $('.left-side.active .onC');
+    var willLoad = $('.left-side.active .active');
     var cloneOp = willLoad.data("cloneOp");
     cloneOp = cloneObj(cloneOp);
     var chartData = willLoad.data('chartData');
