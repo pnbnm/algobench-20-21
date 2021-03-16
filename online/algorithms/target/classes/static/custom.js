@@ -4,18 +4,22 @@ globalPar = {
 };
 $$ = $;
 
+doReset()
 
+//there's a bug where sometimes empty items with key 'undefined' will appear
+localforage.removeItem(undefined);;
 
 //INITIALIZE FROM STORAGE
 //for each task, add it to the list and add its data with jquery
-localforage.iterate(function(value, key, iterationNumber){
+localforage.iterate(function(value, key, iterationNumber) {
+
     //add it to the list
-    var s = '<li id="' + key + '" class="oneTask"><span class="taskName">'
+    var s = '<li id="' + key + '" class="oneTask list-group-item"><span class="taskName">'
         + key + '[queued]</span></li>';
     $('.left-side.active').append(s);
 
     //add task data with JQuery
-    $('#'+key).data(value);
+    $('#' + key).data(value);
 
     //add seed
     seeds.add(value.task.rngSeed, key);
@@ -180,8 +184,7 @@ $('.left-side.active').on("click", ".oneTask" ,function () {
         }
     }
 
-    $("#mainDis").show();
-    $('.layui-body').css('background', "");
+    $("#overview-tab").tab('show');
 });
 
 // Create activity task in pop-up window
@@ -270,7 +273,7 @@ $('.ctBtn').on("click", function () {
 
     seeds.add(task.rngSeed, task.taskID);
 
-    var s = '<li id="' + task.taskID + '" class="oneTask"><span class="image">' + imgName + '</span><span class="taskName">'
+    var s = '<li id="' + task.taskID + '" class="oneTask list-group-item"><span class="image">' + imgName + '</span><span class="taskName">'
         + task.taskID + '[queued]</span></li>';
     $('.left-side.active').append(s);
 
@@ -289,6 +292,15 @@ $('.ctBtn').on("click", function () {
     //$("#mainDis").show();
     doReset();
 
+});
+
+//Show and hide elements of Create form depending on algorithm
+$('select[name="algorithm"]').change(function() {
+    if ($('select[name="algorithm"] option:selected').val() == "QUICKSORT") $("select[name='pivotPosition']").parent().parent().show();
+    else $("select[name='pivotPosition']").parent().parent().hide();
+
+    if ($('select[name="algorithm"] option:selected').val() == "EXTERNAL_MERGESORT") $("input[name='ram']").parent().parent().show();
+    else $("input[name='ram']").parent().parent().hide();
 });
 
 // Start the task
@@ -338,7 +350,7 @@ $('#startTask').on("click", function () {
         alert('Task completed', {icon: 1,title:'info',btn:'OK'})
 
         //update task data in local storage
-        localforage.setItem(task.taskID, $("#" + task.taskID).data(), ()=>console.log("Stored " + task.taskID + " in local storage"));
+        localforage.setItem(willLoad.data('task').taskID, willLoad.data(), ()=>console.log("Stored " + willLoad.data('task').taskID + " in local storage"));
     }
 
 });
@@ -473,6 +485,27 @@ function updateCtx(data, obj) {
 
 }
 
+$("#deleteTask").on("click", function () {
+    var willR = $('.left-side.active .active');
+
+    if (!willR.length) {
+        alert('Please select an active task')
+        return;
+    }
+
+    const taskID = willR.data().task.taskID;
+    localforage.removeItem(taskID, console.log(`Successfully removed ${taskID} from storage`));
+
+    $('#overview-tab').tab('show');
+    $('#overview-tab').removeClass('active');
+    $('#overview').removeClass('active show');
+    $('#banner').addClass('active show')
+
+    willR.remove();
+
+
+});
+
 $("#reStartTask").on("click", function () {
     $('#startTask').click();
 });
@@ -502,7 +535,7 @@ $("#saveTask").on("click", function () {
 
     $.post("/common/save", task, function(data) {
 
-        var s = '<li id="' + task.taskID + '" class="oneTask"><span class="taskName">' + task.taskID + '</span></li>';
+        var s = '<li id="' + task.taskID + '" class="oneTask list-group-item"><span class="taskName">' + task.taskID + '</span></li>';
         $('.left-side.archive').append(s);
         $('.left-side.archive #' + task.taskID).data('task', task);
         $(willR).data('saved', '1');
@@ -691,6 +724,7 @@ $('#compare-tab').on("shown.bs.tab", function () {
 
 });
 
+
 $('#table-tab').on("show.bs.tab", function () {
 
 
@@ -732,6 +766,15 @@ $('#table-tab').on("show.bs.tab", function () {
     tableInner += "</tbody>";
     $("#table table").append(tableInner);
 
+});
+
+
+//if there are no tasks, the overview redirect should go to the banner page instead
+$('#overview-tab').on("show.bs.tab", function (){
+    if ($('.left-side.active').length == 0){
+        $('#overview-tab').tab('hide');
+        $('#banner').addClass('active show');
+    }
 });
 
 $("#toclip").on('click', function() {
@@ -817,6 +860,20 @@ $(".backBtn").on("click", function () {
 $('.clBtn').on("click", function () {
     doReset();
 });
+
+$('#chartNotes').on("click", function () {
+    if ($('#notesForm').hasClass('show')){
+        $('#notesForm').hide();
+        $('#chartMainArea').removeClass('col-sm-8');
+        repaint();
+    } else {
+        $('#notesForm').show()
+        $('#chartMainArea').addClass('col-sm-8');
+        repaint();
+        //insert the correct text to notesForm
+    }
+});
+
 
 $("#selectVal, #constantVal,#selectVal2, #constantVal2").on("change", function () {
 
@@ -1059,7 +1116,6 @@ function doReset() {
     $("input[name='ram']").parent().parent().hide();
     $("select[name='pivotPosition']").parent().parent().show();
 }
-
 
 function gcd(a, b) {
     if (a % b === 0) {
