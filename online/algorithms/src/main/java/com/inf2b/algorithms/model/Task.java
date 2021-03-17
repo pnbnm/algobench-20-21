@@ -40,6 +40,7 @@ public class Task implements Serializable {
     private String searchKeyType;//custom,always-in,not-in,random
     private int ram;
     private String rngSeed;
+    private String notes;
 
     protected Integer status;
 
@@ -413,6 +414,10 @@ public class Task implements Serializable {
     public String getRngSeed() { return rngSeed; }
 
     public void  setRngSeed(String seed) { rngSeed = seed; }
+
+    public String getNotes() { return notes; }
+
+    public void  setNotes(String notes) { this.notes = notes; }
 
     public int getSortRam(){
         return this.ram;

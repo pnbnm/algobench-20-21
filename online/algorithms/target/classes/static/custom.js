@@ -209,7 +209,7 @@ $('.left-side.active').on("click", ".oneTask" ,function () {
         }
     }
 
-    $('#notesTextArea').val($(this).data('notes'));
+    $('#notesTextArea').val(task.notes);
     $("#overview-tab").tab('show');
 });
 
@@ -584,18 +584,16 @@ $("#printReport").on("click", function () {
     var willR = $('.left-side.active .active');
     var task = willR.data('task');
     var chartData = willR.data('chartData');
-    var notes = willR.data('notes');
     console.log(chartData);
     var taskSerialize = willR.data('taskSerialize');
-    if (!willR.size()) {
-        layer.alert('select an active task', {icon: 5,title:'info',btn:'OK'})
+    if (!willR.length) {
+        alert('Please select an active task')
         return;
     }
 
     data = task;
     data.x = chartData.x;
     data.y = chartData.y;
-    data.notes = notes;
 
     $.post("/common/print", data, function(data) {
 
@@ -933,7 +931,7 @@ $('#chartNotes').on("click", function () {
 
 $('#notesTextArea').on('input', function (e) {
     let willLoad = $('.left-side.active .active');
-    willLoad.data('notes', e.target.value);
+    willLoad.data('task').notes = e.target.value;
     localforage.setItem(willLoad.data('task').taskID, willLoad.data(), ()=>console.log("Stored " + willLoad.data('task').taskID + " in local storage"));
 });
 

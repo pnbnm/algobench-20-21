@@ -64,6 +64,7 @@ public class CommonController {
 
         System.out.println("received print request!");
 
+
         res.setHeader("content-type", "application/octet-stream");
         res.setContentType("application/octet-stream");
         res.setHeader("Content-Disposition", "attachment;filename=" + task.getTaskID() + ".pdf");

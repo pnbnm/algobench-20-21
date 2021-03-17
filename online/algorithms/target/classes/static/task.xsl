@@ -324,6 +324,6 @@
         <!-- Notes, if any -->
         <fo:block font-size="14.0pt" font-weight="bold" padding-before="10.0pt">&#160;&#160;Notes</fo:block>
         <fo:block><fo:leader /></fo:block> <!-- empty line -->
-       <!-- <fo:block>&#160;&#160;&#160;&#160; <xsl:value-of select="notes"/></fo:block> -->
+        <fo:block>&#160;&#160;&#160;&#160; <xsl:value-of select="notes"/></fo:block>
     </xsl:template>
 </xsl:stylesheet>

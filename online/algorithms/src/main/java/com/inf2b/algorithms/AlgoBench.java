@@ -51,6 +51,5 @@ public class AlgoBench {
     public String index() {
         return "index";
     }
-
-
+    
 }
