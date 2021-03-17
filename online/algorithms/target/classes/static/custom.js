@@ -38,8 +38,8 @@ localforage.removeItem(undefined);;
 localforage.iterate(function(value, key, iterationNumber) {
 
     //add it to the list
-    var s = '<li id="' + key + '" class="oneTask list-group-item"><span class="taskName">'
-        + key + '[queued]</span></li>';
+    var s = '<li id="' + key + '" class="oneTask list-group-item"><span class="image">' + getImgName(value.task.algorithm) + '</span><span class="taskName">'
+        + key + (value.completed==1 ? '[completed]' : '[queued]') + '</span></li>';
     $('.left-side.active').append(s);
 
     //add task data with JQuery
@@ -721,9 +721,12 @@ $('#compare-tab').on("shown.bs.tab", function () {
          type: 'line'
      }); */
 
-    var muti = $('.left-side.active div');
+    var muti = $('.left-side.active li');
     muti.map(function(one) {
         one = muti[one];
+
+        if ($(one).data('completed')!=1) return;
+
         var thisTask = $(one).data('task');
         var thisChartData = $(one).data('chartData');
         if (thisTask.algorithmGroup == algorithmGroup) {
