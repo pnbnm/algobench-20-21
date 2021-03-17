@@ -136,8 +136,9 @@
                     </div>
                 </div>
                 <div class="tab-pane fade h-100 mx-5" id="chart" role="tabpanel">
-                    <div id="chartMainArea" class="h-100">
-                        <div id="singleChart"></div>
+                    <div class="row h-100">
+                        <div id="chartMainArea" class="h-100">
+                            <div id="singleChart"></div>
                             <div id="chartControls">
                                 <button type="button" class="btn btn-secondary savePng">Save as a PNG</button>
 
@@ -170,9 +171,10 @@
                                 <button type="button" id="chartNotes" class="btn btn-secondary">Experiment Notes</button>
                             </div>
                         </div>
-                    <div id="notesForm" class="col-sm-4">
-                        <h6>Experiment Notes</h6>
-                        <textarea class="form-control"></textarea>
+                        <div id="notesForm" class="col-sm-4 border-start border-secondary h-75 my-3 ps-4">
+                            <label class="form-label">Experiment Notes</label>
+                            <textarea id="notesTextArea" class="form-control" style="height:95%"></textarea>
+                        </div>
                     </div>
                 </div>
 

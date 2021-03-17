@@ -4,6 +4,30 @@ globalPar = {
 };
 $$ = $;
 
+var seeds = {
+    //list of seeds being used by tasks
+    //each member is an obj {value, tasks: [taskid1, taskid2...]}
+    seeds: [],//[{value: "example", tasks: ["example"]}],
+
+    //add a new seed entry or add a new taskid to the list of users
+    add: function (seed, taskId) {
+        console.log("Adding seed " + seed + " with task ID " + taskId);
+        for (let i=0; i<this.seeds.length; i++){
+            if (this.seeds[i].value === seed) {
+                this.seeds[i].tasks.push(taskId);
+                return;
+            }
+        }
+        this.seeds.push({value: seed, tasks: [taskId]});
+    },
+
+    //get the list of seeds with an example user task for each
+    get: function () {
+        return this.seeds.map( x => {return {value: x.value, taskId: x.tasks[0]}});
+    }
+
+};
+
 doReset()
 
 //there's a bug where sometimes empty items with key 'undefined' will appear
@@ -24,6 +48,7 @@ localforage.iterate(function(value, key, iterationNumber) {
     //add seed
     seeds.add(value.task.rngSeed, key);
 }, ()=>console.log("Loading data complete!"));
+
 
 $('.left-side.active').on("click", ".oneTask" ,function () {
     $('.left-side.active .oneTask.active').removeClass("active");
@@ -184,6 +209,7 @@ $('.left-side.active').on("click", ".oneTask" ,function () {
         }
     }
 
+    $('#notesTextArea').val($(this).data('notes'));
     $("#overview-tab").tab('show');
 });
 
@@ -553,6 +579,38 @@ $("#saveTask").on("click", function () {
     $("#downTask p").click(); */
 });
 
+$("#printReport").on("click", function () {
+
+    var willR = $('.left-side.active .active');
+    var task = willR.data('task');
+    var chartData = willR.data('chartData');
+    var notes = willR.data('notes');
+    console.log(chartData);
+    var taskSerialize = willR.data('taskSerialize');
+    if (!willR.size()) {
+        layer.alert('select an active task', {icon: 5,title:'info',btn:'OK'})
+        return;
+    }
+
+    data = task;
+    data.x = chartData.x;
+    data.y = chartData.y;
+    data.notes = notes;
+
+    $.post("/common/print", data, function(data) {
+
+        var s = '<div id="' + task.taskID + '" class="oneTask"><span class="taskName">' + task.taskID + '</span></div>';
+        var form = $('<form method="POST" action="' + "/common/print" + '">');
+        $.each(task, function(k, v) {
+            form.append($('<input type="hidden" name="' + k +
+                '" value="' + v + '">'));
+        });
+        $('body').append(form);
+        form.submit(); //Automatic submission
+    });
+
+});
+
 $('#chart-tab').on("shown.bs.tab", function () {
 
     var willLoad = $('.left-side.active .active');
@@ -862,7 +920,7 @@ $('.clBtn').on("click", function () {
 });
 
 $('#chartNotes').on("click", function () {
-    if ($('#notesForm').hasClass('show')){
+    if ($('#notesForm').is(":visible")){
         $('#notesForm').hide();
         $('#chartMainArea').removeClass('col-sm-8');
         repaint();
@@ -870,10 +928,14 @@ $('#chartNotes').on("click", function () {
         $('#notesForm').show()
         $('#chartMainArea').addClass('col-sm-8');
         repaint();
-        //insert the correct text to notesForm
     }
 });
 
+$('#notesTextArea').on('input', function (e) {
+    let willLoad = $('.left-side.active .active');
+    willLoad.data('notes', e.target.value);
+    localforage.setItem(willLoad.data('task').taskID, willLoad.data(), ()=>console.log("Stored " + willLoad.data('task').taskID + " in local storage"));
+});
 
 $("#selectVal, #constantVal,#selectVal2, #constantVal2").on("change", function () {
 
@@ -978,6 +1040,8 @@ function repaint() {
     }
     myChart.setOption(option);
 }
+
+window.addEventListener('resize', repaint());
 
 function downloadCanvasImage(selector, name) {
     // Get canvas elements through selectors
@@ -1166,29 +1230,6 @@ function yyyy() {
     }
 };
 
-var seeds = {
-    //list of seeds being used by tasks
-    //each member is an obj {value, tasks: [taskid1, taskid2...]}
-    seeds: [],//[{value: "example", tasks: ["example"]}],
-
-    //add a new seed entry or add a new taskid to the list of users
-    add: function (seed, taskId) {
-        console.log("Adding seed " + seed + " with task ID " + taskId);
-        for (let i=0; i<this.seeds.length; i++){
-            if (this.seeds[i].value === seed) {
-                this.seeds[i].tasks.push(taskId);
-                return;
-            }
-        }
-        this.seeds.push({value: seed, tasks: [taskId]});
-    },
-
-    //get the list of seeds with an example user task for each
-    get: function () {
-        return this.seeds.map( x => {return {value: x.value, taskId: x.tasks[0]}});
-    }
-
-};
 
 function fillSeedList() {
 
