@@ -617,7 +617,6 @@ $('.layui-body').on('click', '.savePng', function() {
         task.algorithm = $('select[name="algorithm"]  option:selected').val();
         task.runTitle = task.taskID + "(" + task.algorithm + ")";
         task.algorithmGroup = $('#alertNorthWest li.selected').text().toUpperCase();
-        task.rngSeed = 'default_seed';
         
         if ("SORT" == task.algorithmGroup) {
             task.pivotPosition = $('select[name="pivotPosition"]  option:selected').val();
