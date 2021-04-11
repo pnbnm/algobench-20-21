@@ -24,6 +24,20 @@ var seeds = {
     //get the list of seeds with an example user task for each
     get: function () {
         return this.seeds.map( x => {return {value: x.value, taskId: x.tasks[0]}});
+    },
+
+    //get the list of seeds with an example user task for each
+    remove: function (taskId) {
+        for (let i=0; i<this.seeds.length; i++){
+            taskIndex = this.seeds[i].tasks.indexOf(taskId);
+            if (taskIndex>-1) {
+                this.seeds[i].tasks.splice(taskIndex,1);
+                if(this.seeds[i].tasks.length === 0){
+                    this.seeds.splice(i,1);
+                }
+                return;
+            }
+        }
     }
 
 };
@@ -520,6 +534,7 @@ $("#deleteTask").on("click", function () {
     }
 
     const taskID = willR.data().task.taskID;
+    seeds.remove(taskID);
     localforage.removeItem(taskID, console.log(`Successfully removed ${taskID} from storage`));
 
     $('#overview-tab').tab('show');
@@ -638,45 +653,7 @@ $('#chart-tab').on("shown.bs.tab", function () {
     legendData = [task.taskID + '(' + task.algorithm + ')']
 
     // Specify the configuration entries and data for the chart.
-    option = {
-        legend: {
-            data:legendData
-        },
-        toolbox: {
-            show: true,
-            feature: {
-                /*dataZoom: {
-                    yAxisIndex: 'none'
-                },*/
-                dataView: {readOnly: false,
-                    title:'data view',lang:['data view', 'close', 'refresh']},
-                magicType: {type: ['line', 'bar'],
-                    title:{line:'switch to line', bar:'switch to bar'}},
-                restore: {title:'restore'},
-                saveAsImage: {title:'save as a image'}
-            }
-        },
-        xAxis: {
-            type: 'category',
-            name : 'Input Size',
-            nameLocation: 'center',
-            nameGap: 35,
-            data: xAxisData
-        },
-        yAxis: {
-            name : 'Time(ms)',
-            nameLocation: 'center',
-            nameGap: 35,
-            type: 'value'
-        },grid:{
-            left:0
-        },
-        series: [{
-            data: yAxisData,
-            name: legendData[0],
-            type: 'line'
-        }]
-    };
+    option = getLineChartOption(xAxisData, yAxisData, legendData);
 
     willLoad.data("cloneOp", cloneObj(option));
     // Use just assigned configuration items and data to display charts.
@@ -1240,7 +1217,7 @@ function fillSeedList() {
     let seedListSearch = document.getElementById('seedListSearch');
 
     function fillList(seedList){
-        for (let i = seedList.options.length; i > 0; i--){
+        for (let i = seedList.options.length; i >= 0; i--){
             seedList.remove(i)
         }
         seeds.get().forEach(x => {

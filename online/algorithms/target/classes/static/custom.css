@@ -89,4 +89,9 @@ input[type="radio"]:checked ~ .reveal-if-active {
     overflow: visible;
 }
 
+.list-group-item {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 

@@ -277,7 +277,6 @@ $("#toTabExp").on('click', function() {
         $("#downTask p").click(); */
     });
 
-    //TODO
      $("#printReport").on("click", function () {
 
          var willR = $('.left-side.active .onC');

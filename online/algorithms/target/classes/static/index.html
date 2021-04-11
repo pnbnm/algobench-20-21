@@ -8,7 +8,7 @@
     <!--Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="custom.css">
 
 </head>
@@ -21,26 +21,26 @@
             <div class="col-sm-1"><div class="navbar-brand text-center">AlgoBench</div></div>
 
             <div>
-                    <button id="createTask" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#createTaskDialog">Create</button>
-                    <button id="test1" class="btn btn-light"><i class="plus"></i>Load</button>
-                    <button id="saveTask" class="btn btn-light"><i class="plus"></i>Save</button>
-                    <button id="deleteTask" class="btn btn-light"><i class="plus"></i>Delete</button>
-                    <button id="printReport" class="btn btn-light"><i class="plus"></i>Download Report</button>
+                    <button id="createTask" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#createTaskDialog"><i class="bi-plus"></i> Create</button>
+                    <button id="test1" class="btn btn-light"><i class="bi-upload"></i> Load</button>
+                    <button id="saveTask" class="btn btn-light"><i class="bi-download"></i> Save</button>
+                    <button id="deleteTask" class="btn btn-light"><i class="bi-trash"></i> Delete</button>
+                    <button id="printReport" class="btn btn-light"><i class="bi-file-earmark-text"></i> Download Report</button>
 
             </div>
             <div>
-                <button id="startTask" class="btn btn-light">Start</button>
-                <button id="stopTask" class="btn btn-light"><i class="plus"></i>Stop</button>
-                <button id="reStartTask" class="btn btn-light"><i class="plus"></i>Restart</button>
+                <button id="startTask" class="btn btn-light"><i class="bi-play-circle"></i> Start</button>
+                <button id="stopTask" class="btn btn-light"><i class="bi-stop-circle"></i> Stop</button>
+                <button id="reStartTask" class="btn btn-light"><i class="bi-arrow-repeat"></i> Restart</button>
             </div>
 
             <div class="nav nav-fill nav-pills" id="top-pills-tab" role="tablist" aria-orientation="horizontal">
-                <a class="nav-link" id="overview-tab"  data-bs-toggle="pill" data-bs-target="#overview" type="button" role="tab"  aria-controls="overview" aria-selected="false">Overview</a>
-                <a class="nav-link" id="chart-tab" data-bs-toggle="pill" data-bs-target="#chart" type="button" role="tab"  aria-controls="chart" aria-selected="false">Chart</a>
-                <a class="nav-link" id="compare-tab" data-bs-toggle="pill" data-bs-target="#compare" type="button" role="tab"  aria-controls="compare" aria-selected="false">Compare</a>
-                <a class="nav-link" id="table-tab" data-bs-toggle="pill" data-bs-target="#table" type="button" role="tab"  aria-controls="table" aria-selected="false">Table</a>
+                <a class="nav-link" id="overview-tab"  data-bs-toggle="pill" data-bs-target="#overview" type="button" role="tab"  aria-controls="overview" aria-selected="false"><i class="bi-text-center"></i> Overview</a>
+                <a class="nav-link" id="chart-tab" data-bs-toggle="pill" data-bs-target="#chart" type="button" role="tab"  aria-controls="chart" aria-selected="false"><i class="bi-graph-up"></i> Chart</a>
+                <a class="nav-link" id="compare-tab" data-bs-toggle="pill" data-bs-target="#compare" type="button" role="tab"  aria-controls="compare" aria-selected="false"><i class="bi-arrow-left-right"></i> Compare</a>
+                <a class="nav-link" id="table-tab" data-bs-toggle="pill" data-bs-target="#table" type="button" role="tab"  aria-controls="table" aria-selected="false"><i class="bi-table"></i> Table</a>
             </div>
-            <div class="col-sm-3"></div>
+            <div class="col-sm-2"></div>
         </div>
     </header>
 
@@ -198,14 +198,15 @@
         </div>
     </div>
 
+
+
     <!-- Create Task Window -->
     <div class="modal fade" id="createTaskDialog" tabindex="-1" role="dialog" aria-labelledby="createTaskTitle" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createTaskTitle">Create Task</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
                 <div class="modal-body">
@@ -795,18 +796,33 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="hpBtn btn">Help</button>
-                    <button class="backBtn btn">Back</button>
-                    <button class="nextBtn btn">Next</button>
-                    <button class="ctBtn btn">Create task</button>
-                    <button class="clBtn btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button class="hpBtn btn btn-info" data-bs-toggle="modal" data-bs-target="#helpModal">Help</button>
+                    <button class="backBtn btn btn-primary">Back</button>
+                    <button class="nextBtn btn btn-primary">Next</button>
+                    <button class="ctBtn btn btn-primary">Create task</button>
+                    <button class="clBtn btn btn-dark" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Help window for Create Task -->
+    <div class="modal fade" id="helpModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Help</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe src="newtask_help.html" width="700" height="800"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="localforage.min.js"></script>
     <script src="math.js"></script>
@@ -814,6 +830,7 @@
     <script src="echarts.js"></script>
 
     <script src="custom.js"></script>
+    <script src="charting.js"></script>
 
 
 
