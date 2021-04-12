@@ -3,794 +3,835 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>INF2B</title>
-    <link rel="stylesheet" href="layui/css/layui.css">
+    <!--Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="custom.css">
 
 </head>
 
-<body class="layui-layout-body">
-<div class="layui-layout layui-layout-admin">
-    <div class="layui-header">
-        <div class="layui-logo">Inf2b Workbench</div>
-        <!-- Head area (can be used in conjunction with layui's horizontal navigation).  -->
-        <ul class="layui-nav layui-layout-left">
+<body>
+    <!-- Navigation Bar -->
 
-            <li class="layui-nav-item">
+    <header class="top-nav navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="col-sm-1"><div class="navbar-brand text-center">AlgoBench</div></div>
 
-                <div class="layui-btn-group">
-                    <button id="createTask" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe654;</i>create</button>
-                    <button type="button" class="layui-btn layui-btn-sm" id="test1">
-                        <i class="layui-icon">&#xe67c;</i>load
-                    </button>
-                    <button id="saveTask" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe63c;</i>save</button>
-                    <button id="deleteTask" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe640;</i>delete</button>
-                    <button id="printReport" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe63c;</i>print report</button>
-                </div>
-                <div class="layui-btn-group">
-                    <button id="startTask" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe652;</i>start</button>
-                    <button id="stopTask" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe651;</i>stop</button>
-                    <button id="reStartTask" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe652;</i>restart</button>
-                </div>
-                <div class="layui-btn-group">
-                    <button id="compareChartTask" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe630;</i>compare</button>
-                    <button id="taskOverview" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe68e;</i>overview</button>
-                    <button id="seeChartTask" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe62c;</i>chart</button>
-                    <button id="seeTable" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe62d;</i>table</button>
-                </div>
+            <div>
+                    <button id="createTask" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#createTaskDialog"><i class="bi-plus"></i> Create</button>
+                    <button id="test1" class="btn btn-light"><i class="bi-upload"></i> Load</button>
+                    <button id="saveTask" class="btn btn-light"><i class="bi-download"></i> Save</button>
+                    <button id="deleteTask" class="btn btn-light"><i class="bi-trash"></i> Delete</button>
+                    <button id="printReport" class="btn btn-light"><i class="bi-file-earmark-text"></i> Download Report</button>
 
-            </li>
-        </ul>
-    </div>
-
-    <div class="layui-side layui-bg-black">
-        <!-- <div class="layui-side-scroll">
-            <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">active tasks</a>
-                    <dl class="layui-nav-child activeTasks">
-
-                        <dd>
-                            <a href="javascript:;">列表三</a>
-                        </dd>
-
-                    </dl>
-                </li>
-                <li class="layui-nav-item  layui-nav-itemed">
-                    <a href="javascript:;">archive tasks</a>
-                    <dl class="layui-nav-child archivedTasks">
-                       <button id="loadArchiveTask">load task</button>
-                       <button id="delArchiveTask"> delete task</button>
-                    </dl>
-
-                </li>
-            </ul>
-        </div> -->
-        <div class="left-side up">
-            <div class="left-side title">
-                <span>Active Tasks</span>
             </div>
-            <div class="left-side active">
-                <!-- <div class="oneTask"><span class="image">QS</span><span class="taskName">列表三</span></div>
-                <div class="oneTask"><span class="image">QS</span><span class="taskName">列表三</span></div>
-                <div class="oneTask"><span class="image">QS</span><span class="taskName">列表三</span></div>
-                <div class="oneTask"><span class="image">QS</span><span class="taskName">列表三</span></div>
-                <div class="oneTask"><span class="image">QS</span><span class="taskName">列表三</span></div>
-             --></div>
+            <div>
+                <button id="startTask" class="btn btn-light"><i class="bi-play-circle"></i> Start</button>
+                <button id="stopTask" class="btn btn-light"><i class="bi-stop-circle"></i> Stop</button>
+                <button id="reStartTask" class="btn btn-light"><i class="bi-arrow-repeat"></i> Restart</button>
+            </div>
+
+            <div class="nav nav-fill nav-pills" id="top-pills-tab" role="tablist" aria-orientation="horizontal">
+                <a class="nav-link" id="overview-tab"  data-bs-toggle="pill" data-bs-target="#overview" type="button" role="tab"  aria-controls="overview" aria-selected="false"><i class="bi-text-center"></i> Overview</a>
+                <a class="nav-link" id="chart-tab" data-bs-toggle="pill" data-bs-target="#chart" type="button" role="tab"  aria-controls="chart" aria-selected="false"><i class="bi-graph-up"></i> Chart</a>
+                <a class="nav-link" id="compare-tab" data-bs-toggle="pill" data-bs-target="#compare" type="button" role="tab"  aria-controls="compare" aria-selected="false"><i class="bi-arrow-left-right"></i> Compare</a>
+                <a class="nav-link" id="table-tab" data-bs-toggle="pill" data-bs-target="#table" type="button" role="tab"  aria-controls="table" aria-selected="false"><i class="bi-table"></i> Table</a>
+            </div>
+            <div class="col-sm-2"></div>
         </div>
-        <div class="left-side down">
-            <div class="left-side title">
-                <span class="image">Archived Tasks</span>
-            </div>
-            <div class="left-side button">
-                <button id="loadArchiveTask" disabled>Load Task</button>
-                <button id="delArchiveTask" disabled> Delete Task</button>
-            </div>
-            <div class="left-side archive">
-            </div>
-        </div>
-    </div>
+    </header>
 
-    <div class="layui-body" style="background: url(awb_splash_screen_no_border_meitu_2.jpg) no-repeat center;">
-        <div id="paintChart">
-            <div id="paintChartfirst"></div>
+    <!-- Main Content -->
 
-            <div id="paintChartsecond"><button class="savePng">save as a png</button>
-                <i class="layui-icon">&#xe671;</i>
-                stand function:
-                <select id="selectVal">
-                    <option value="NONE">NONE</option>
-                    <option value="1">1</option>
-                    <option value="logN">logN</option>
-                    <option value="N">N</option>
-                    <option value="NlogN">NlogN</option>
-                    <option value="N^2">N^2</option>
-                </select>
-                constant: 0.00001 * <input type="text" id="constantVal" value="1" />
-
-                <i class="layui-icon">&#xe671;</i>
-                <input type="checkbox" id="anotherInput" value="true" />
-                <label for="anotherInput">add another one</label>
-                <select id="selectVal2">
-                    <i class="layui-icon">&#xe671;</i>
-                    stand function:
-                    <option value="NONE">NONE</option>
-                    <option value="1">1</option>
-                    <option value="logN">logN</option>
-                    <option value="N">N</option>
-                    <option value="NlogN">NlogN</option>
-                    <option value="N^2">N^2</option>
-                </select>
-                <span id="constant2">constant: 0.00001 *</span> <input type="text" id="constantVal2" value="1" />
-            </div>
-        </div>
-        <div id="paintTable">
-            <table>
-
-            </table>
-            <div style="text-align: center">
-                <button id="toclip" class="layui-btn layui-btn-radius layui-btn-primary layui-btn-sm">copy to clipboard</button>
-                <button id="toTabExp" class="layui-btn layui-btn-radius layui-btn-primary layui-btn-sm">export to tab-separated values</button>
-                <a id="createInvote"  download="numbers.txt" style="display:none" >code</a>
-            </div>
-        </div>
-        <div id="compareChart"><div id="compareChartfirst"></div><div id="compareChartsecond"><button class="savePng">save as a png</button></div></div>
-        <!--Content main body area  -->
-        <div id="mainDis" style="display:none">
-            <div id="settings">
-                <div class="mainTask">
-                    <span class="mainTaskName"></span><span style="text-align: right;display: inline-block;float: right;margin-right: 50px;">running time:<span id="runTime">--</span></span>
-                    <hr style="height: 2px;border: none;background-color: #ccc7c7;" />
+    <div class="mainDis container-fluid">
+        <div class="row h-100">
+            <div class="col-sm-1 sidebar bg-secondary px-0">
+                <div class="h-50">
+                    <h5 class="text-center bg-info pt-2" style="height:10%">Active Tasks</h5>
+                    <ul class="left-side active list-group"></ul>
                 </div>
+                <div class="h-50">
 
-                <div class="mainStatus">
-                    Status: <span>queued</span>
-                    <hr />
-                </div>
-
-                <div class="mainSettings">
-                    <div class="settings left">
-                        <span style="position: relative;top: -7px;background-color: #F4F7FF;margin-left: 15px;">Execution Progress Details</span>
-                        <p>Current input size: <span id="currentInputSize"></span></p>
-                        <p>Memory footprint: <span id="memUsage">0</span></p>
-                        <p>Current no. of edges: <span id="currentEdges">0</span></p>
-                        <p>Bucket memory footprint: <span id="bucketMemoryFootprint">--</span></p>
-                        <p>Max. bucket size: <span id="maxBucketSize">--</span></p>
-                        <p>Min. bucket size: <span id="minBucketSize">--</span></p>
-
-                        <hr />
-                        <p>No. of scheduled tasks: <span id="scheduledTasks"></span></p>
-                        <p>No. of completed tasks: <span id="completedNum">--</span></p>
-                        <p>Percentage completion: <span id="percentage">--</span></p>
-                        <p>Max. recursion depth: <span id="recursion">--</span></p>
-                        <p>Tree height: <span id="treeHeight">--</span></p>
-                        <p>Graph representation: <span id="graphRepresentation">--</span></p>
-                        <p>Average bucket size: <span id="averageBucketSize">--</span></p>
-                        <p>Standard deviation: <span id="standardDeviation">--</span></p>
-                        <p>Range: <span id="range">--</span></p>
-                        <p>Long visit simulated: <span id="longVisitSimulated">--</span></p>
-
-                    </div>
-                    <div class="settings right">
-                        <span style="position: relative;top: -7px;background-color: #F4F7FF;margin-left: 15px;">Input Setup Details</span>
-                        <p>Initial size: <span id="inputStartSize"></span></p>
-
-                        <p>Fixed parameter: <span id="fixedParameter"></span></p>
-                        <p>Size: <span id="size"></span></p>
-                        <p>Varied Parameter: <span id="variedParameter"></span></p>
-                        <p>start size: <span id="startSize"></span></p>
-                        <p>Final size: <span id="inputFinalSize"></span></p>
-                        <p>Increment size: <span id="inputStepSize"></span></p>
-                        <p>directed edges: <span id="directedEdges"></span></p>
-                        <p>Self-loop allowed: <span id="selfLoop"></span></p>
-
-                        <p>Min. value: <span id="inputMinValue"></span></p>
-                        <p>Max. value: <span id="inputMaxValue"></span></p>
-                        <p>Input distribution: <span id="inputDistribution"></span></p>
-                        <p>Pivot position: <span id="pivotPosition"></span></p>
-                        <p>Total no. of eleme...: <span id="totalNoEleme"></span></p>
-                        <p>Bucket array size: <span id="bucketArraySize"></span></p>
-                        <p>RNG Seed: <span id="rngSeed"></span></p>
-                        <p>Hash function: <span id="hashFunction"></span></p>
-                        <p>Hash key type: <span id="hashKeyType"></span></p>
-                        <p>Custom RAM: <span id="customRam"></span></p>
-
-                    </div>
                 </div>
             </div>
-            <div id="updateContent">
-                <div id="live">Live updates:<span></span></div>
-                <textarea id="yang"></textarea>
-            </div>
-        </div>
-    </div>
-
-    <div class="layui-footer">
-        <!-- Bottom fixed area -->
-        <span id="statusInfo"></span>
-    </div>
-</div>
-<script src="layui/layui.js"></script>
-<script src="echarts.js"></script>
-
-
-<div id="alertDiv">
-    <div id="alertNorth">
-        <div id="alertNorthWest">
-            <p class="alert-ul-title">Select algorithm type</p>
-            <ul style="text-align: center;">
-                <li>Sort</li>
-                <li>Graph</li>
-                <li>Hash</li>
-                <li>Search</li>
-            </ul>
-        </div>
-        <div id="alertNorthEast">
-
-            <!-- formSort -->
-
-            <form id="formSort" class="layui-form" action="" enctype="application/x-www-form-urlencoded">
-                <div class="alert-sort one show">
-                    <span>Step 1: Choose algorithm</span>
-                    <hr />
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Algotithm:</label>
-                        <div class="layui-input-inline">
-                            <select name="algorithm"  lay-filter="aihao">
-                                <option value="QUICKSORT">Quicksort</option>
-                                <option value="HEAPSORT">Heapsort</option>
-                                <option value="INSERTSORT">Insertsort</option>
-                                <option value="EXTERNAL_MERGESORT">External Mergesort</option>
-                                <option value="INTERNAL_MERGESORT">Internal Mergesort</option>
-                            </select>
+            <div class="col-sm-11 h-100 tab-content">
+                <div class="tab-pane fade h-100 mx-5 show active" id="banner" role="tabpanel" style="background: url(splash.png) no-repeat center;"></div>
+                <div class="tab-pane fade h-100 mx-5" id="overview" role="tabpanel">
+                    <div id="settings">
+                        <div class="mainTask row">
+                            <span class="mainTaskName col-sm-1 fw-bold"></span>
+                            <div class="col-sm-8"></div>
+                            <span class="col-sm-2">running time:<span id="runTime">--</span></span>
+                            <br><br>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Pivot position:</label>
-                        <div class="layui-input-inline">
-                            <select name="pivotPosition">
-                                <option value="Left">Left</option>
-                                <option value="Centre">Centre</option>
-                            </select>
+
+                        <div class="mainStatus">
+                            Status: <span>queued</span>
+                            <br><br>
                         </div>
-                    </div>
 
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">RAM:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="ram" autocomplete="off" class="layui-input" value="16" placeholder="KB">
-                        </div>
-                    </div>
+                        <div class="mainSettings row">
 
-                    <br />
-                    <br /><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br>
-                    <br><br><br><br>
-                    <span class="alert-next-alt">
-                            Click "Next" button below to step 2.
-                        </span>
-                </div>
+                            <div class="col-sm-5 h-100">
+                                <div class="card settings h-100">
 
-                <div class="alert-sort two">
-                    <span>Step 2: Input settings</span>
-                    <hr /> Input Source:
-                    <br />
-                    <input type="radio" name="inputFileName" value="nan" title="Use Algobench-generated input" checked>
-                    <br />
-                    <!-- <input type="radio" name="inputFileName" value="nv" title="Use custom input file"> -->
-                    <hr /> Input Settings:
-                    <br />
-                    <label class="layui-form-label">Distribution:</label>
-                    <div class="layui-input-inline">
-                        <select name="inputDistribution">
-                            <option value="Random">Random</option>
-                            <option value="Sorted">Sorted</option>
-                            <option value="REVERSE-SORTED">Reverse-sorted</option>
-                            <option value="Worst-case">Worst-case</option>
-                        </select>
-                    </div>
-                    <br />
-                    <div class="layui-input-inline">
-                        <div class = rngSeedInput>
-                            <input type="radio" name="seedInputType" value="newSeed" title="Use new seed" checked>
-                            <div class = reveal-if-active>
-                                <input type="text" name="rngSeed" value="default_value">
+                                    <div class="card-header">Execution Progress Details</div>
+                                    <div class="card-body overflow-auto">
+                                        <p>Current input size: <span id="currentInputSize"></span></p>
+                                        <p>Memory footprint: <span id="memUsage">0</span></p>
+                                        <p>Current no. of edges: <span id="currentEdges">0</span></p>
+                                        <p>Bucket memory footprint: <span id="bucketMemoryFootprint">--</span></p>
+                                        <p>Max. bucket size: <span id="maxBucketSize">--</span></p>
+                                        <p>Min. bucket size: <span id="minBucketSize">--</span></p>
+
+                                        <p>No. of scheduled tasks: <span id="scheduledTasks"></span></p>
+                                        <p>No. of completed tasks: <span id="completedNum">--</span></p>
+                                        <p>Percentage completion: <span id="percentage">--</span></p>
+                                        <p>Max. recursion depth: <span id="recursion">--</span></p>
+                                        <p>Tree height: <span id="treeHeight">--</span></p>
+                                        <p>Graph representation: <span id="graphRepresentation">--</span></p>
+                                        <p>Average bucket size: <span id="averageBucketSize">--</span></p>
+                                        <p>Standard deviation: <span id="standardDeviation">--</span></p>
+                                        <p>Range: <span id="range">--</span></p>
+                                        <p>Long visit simulated: <span id="longVisitSimulated">--</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-5 h-100">
+                                <div class="card settings h-100">
+                                    <div class="card-header">Input Setup Details</div>
+                                    <div class="card-body overflow-auto">
+                                        <p>Initial size: <span id="inputStartSize"></span></p>
+                                        <p>Fixed parameter: <span id="fixedParameter"></span></p>
+                                        <p>Size: <span id="size"></span></p>
+                                        <p>Varied Parameter: <span id="variedParameter"></span></p>
+                                        <p>start size: <span id="startSize"></span></p>
+                                        <p>Final size: <span id="inputFinalSize"></span></p>
+                                        <p>Increment size: <span id="inputStepSize"></span></p>
+                                        <p>Directed edges: <span id="directedEdges"></span></p>
+                                        <p>Self-loop allowed: <span id="selfLoop"></span></p>
+
+                                        <p>Min. value: <span id="inputMinValue"></span></p>
+                                        <p>Max. value: <span id="inputMaxValue"></span></p>
+                                        <p>Input distribution: <span id="inputDistribution"></span></p>
+                                        <p>Pivot position: <span id="pivotPosition"></span></p>
+                                        <p>Total no. of eleme...: <span id="totalNoEleme"></span></p>
+                                        <p>Bucket array size: <span id="bucketArraySize"></span></p>
+                                        <p>RNG Seed: <span id="rngSeed"></span></p>
+                                        <p>Hash function: <span id="hashFunction"></span></p>
+                                        <p>Hash key type: <span id="hashKeyType"></span></p>
+                                        <p>Custom RAM: <span id="customRam"></span></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <br />
-                        <div class = rngSeedInput>
-                            <input type="radio" name="seedInputType" value="existingSeed" title="Use existing seed" >
-                            <div class = reveal-if-active>
-                                <select id="seedList" name="rngSeed">
+                    </div>
+
+                    <div id="updateContent">
+                        <div id="live">Live updates: <span></span></div>
+                        <textarea id="yang"></textarea>
+                    </div>
+                </div>
+                <div class="tab-pane fade h-100 mx-5" id="chart" role="tabpanel">
+                    <div class="row h-100">
+                        <div id="chartMainArea" class="h-100">
+                            <div id="singleChart"></div>
+                            <div id="chartControls">
+                                <button type="button" class="btn btn-secondary savePng">Save as a PNG</button>
+
+                                stand function:
+                                <select class="form-control w-auto d-inline"id="selectVal">
+                                    <option value="NONE">NONE</option>
+                                    <option value="1">1</option>
+                                    <option value="logN">logN</option>
+                                    <option value="N">N</option>
+                                    <option value="NlogN">NlogN</option>
+                                    <option value="N^2">N^2</option>
                                 </select>
+                                constant: 0.00001 * <input type="text" id="constantVal" value="1" />
+
+                                <input type="checkbox" id="anotherInput" value="true" />
+                                <label for="anotherInput">add another one</label>
+                                <select class="form-control w-auto d-inline" id="selectVal2">
+                                    stand function:
+                                    <option value="NONE">NONE</option>
+                                    <option value="1">1</option>
+                                    <option value="logN">logN</option>
+                                    <option value="N">N</option>
+                                    <option value="NlogN">NlogN</option>
+                                    <option value="N^2">N^2</option>
+                                </select>
+                                <span id="constant2">constant: 0.00001 *</span> <input type="text" id="constantVal2" value="1" />
+
+                                <br>
+                                <br>
+                                <button type="button" id="chartNotes" class="btn btn-secondary">Experiment Notes</button>
+                            </div>
+                        </div>
+                        <div id="notesForm" class="col-sm-4 border-start border-secondary h-75 my-3 ps-4">
+                            <label class="form-label">Experiment Notes</label>
+                            <textarea id="notesTextArea" class="form-control" style="height:95%"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade h-100 mx-5" id="compare" role="tabpanel">
+                    <div id="compareChart"></div>
+                    <div id="compareControls">
+                        <button type="button" class="btn btn-secondary savePng">Save as a PNG</button>
+                    </div>
+                </div>
+                <div class="tab-pane fade h-100 mx-5" id="table" role="tabpanel">
+                    <div class="table-wrapper overflow-auto">
+                        <table class="table table-striped"></table>
+                    </div>
+                    <div class="table-controls" style="text-align: center">
+                        <button id="toclip" type="button" class="btn btn-secondary">Copy to Clipboard</button>
+                        <button id="toTabExp" type="button" class="btn btn-secondary">Export to Tab-Separated Values</button>
+                        <a id="createInvote"  download="numbers.txt" style="display:none" >code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Create Task Window -->
+    <div class="modal fade" id="createTaskDialog" tabindex="-1" role="dialog" aria-labelledby="createTaskTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createTaskTitle">Create Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link active createTaskPill" id="sort-tab" data-bs-toggle="pill" data-bs-target="#v-pills-sort" role="tab" aria-controls="v-pills-sort" aria-selected="true">Sort</a>
+                                    <a class="nav-link createTaskPill" id="graph-tab" data-bs-toggle="pill" data-bs-target="#v-pills-graph" role="tab" aria-controls="v-pills-graph" aria-selected="false">Graph</a>
+                                    <a class="nav-link createTaskPill" id="hash-tab" data-bs-toggle="pill" data-bs-target="#v-pills-hash" role="tab" aria-controls="v-pills-hash" aria-selected="false">Hash</a>
+                                    <a class="nav-link createTaskPill" id="search-tab" data-bs-toggle="pill" data-bs-target="#v-pills-search" role="tab" aria-controls="v-pills-search" aria-selected="false">Search</a>
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="tab-content" id="v-pills-tabContent">
+                                    <div class="tab-pane fade show active createTaskForm" id="v-pills-sort" role="tabpanel" aria-labelledby="sort-tab">
+                                        <form class="form-horizontal"  id="formSort" action="" enctype="application/x-www-form-urlencoded">
+                                            <div class="alert-sort one show">
+                                                <span>Step 1: Choose algorithm</span>
+                                                <hr />
+
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Algorithm</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="algorithm">
+                                                            <option value="QUICKSORT">Quicksort</option>
+                                                            <option value="HEAPSORT">Heapsort</option>
+                                                            <option value="INSERTSORT">Insertsort</option>
+                                                            <option value="EXTERNAL_MERGESORT">External Mergesort</option>
+                                                            <option value="INTERNAL_MERGESORT">Internal Mergesort</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Pivot Position</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="pivotPosition">
+                                                            <option value="Left">Left</option>
+                                                            <option value="Centre">Centre</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">RAM</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" name="ram" autocomplete="off" class="form-control" value="16" placeholder="KB">
+                                                    </div>
+                                                </div>
+
+                                                <br />
+                                                <br /><br><br><br>
+
+                                                <span class="alert-next-alt">
+                                                    Click "Next" button below to step 2.
+                                                </span>
+                                            </div>
+
+                                            <div class="alert-sort two">
+                                                <span>Step 2: Input settings</span>
+                                                <hr />
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Input distribution:</label>
+                                                    <div class="col-sm-5">
+                                                        <select name="inputDistribution" class="form-control">
+                                                            <option value="Random">Random</option>
+                                                            <option value="Sorted">Sorted</option>
+                                                            <option value="REVERSE-SORTED">Reverse-sorted</option>
+                                                            <option value="Worst-case">Worst-case</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="form-check">
+                                                    <div class = "rngSeedInput">
+                                                            <input class="form-check-input" type="radio" name="seedInputType" id="rngSeedInputSort1" value="newSeed"checked>
+                                                            <label class="form-check-label" for="rngSeedInputSort1">
+                                                                Use new seed
+                                                            </label>
+                                                        <div class = "reveal-if-active col-sm-3">
+                                                            <input type="text" class="form-control" name="rngSeed" value="default_value">
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class = "rngSeedInput">
+                                                        <input class="form-check-input" type="radio" name="seedInputType" id="rngSeedInputSort2" value="existingSeed" title="Use existing seed" >
+                                                        <label class="form-check-label" for="rngSeedInputSort2">
+                                                            Use existing seed
+                                                        </label>
+                                                        <div class = "reveal-if-active">
+                                                            <select id="seedListSort" name="rngSeed" class="form-control">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br><br><br>
+                                                <br>
+                                                <span class="alert-next-alt">
+                                                    Click "Next" button below to step 3.
+                                                </span>
+                                            </div>
+
+                                            <div class="alert-sort three">
+                                                <span>Step 3: Run configuration</span>
+                                                <hr />
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Initial input size:</label>
+                                                    <div class="col-sm-5">
+                                                        <select name="inputStartSize" class="form-control">
+                                                            <option value="10000">10000</option>
+                                                            <option value="20000">20000</option>
+                                                            <option value="50000">50000</option>
+                                                            <option value="100000">100000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Final input size:</label>
+                                                    <div class="col-sm-5">
+                                                        <select name="inputFinalSize" class="form-control">
+                                                            <option value="500000">500000</option>
+                                                            <option value="1000000">1000000</option>
+                                                            <option value="2000000">2000000</option>
+                                                            <option value="5000000">5000000</option>
+                                                            <option value="10000000">10000000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Step size:</label>
+                                                    <div class="col-sm-5">
+                                                        <select name="inputStepSize" class="form-control">
+                                                            <option value="10000">10000</option>
+                                                            <option value="20000">20000</option>
+                                                            <option value="50000">50000</option>
+                                                            <option value="100000">100000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Number of experiments per input size:</label>
+                                                    <div class="col-sm-5">
+                                                        <select name="numRepeats" class="form-control">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-sm-12">
+                                                        If > 1, Algobench will calculate average runtime
+                                                    </div>
+
+                                                    <br />
+
+                                                </div>
+
+                                                <br /> <br />Total no.of executions: <span id="noOfExe">--</span>
+                                                <br /><br />
+                                                <span class="alert-next-alt">
+                                                    Click "Create Task" button below to finish.
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade createTaskForm" id="v-pills-graph" role="tabpanel" aria-labelledby="graph-tab">
+                                        <form class="form-horizontal" id="formGraph" action="" enctype="application/x-www-form-urlencoded">
+                                            <div class="alert-sort one show">
+                                                <span>Step 1: Choose algorithm</span>
+                                                <hr />
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Algorithm:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="algorithm">
+                                                            <option value="BREADTH-FIRST_SEARCH">Breadth-First Search</option>
+                                                            <option value="DEPTH-FIRST_SEARCH">Depth-First Search</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <br /><br><br><br><br>
+                                                <p></p>
+                                                <span class="alert-next-alt">
+                                                    Click "Next" button below to step 2.
+                                                </span>
+                                            </div>
+
+                                            <div class="alert-sort two ">
+                                                <span>Step 2: Input settings</span>
+                                                <hr />
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-4 col-form-label">Graph representaton:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="dataStructure">
+                                                            <option value="Adjacency List">Adjacency List</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-check ">
+                                                        <input class="form-check-input " type="checkbox" name="isDirectedGraph" id="isDirectedGraph" title="Use directed edges">
+                                                        <label class="form-check-label" for="isDirectedGraph">
+                                                            Use directed edges
+                                                        </label>
+                                                        <br>
+                                                        <input class="form-check-input" type="checkbox" name="allowSelfLoops" id="allowSelfLoops" title="Allow self loops">
+                                                        <label class="form-check-label" for="graphIsDelayed">
+                                                            Allow self loops
+                                                        </label>
+                                                        <br>
+                                                        <input class="form-check-input" type="checkbox" name="graphIsDelayed" id="graphIsDelayed" title="Use directed edges">
+                                                        <label class="form-check-label" for="graphIsDelayed">
+                                                            Simulate longer vertex visits
+                                                        </label>
+                                                        <br>
+                                                    </div>
+                                                    <br><br>
+                                                    <div class="form-check">
+                                                        <div class = "rngSeedInput">
+                                                            <input class="form-check-input" type="radio" name="seedInputType" id="rngSeedInputGraph1" value="newSeed"checked>
+                                                            <label class="form-check-label" for="rngSeedInputGraph1">
+                                                                Use new seed
+                                                            </label>
+                                                            <div class = "reveal-if-active col-sm-3">
+                                                                <input type="text" class="form-control" name="rngSeed" value="default_value">
+                                                            </div>
+                                                        </div>
+                                                        <br />
+                                                        <div class = "rngSeedInput">
+                                                            <input class="form-check-input" type="radio" name="seedInputType" id="rngSeedInputGraph2" value="existingSeed" title="Use existing seed" >
+                                                            <label class="form-check-label" for="rngSeedInputGraph2">
+                                                                Use existing seed
+                                                            </label>
+                                                            <div class = "reveal-if-active">
+                                                                <select id="seedListGraph" name="rngSeed" class="form-control">
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <br />
+                                                <br />
+
+                                                <span class="alert-next-alt">
+                                                    Click "Next" button below to step 3.
+                                                </span>
+                                            </div>
+
+                                            <div class="alert-sort three">
+                                                <span>Step 3: Graph configuration</span>
+                                                <hr />
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-4 col-form-label">Fixed parameter:</label>
+                                                    <div class="col-sm-4">
+                                                        <input class="form-check-input" type="radio" name="fixedGraphParam" value="VERTEX" title="No.of Vertices" checked="">
+                                                        <label class="form-check-label" >No. of Vertices</label>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <input class="form-check-input" type="radio" name="fixedGraphParam" value="EDGE" title="No.of Edges">
+                                                        <label class="form-check-label" >No. of Edges</label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-5 col-form-label">Size of fixed parameter(Vertices):</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="fixedGraphSize">
+                                                            <option value="100000">100000</option>
+                                                            <option value="500000">500000</option>
+                                                            <option value="1000000">1000000</option>
+                                                            <option value="5000000">5000000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <hr />
+                                                Varied parameter: <br><br>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-5 col-form-label">Initial no.of Edges:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="inputStartSize">
+                                                            <option value="0">0</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-5 col-form-label">Final no.of Edges:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="inputFinalSize">
+                                                            <option value="100000">100000</option>
+                                                            <option value="200000">200000</option>
+                                                            <option value="500000">500000</option>
+                                                            <option value="1000000">1000000</option>
+                                                            <option value="2000000">2000000</option>
+                                                            <option value="5000000">5000000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-5 col-form-label">Increment by:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="inputStepSize">
+                                                            <option value="10000">10000</option>
+                                                            <option value="50000">50000</option>
+                                                            <option value="100000">100000</option>
+                                                            <option value="500000">500000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-5 col-form-label">No.of experiments per step:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="numRepeats">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                    if > 1, Algobench will calculate average runtime
+                                                    </div>
+                                                </div>
+
+                                                <br /> Total no.of executions: 100
+                                                <br />
+                                                <br />
+                                                <span class="alert-next-alt">
+                                                    Click "Create Task" button below to finish.
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade createTaskForm" id="v-pills-hash" role="tabpanel" aria-labelledby="hash-tab">
+                                        <form id="formHash" class="" action="" enctype="application/x-www-form-urlencoded">
+                                            <div class="alert-sort one show">
+                                                <span>Step 1: Choose algorithm</span>
+                                                <hr />
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Algorithm:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="algorithm">
+                                                            <option value="HASHING">Hashing</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <br /><br><br><br><br>
+                                                <p></p>
+                                                <span class="alert-next-alt">
+                                                    Click "Next" button below to step 2.
+                                                </span>
+                                            </div>
+
+                                            <div class="alert-sort two">
+                                                <span>Step 2: Input settings</span>
+                                                <hr />
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Input size:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="inputStartSize">
+                                                            <option value="1000">1000</option>
+                                                            <option value="10000">10000</option>
+                                                            <option value="500000">500000</option>
+                                                            <option value="500000">500000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <br />
+                                                <div class="form-check">
+                                                    <div class = "rngSeedInput">
+                                                        <input class="form-check-input" type="radio" name="seedInputType" id="rngSeedInputHash1" value="newSeed"checked>
+                                                        <label class="form-check-label" for="rngSeedInputHash1">
+                                                            Use new seed
+                                                        </label>
+                                                        <div class = "reveal-if-active col-sm-3">
+                                                            <input type="text" class="form-control" name="rngSeed" value="default_value">
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class = "rngSeedInput">
+                                                        <input class="form-check-input" type="radio" name="seedInputType" id="rngSeedInputHash2" value="existingSeed" title="Use existing seed" >
+                                                        <label class="form-check-label" for="rngSeedInputHash2">
+                                                            Use existing seed
+                                                        </label>
+                                                        <div class = "reveal-if-active">
+                                                            <select id="seedListHash" name="rngSeed" class="form-control">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <br>
+                                                <br>
+
+                                                <span class="alert-next-alt">
+                                                    Click "Next" button below to step 3.
+                                                </span>
+                                            </div>
+
+                                            <div class="alert-sort three ">
+                                                <span>Step 3: Hash function</span>
+                                                <hr />
+                                                My Hash function: |aK + b| mode N
+                                                <br>
+                                                <br>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-1 col-form-label">a=:</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" name="hashFunction_a" autocomplete="off" class="form-control" value="" onchange="yyyy()">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-1 col-form-label">b=:</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" name="hashFunction_b" autocomplete="off" class="form-control" value="" onchange="yyyy()">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-1 col-form-label">n=:</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" name="hashBucketSize" autocomplete="off" class="form-control" value="" onchange="yyyy()">
+                                                    </div>
+
+                                                </div>
+
+                                                <br /><span id="coprime"></span>
+                                                <br />
+                                                <br />
+
+                                                <span class="alert-next-alt">
+                                                    Click "Create Task" button below to finish.
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade createTaskForm" id="v-pills-search" role="tabpanel" aria-labelledby="search-tab">
+                                        <form id="formSearch" class="" action="" enctype="application/x-www-form-urlencoded">
+                                            <div class="alert-sort one show">
+                                                <span>Step 1: Choose algorithm</span>
+                                                <hr />
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Algorithm:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="algorithm" >
+                                                            <option value="LINEAR_SEARCH">Linear Search</option>
+                                                            <option value="BINARY_SEARCH">Binary Search</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <br /><br><br><br><br>
+                                                <p></p>
+                                                <span class="alert-next-alt">
+                                                    Click "Next" button below to step 2.
+                                                </span>
+                                            </div>
+
+                                            <div class="alert-sort two">
+                                                <span>Step 2: Input settings</span>
+                                                <hr />
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Input array:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="inputDistribution">
+                                                            <option value="SORTED">Sorted</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-3 col-form-label">Search key:</label>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" name="searchKeyType">
+                                                            <option value="ALWAYS_IN_ARRAY">Always in array</option>
+                                                            <option value="NOT_IN_ARRAY">Not in array</option>
+                                                            <option value="RANDOM">Random</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="form-check">
+                                                    <div class = "rngSeedInput">
+                                                        <input class="form-check-input" type="radio" name="seedInputType" id="rngSeedInputSearch1" value="newSeed"checked>
+                                                        <label class="form-check-label" for="rngSeedInputSearch1">
+                                                            Use new seed
+                                                        </label>
+                                                        <div class = "reveal-if-active col-sm-3">
+                                                            <input type="text" class="form-control" name="rngSeed" value="default_value">
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class = "rngSeedInput">
+                                                        <input class="form-check-input" type="radio" name="seedInputType" id="rngSeedInputSearch2" value="existingSeed" title="Use existing seed" >
+                                                        <label class="form-check-label" for="rngSeedInputSearch2">
+                                                            Use existing seed
+                                                        </label>
+                                                        <div class = "reveal-if-active">
+                                                            <select id="seedListSearch" name="rngSeed" class="form-control">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <br />
+
+                                                <span class="alert-next-alt">
+                                                    Click "Next" button below to step 3.
+                                                </span>
+                                            </div>
+
+                                            <div class="alert-sort three ">
+                                                <span>Step 3: Run configuration</span>
+                                                <hr />
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-5 col-form-label">Initial input size:</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" name="inputStartSize">
+                                                            <option value="5000000">5000000</option>
+                                                            <option value="10000000">10000000</option>
+                                                            <option value="20000000">20000000</option>
+                                                            <option value="50000000">50000000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-5 col-form-label">Final input size:</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" name="inputFinalSize">
+                                                            <option value="50000000">50000000</option>
+                                                            <option value="100000000">100000000</option>
+                                                            <option value="200000000">200000000</option>
+                                                            <option value="500000000">500000000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-5 col-form-label">Step size:</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" name="inputStepSize">
+                                                            <option value="5000000">5000000</option>
+                                                            <option value="10000000">10000000</option>
+                                                            <option value="20000000">20000000</option>
+                                                            <option value="50000000">50000000</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-sm-5 col-form-label">Number of experiments per input size:</label>
+                                                    <div class="col-sm-3">
+                                                        <select class="form-control" name="numRepeats">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                    </div>
+                                                    <br />
+                                                    <div class="col-sm-12">
+                                                        if > 1, Algobench will calculate average runtime
+                                                    </div>
+                                                </div>
+
+                                                <br />
+                                                <br />
+                                                <br />
+
+                                                <span class="alert-next-alt">
+                                                    Click "Create Task" button below to finish.
+                                                </span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br>
-                    <br>
-                    <span class="alert-next-alt">
-                            Click "Next" button below to step 3.
-                        </span>
                 </div>
-
-                <div class="alert-sort three">
-                    <span>Step 3: Run configuration</span>
-                    <hr />
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Initial input size:</label>
-                        <div class="layui-input-inline">
-                            <select name="inputStartSize" lay-filter="inputStartSize">
-                                <option value="10000">10000</option>
-                                <option value="20000">20000</option>
-                                <option value="50000">50000</option>
-                                <option value="100000">100000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Final input size:</label>
-                        <div class="layui-input-inline">
-                            <select name="inputFinalSize" lay-filter="inputFinalSize">
-                                <option value="500000">500000</option>
-                                <option value="1000000">1000000</option>
-                                <option value="2000000">2000000</option>
-                                <option value="5000000">5000000</option>
-                                <option value="10000000">10000000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Step size:</label>
-                        <div class="layui-input-inline">
-                            <select name="inputStepSize" lay-filter="inputStepSize">
-                                <option value="10000">10000</option>
-                                <option value="20000">20000</option>
-                                <option value="50000">50000</option>
-                                <option value="100000">100000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Number of experiments per input size:</label>
-                        <div class="layui-input-inline">
-                            <select name="numRepeats">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                        <br />
-                        if > 1, Algobench will calculate average runtime
-                    </div>
-
-                    <br /> Total no.of executions: <span id="noOfExe">--</span>
-                    <br /><br /><br /><br /><br /><br /><br />
-                    <span class="alert-next-alt">
-                            Click "Create Task" button below to finish.
-                        </span>
+                <div class="modal-footer">
+                    <button class="hpBtn btn btn-info" data-bs-toggle="modal" data-bs-target="#helpModal">Help</button>
+                    <button class="backBtn btn btn-primary">Back</button>
+                    <button class="nextBtn btn btn-primary">Next</button>
+                    <button class="ctBtn btn btn-primary">Create task</button>
+                    <button class="clBtn btn btn-dark" data-bs-dismiss="modal">Cancel</button>
                 </div>
-            </form>
-
-
-
-
-
-
-
-
-
-
-
-            <!-- formGraph -->
-
-            <form id="formGraph" class="layui-form" action="" enctype="application/x-www-form-urlencoded">
-                <div class="alert-sort one show">
-                    <span>Step 1: Choose algorithm</span>
-                    <hr />
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Algotithm:</label>
-                        <div class="layui-input-inline">
-                            <select name="algorithm"  lay-filter="aihao">
-                                <option value="BREADTH-FIRST_SEARCH">Breadth-First Search</option>
-                                <option value="DEPTH-FIRST_SEARCH">Depth-First Search</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <br />
-                    <p></p>
-                    <p style="
-                        height: 320px;
-                    "></p>
-                    <span class="alert-next-alt">
-                            Click "Next" button below to step 2.
-                        </span>
-                </div>
-
-                <div class="alert-sort two">
-                    <span>Step 2: Input settings</span>
-                    <hr /> Input Source:
-                    <br />
-                    <input type="radio" name="inputFileName" value="nan" title="Use Algobench-generated input" checked>
-                    <br />
-                    <!-- <input type="radio" name="inputFileName" value="nv" title="Use custom input file"> -->
-                    <hr /> Input Settings:
-                    <br />
-                    <label class="layui-form-label">Graph representaton:</label>
-                    <div class="layui-input-inline">
-                        <select name="dataStructure">
-                            <option value="Adjacency List">Adjacency List</option>
-                        </select>
-                    </div>
-                    <div class="layui-input-block">
-                        <input type="checkbox" name="isDirectedGraph" lay-skin="primary" title="Use directed edges"><br />
-                        <input type="checkbox" name="allowSelfLoops" lay-skin="primary" title="Allow self loops"><br />
-                        <input type="checkbox" name="graphIsDelayed" lay-skin="primary" title="Simulate longer vertex visits" >
-                    </div>
-                    <br />
-                    <label class="layui-form-label">RNG Seed:</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="rngSeed">
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <p style="
-                        height: 90px;
-                    "></p>
-                    <span class="alert-next-alt">
-                            Click "Next" button below to step 3.
-                        </span>
-                </div>
-
-                <div class="alert-sort three">
-                    <span>Step 3: Graph configuration</span>
-                    <hr />
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Fixed parameter:</label>
-                        <div class="layui-input-block">
-                            <input type="radio" name="fixedGraphParam" value="VERTEX" title="No.of Vertices" checked="">
-                            <input type="radio" name="fixedGraphParam" value="EDGE" title="No.of Edges">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Size of fixed parameter(Vertices):</label>
-                        <div class="layui-input-inline">
-                            <select name="fixedGraphSize">
-                                <option value="100000">100000</option>
-                                <option value="500000">500000</option>
-                                <option value="1000000">1000000</option>
-                                <option value="5000000">5000000</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <hr />
-                    <div class="layui-form-item">
-                        Varied parameter: <br />
-                        <label class="layui-form-label">Initial no.of Edges:</label>
-                        <div class="layui-input-inline">
-                            <select name="inputStartSize">
-                                <option value="0">0</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Final no.of Edges:</label>
-                        <div class="layui-input-inline">
-                            <select name="inputFinalSize">
-                                <option value="100000">100000</option>
-                                <option value="200000">200000</option>
-                                <option value="500000">500000</option>
-                                <option value="1000000">1000000</option>
-                                <option value="2000000">2000000</option>
-                                <option value="5000000">5000000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Increment by:</label>
-                        <div class="layui-input-inline">
-                            <select name="inputStepSize">
-                                <option value="10000">10000</option>
-                                <option value="50000">50000</option>
-                                <option value="100000">100000</option>
-                                <option value="500000">500000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">No.of experiments per step:</label>
-                        <div class="layui-input-inline">
-                            <select name="numRepeats">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                        <br />
-                        if > 1, Algobench will calculate average runtime
-                    </div>
-
-                    <br /> Total no.of executions: 100
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <span class="alert-next-alt">
-                            Click "Create Task" button below to finish.
-                        </span>
-                </div>
-            </form>
-
-
-            <!-- formHash -->
-
-            <form id="formHash" class="layui-form" action="" enctype="application/x-www-form-urlencoded">
-                <div class="alert-sort one show">
-                    <span>Step 1: Choose algorithm</span>
-                    <hr />
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Algotithm:</label>
-                        <div class="layui-input-inline">
-                            <select name="algorithm"  lay-filter="aihao">
-                                <option value="HASHING">Hashing</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <br />
-                    <br />
-                    <p style="
-                        height: 320px;
-                    "></p>
-                    <span class="alert-next-alt">
-                            Click "Next" button below to step 2.
-                        </span>
-                </div>
-
-                <div class="alert-sort two">
-                    <span>Step 2: Input settings</span>
-                    <hr /> Input Source:
-                    <br />
-                    <input type="radio" name="inputFileName" value="nan" title="Use Algobench-generated input" checked>
-                    <br />
-                    <!-- <input type="radio" name="inputFileName" value="nv" title="Use custom input file"> -->
-                    <hr /> Input Settings:
-                    <br />
-                    <label class="layui-form-label">Input size:</label>
-                    <div class="layui-input-inline">
-                        <select name="inputStartSize">
-                            <option value="1000">1000</option>
-                            <option value="10000">10000</option>
-                            <option value="500000">500000</option>
-                            <option value="500000">500000</option>
-                        </select>
-                    </div>
-
-                    <br />
-                    <label class="layui-form-label">RNG Seed:</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="rngSeed">
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <p style="
-                        height: 170px;
-                    "></p>
-                    <span class="alert-next-alt">
-                            Click "Next" button below to step 3.
-                        </span>
-                </div>
-
-                <div class="alert-sort three">
-                    <span>Step 3: Hash function</span>
-                    <hr />
-                    My Hash function: |aK + b| mode N
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">a=:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="hashFunction_a" autocomplete="off" class="layui-input" value="" onchange="yyyy()">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">b=:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="hashFunction_b" autocomplete="off" class="layui-input" value="" onchange="yyyy()">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">n=:</label>
-                        <div class="layui-input-inline">
-                            <input type="text" name="hashBucketSize" autocomplete="off" class="layui-input" value="" onchange="yyyy()">
-                        </div>
-
-                    </div>
-
-                    <br /><span id="coprime"></span>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <p style="
-                        height: 150px;
-                    "></p>
-                    <span class="alert-next-alt">
-                            Click "Create Task" button below to finish.
-                        </span>
-                </div>
-            </form>
-
-
-            <!-- formSearch -->
-
-            <form id="formSearch" class="layui-form" action="" enctype="application/x-www-form-urlencoded">
-                <div class="alert-sort one show">
-                    <span>Step 1: Choose algorithm</span>
-                    <hr />
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Algotithm:</label>
-                        <div class="layui-input-inline">
-                            <select name="algorithm"  lay-filter="aihao">
-                                <option value="LINEAR_SEARCH">Linear Search</option>
-                                <option value="BINARY_SEARCH">Binary Search</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <br />
-                    <br />
-                    <p style="
-        height: 320px;
-    "></p>
-                    <span class="alert-next-alt">
-            Click "Next" button below to step 2.
-        </span>
-                </div>
-
-                <div class="alert-sort two">
-                    <span>Step 2: Input settings</span>
-                    <hr /> Input Source:
-                    <br />
-                    <input type="radio" name="inputFileName" value="nan" title="Use Algobench-generated input" checked>
-                    <br />
-                    <!-- <input type="radio" name="inputFileName" value="nv" title="Use custom input file"> -->
-                    <hr /> Input Settings:
-                    <br />
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Input array:</label>
-                        <div class="layui-input-inline">
-                            <select name="inputDistribution">
-                                <option value="SORTED">Sorted</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Search key:</label>
-                        <div class="layui-input-inline">
-                            <select name="searchKeyType">
-                                <option value="ALWAYS_IN_ARRAY">Always in array</option>
-                                <option value="NOT_IN_ARRAY">Not in array</option>
-                                <option value="RANDOM">Random</option>
-                            </select>
-                        </div>
-                    </div>
-                    <br />
-                    <label class="layui-form-label">RNG Seed:</label>
-                    <div class="layui-input-inline">
-                        <input type="text" name="rngSeed">
-                    </div>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <p style="
-        height: 100px;
-    "></p>
-                    <span class="alert-next-alt">
-            Click "Next" button below to step 3.
-        </span>
-                </div>
-
-                <div class="alert-sort three">
-                    <span>Step 3: Run configuration</span>
-                    <hr />
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Initial input size:</label>
-                        <div class="layui-input-inline">
-                            <select name="inputStartSize">
-                                <option value="5000000">5000000</option>
-                                <option value="10000000">10000000</option>
-                                <option value="20000000">20000000</option>
-                                <option value="50000000">50000000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Final input size:</label>
-                        <div class="layui-input-inline">
-                            <select name="inputFinalSize">
-                                <option value="50000000">50000000</option>
-                                <option value="100000000">100000000</option>
-                                <option value="200000000">200000000</option>
-                                <option value="500000000">500000000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Step size:</label>
-                        <div class="layui-input-inline">
-                            <select name="inputStepSize">
-                                <option value="5000000">5000000</option>
-                                <option value="10000000">10000000</option>
-                                <option value="20000000">20000000</option>
-                                <option value="50000000">50000000</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">Number of experiments per input size:</label>
-                        <div class="layui-input-inline">
-                            <select name="numRepeats">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                        <br />
-                        if > 1, Algobench will calculate average runtime
-                    </div>
-
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <p style="
-        height: 30px;
-    "></p>
-                    <span class="alert-next-alt">
-            Click "Create Task" button below to finish.
-        </span>
-                </div>
-            </form>
-
-
-
+            </div>
         </div>
     </div>
-    <div id="alertSouth">
-        <button class="hpBtn layui-btn layui-btn-xs layui-btn-primary"><i class="layui-icon">&#xe607;</i>Help</button>
-        <button class="backBtn layui-btn layui-btn-xs layui-btn-primary"><i class="layui-icon">&#xe65a;</i>Back</button>
-        <button class="nextBtn layui-btn layui-btn-xs layui-btn-primary"><i class="layui-icon">&#xe65b;</i>Next</button>
-        <button class="ctBtn layui-btn layui-btn-xs layui-btn-primary" lay-submit lay-filter="*"><i class="layui-icon">&#xe605;</i>Create task</button>
-        <button class="clBtn layui-btn layui-btn-xs layui-btn-primary"><i class="layui-icon">&#xe64d;</i>Cancel</button>
+
+    <!-- Help window for Create Task -->
+    <div class="modal fade" id="helpModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Help</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe src="newtask_help.html" width="700" height="800"></iframe>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<script src="custom2.js"></script>
-<script src="math.js"></script>
-<script src="clipboard.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="localforage.min.js"></script>
+    <script src="math.js"></script>
+    <script src="clipboard.js"></script>
+    <script src="echarts.js"></script>
+
+    <script src="custom.js"></script>
+    <script src="charting.js"></script>
+
 
 
 

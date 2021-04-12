@@ -17,7 +17,7 @@ public class PDFGeneration {
     //adapted from http://svn.apache.org/viewvc/xmlgraphics/fop/trunk/fop/examples/embedding/java/embedding/ExampleXML2PDF.java?view=markup
     public static void generatePDF(Task task, double[] chartXData, double[] chartYData, OutputStream out) throws FOPException, TransformerException, IOException {
 
-
+        System.out.println("Notes on experiment: " + task.getNotes());
         //prepare XSLT file
         File xsltFile = new File("src/main/resources/static/task.xsl");
         //generate XML
@@ -128,6 +128,8 @@ public class PDFGeneration {
             //sb.append("\n<internal-representation>" + "Heaps" + "</internal-representation>"
             //        + "\n<data-element>" + t.getDataElement() + "</data-element>");
         }
+
+        sb.append("\n<notes>" + t.getNotes() +"</notes>");
 
         sb.append("\n</data>");
 

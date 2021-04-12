@@ -1,331 +1,56 @@
-* {
-    font-size: 12px;
-}
-
-#alertDiv {
-    display: none;
-    width: 100%;
-    height: 100%;
-    background-color: #1E9FFF;
-}
-
-#alertNorth {
-    width: 100%;
-    height: 90%;
-    background-color: #00F7DE;
-    /*float: left;*/
-}
-
-#alertSouth {
-    width: 100%;
-    height: 10%;
-    background-color: #DBE5F4;
-    text-align: center;
-}
-
-#alertNorthWest {
-    width: 20%;
-    height: 100%;
-    background-color: #FFFFFF;
-    float: left;
-}
-
-#alertNorthEast {
-    width: 80%;
-    height: 100%;
-    background-color: #F0F0F0;
-    float: left;
-    overflow-y: scroll;
-}
-
-.alert-ul-title {
-    background-color: #668bab;
-    padding: 5px;
+.settings p {
     font-size: 15px;
-    color: white;
+    line-height: 0.8;
+}
+.mainDis{
+    height: 95vh
 }
 
-#alertNorthWest ul li {
-    margin: 0px;
-    padding: 10px;
-    font-size: 10px;
+.mainSettings{
+    height: 70%
 }
 
-#alertNorthWest ul li.selected {
-    cursor:hand;
-    background:#85c9ff;
+.mainStatus{
+    height: 7%
 }
 
-#alertSouth button {
-    font-size: 20px;
-    margin: 10px 20px;
+.table-wrapper{
+    height: 90%;
 }
 
-li button {
-    font-size: 20px;
-    margin: 10px 20px;
+.table-controls{
+    height: 10%;
 }
 
-.alert-sort {
-    padding-left: 10px;
-    display: none;
+.oneTask{
+    font-size: 13px
 }
 
-.alert-sort.show {
-    display: inherit;
-}
-
-#mainDis {
+#singleChart{
     width: 100%;
-    height: 100%;
+    height: 80%;
+}
+
+#compareChart{
+    width: 100%;
+    height: 80%;
 }
 
 #settings {
     width: 100%;
-    height: 60%;
-    background-color: #F4F7FF;
+    height: 55%;
 }
 
 #updateContent {
     width: 100%;
-    height: 40%;
-    background-color: #F4F7FF;
-}
-
-#updateContent #live {
-    margin-left: 10px;
+    height: 35%;
 }
 
 #updateContent textarea {
     margin: 10px;
     height: 90%;
     width: 100%;
-}
-
-.mainSettings {
-    height: 80%
-}
-
-#mainDis .left {
-    float: left;
-    width: 40%;
-    border: solid 1px #ccc7c7;
-    margin-left: 8px;
-    height: 100%;
-    padding-left: 10px;
-}
-
-#mainDis .right {
-    float: left;
-    width: 40%;
-    border: solid 1px #ccc7c7;
-    margin-left: 8px;
-    height: 100%;
-    padding-left: 10px;
-}
-
-.left-side.active .onC {
-    background-color: #6699CC;
-}
-.left-side.archive .onC {
-    background-color: #6699CC;
-}
-
-.firstDisplay {
-    display: none;
-}
-
-.settings p {
-    font-size: 15px;
-    margin-top: 15px;
-}
-
-.mainStatus {
-    padding: 10px;
-    height: 5%;
-}
-
-.mainStatus span {
-    font-weight: bolder;
-    padding-left: 15px; 
-}
-
-.mainTask {
-    padding: 10px;
-    height: 5%;
-}
-
-.mainTask .mainTaskName {
-    font-weight: bolder;
-    /* padding-left: 15px;  */
-}
-
-#paintChart {
-    width: 100%;
-    height: 100%;
-    display: none;
-    background-color: #ffffff;
-}
-#compareChart {
-    width: 100%;
-    height: 100%;
-    display: none;
-    background-color: #ffffff;
-}
-
-#paintChartfirst {
-    width: 100%;
-    height: 90%;
-    background-color: #ffffff;
-}
-#paintChartsecond {
-    width: 100%;
-    height: 10%;
-    background-color: #ffffff;
-}
-
-#compareChartfirst {
-    width: 100%;
-    height: 90%;
-    background-color: #ffffff;
-}
-#compareChartsecond {
-    width: 100%;
-    height: 10%;
-    background-color: #ffffff;
-}
-
-
-
-#paintTable {
-    width: 100%;
-    height: 100%;
-    display: none;
-    background-color: #ffffff;
-}
-
-#paintTable table {
-    width: 100%;
-    height: 100%;
-    text-align: left;
-    border-collapse: collapse;
-}
-
-#paintTable table td, #paintTable table th {
-    font-size:1em;
-    border:1px solid #98bf21;
-    padding:3px 7px 2px 7px;
-}
-#paintTable table th 
-{
-    font-size:1.1em;
-    text-align:left;
-    padding-top:5px;
-    padding-bottom:4px;
-    background-color:#A7C942;
-    color:#ffffff;
-}
-
-#paintTable table tr.alt td 
-{
-color:#000000;
-background-color:#EAF2D3;
-}
-
-.left-side.up {
-    width: 100%;
-    height: 50%;
-    background-color: #e3e7d8
-}
-
-.left-side.down {
-    width: 100%;
-    height: 50%;
-    background-color: #e3e7d8;
-}
-
-.left-side .title {
-    height: 30px;
-    background-color: #4D6A82;
-    padding: 10px 0;
-    text-align: center;
-}
-.left-side.title span {
-    font-size: 15px;
-}
-
-.left-side.button {
-    height: 10%;
-    background-color: #DBE5F4;
-    text-align: center;
-}
-
-.left-side.active {
-    height: 85%;
-}
-.left-side.active div {
-    height: 10%;
-    color: black;
-}
-.left-side.active div:hover {
-    height: 15%;
-    font-weight: bolder;
-    border: red solid thin;
-    cursor: pointer;
-}
-.left-side.active .image {
-    background-color: #FFFFCC;
-    font-weight: bolder;
-    font-size: 17px;
-    color: #6A97B1;
-    width: 20%;
-}
-.left-side.active .taskName {
-    margin-left: 5px;
-    font-size: 12px;
-    /* background-color: #E3E7D8; */
-    width: 80%;
-}
-
-.left-side.archive div {
-    height: 10%;
-    color: black;
-}
-.left-side.archive div:hover {
-    height: 15%;
-    font-weight: bolder;
-    border: red solid thin;
-    cursor: pointer;
-}
-
-.left-side.archive .taskName {
-    margin-left: 5px;
-    font-size: 17px;
-    width: 80%;
-}
-
-#constantVal2, #selectVal2, #constant2 {
-    display: none;
-}
-
-
-.layui-layout-admin .layui-side {
-    width: 150px;
-}
-.layui-layout-admin .layui-footer {
-    left: 150px;
-}
-.layui-layout-admin .layui-logo {
-    width: 150px;
-    font-weight: bold;
-    color: #fff;
-}
-.layui-nav {
-    padding: 0 20px 0 0;
-}
-.layui-layout-left {
-    left: 150px;
-    min-width: 960px;
+    font-size: 10px;
 }
 
 .reveal-if-active {
@@ -334,13 +59,39 @@ background-color:#EAF2D3;
     overflow: hidden;
 }
 
+.alert-sort.show {
+    display: inherit;
+}
+
+.alert-sort {
+    display: none;
+}
+
+#notesForm {
+    display: none;
+}
+
+
+#top-pills-tab .nav-link:not(.active){
+    background-color: #f8f9fa;
+    color: #212529
+}
+
+#top-pills-tab .nav-link{
+    color: #f8f9fa;
+    background-color: #212529;
+}
+
+
 input[type="radio"]:checked ~ .reveal-if-active {
     opacity: 1;
     max-height: 100px;
     overflow: visible;
 }
 
-/*
-.alert-sort span {
-    margin-left: 10px;
-}*/
+.list-group-item {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
